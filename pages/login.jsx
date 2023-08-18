@@ -23,7 +23,7 @@ const Login = () => {
     return (
 
 
-        <div className="w-full h-screen grid justify-center items-center">
+        <div className="w-full h-screen grid justify-center items-center ">
             
             {/* <section className="w-[300px]">
                 <Auth

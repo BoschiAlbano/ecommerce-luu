@@ -111,14 +111,18 @@ const Login = () => {
 
 
     return (
-        <Card className="bg-[rgba(255,255,255,0.3)] py-5 px-10 relative overflow-visible sm:h-auto sm:w-auto h-full w-full">
+        <Card className="py-5 px-10 relative overflow-visible sm:h-auto sm:w-auto h-full w-full"
+        style={{
+            background: "rgba(255,255,255,0.3)",
+            overflow: "visible"
+        }}>
 
             <Planta1 top={0} right={0} width={50}/>
             <Planta2 top={0} right={60} width={30}/>
             <Planta3 top={0} left={0} width={60}/>
 
 
-            <CardContent className='flex flex-col justify-center items-center relative'>
+            <CardContent className='flex flex-col justify-center items-center relative '>
 
                 <div className="sm:w-[300px] py-5">
                     <img src="/assets/logo.png" alt="Descripcion del logo" />
