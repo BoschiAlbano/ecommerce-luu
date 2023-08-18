@@ -48,9 +48,6 @@ const Login = () => {
     const OnSubmitLogin = async (e) => {
         e.preventDefault()
 
-        console.log(datos)
-        return
-
         try {
 
             const { data, error } = await supabase.auth.signInWithPassword({
