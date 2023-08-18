@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { supabase } from '@/supabase/cliente';
 
 import Button from '@mui/material/Button';
@@ -23,8 +23,6 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-import Alert from '@mui/material/Alert';
-
 const Login = () => {
 
     //Datos Formilario Login
@@ -40,11 +38,45 @@ const Login = () => {
       event.preventDefault();
     };
 
+    useEffect(() => {
+        setDatos({email: "", password: "" })
+    }, [register]);
+
     const Onchange = (e) => {
         setDatos({...datos, [e.target.name]: e.target.value })
     }
-    const OnSubmit = async (e) => {
+    const OnSubmitLogin = async (e) => {
         e.preventDefault()
+
+        console.log(datos)
+        return
+
+        try {
+
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: datos.email,
+                password: datos.password
+            })
+
+            if(error){
+                console.log(error)
+                return;
+            }
+
+            console.log(data.user)
+
+        } catch (error) {
+            // Manejar errores generales
+            console.log(error)
+        }
+
+    }
+    const OnSubmitRegister = async (e) => {
+        e.preventDefault()
+
+        console.log(datos)
+
+        return;
 
         try {
 
@@ -130,7 +162,7 @@ const Login = () => {
 
                 <div className={`${register ? "card-inner" : "card-inner2"} relative`}>
 
-                    <form className={`${register ? "hidden" : "flex"} flex-col gap-4 card-front`} onSubmit={(e) => {OnSubmit(e)}}>
+                    <form className={`${register ? "hidden" : "flex"} flex-col gap-4 card-front`} onSubmit={(e) => {OnSubmitLogin(e)}}>
 
                         <TextField id="input-with-sx" label="Email" variant="standard" type="text" name='email' placeholder='email' value={datos.email} onChange={(e) => Onchange(e)}/>
                         
@@ -175,19 +207,37 @@ const Login = () => {
 
                     </form>
                     
-                    <form className={`${register ? "flex": "hidden"} flex-col gap-4 card-back`}>
-                        <button className="cursor-pointer" onClick={(e) => {
-                            e.preventDefault()
-                            console.log("Register");
-                            }}>Register</button>
+                    <form className={`${register ? "flex": "hidden"} flex-col gap-4 card-back`} onSubmit={(e) => {OnSubmitRegister(e)}}>
+                        <TextField id="input-with-sx" label="Email" variant="standard" type="text" name='email' placeholder='email' value={datos.email} onChange={(e) => Onchange(e)}/>
 
-                        <Alert variant="outlined" severity="warning">
-                            No esta imprentado aun
-                        </Alert>
+                        <FormControl variant="standard">
+                            <InputLabel htmlFor="standard-adornment-password">Contraseña</InputLabel>
+                            <Input
+                                id="standard-adornment-password"
+                                type={showPassword ? 'text' : 'password'}
+                                name='password'
+                                value={datos.password}
+                                onChange={(e) => Onchange(e)}
+                                endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    >
+                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                                }
+                            />
+                        </FormControl>
 
-                        <p className="cursor-pointer" onClick={() => setRegister(false)}>Volver a Login</p>
+                        <BotonPlantas Texto={"Registrarse"}></BotonPlantas>
+
+                        <p className="cursor-pointer hover:text-[#1976D2]" onClick={() => setRegister(false)}>Volver a Login</p>
 
                     </form>
+
                 </div>
 
             </CardContent>
