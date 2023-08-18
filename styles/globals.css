@@ -28,7 +28,7 @@ body {
       rgba(107, 151, 222, 0.85)20%, 
       rgba(106, 112, 228, 0.65)50%),
     /* bottom, image */
-    url("/assets/fondo.jpg") no-repeat center;
+    url("/assets/fondo4.png") no-repeat center;
 
   background-size: cover;
 

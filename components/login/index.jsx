@@ -23,10 +23,15 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
+import Alert from '@mui/material/Alert';
+
 const Login = () => {
 
     //Datos Formilario Login
-    const [datos, setDatos] = useState({email: "", password: "" });
+    const [datos, setDatos] = useState({email: "", password: "", password2: "" });
+
+    // Errores Mensajes
+    const [error, setError] = useState({mostrar: false, msj: ""});
 
     // voltiar tarjeta
     const [register, setRegister] = useState(false);
@@ -38,8 +43,16 @@ const Login = () => {
       event.preventDefault();
     };
 
+    // Contraseña2
+    const [showPassword2, setShowPassword2] = useState(false);
+    const handleClickShowPassword2 = () => setShowPassword2((show) => !show);
+    const handleMouseDownPassword2 = (event) => {
+      event.preventDefault();
+    };
+
     useEffect(() => {
-        setDatos({email: "", password: "" })
+        setDatos({email: "", password: "", password2: "" })
+
     }, [register]);
 
     const Onchange = (e) => {
@@ -71,7 +84,24 @@ const Login = () => {
     const OnSubmitRegister = async (e) => {
         e.preventDefault()
 
-        console.log(datos)
+        // comprobar si las contraseñas son iguales
+
+        if (datos.password != datos.password2) {
+
+            setError({mostrar: true, msj: "Las Contraseñas no son iguales"})
+
+            setTimeout(() => {
+                setError({mostrar: false, msj: ""})
+            }, 3000);
+
+            return;
+        }
+
+        setError({mostrar: true, msj: "No esta implementado"})
+
+        setTimeout(() => {
+            setError({mostrar: false, msj: ""})
+        }, 3000);
 
         return;
 
@@ -140,11 +170,17 @@ const Login = () => {
 
 
     return (
-        <Card className="py-5 px-10 relative overflow-visible sm:h-auto sm:w-auto h-full w-full"
+        <Card className="py-5 px-10  sm:overflow-visible overflow-hidden sm:h-auto sm:w-auto h-full w-full"
         style={{
             background: "rgba(255,255,255,0.3)",
-            overflow: "visible"
+            position: "relative",
         }}>
+
+            <div className="absolute top-0 right-0 w-full flex justify-center items-center"> 
+                {error.mostrar 
+                ? <Alert className="w-full mx-5 mt-1" severity="error">{error.msj} </Alert> 
+                : null}
+            </div>
 
             <Planta1 top={0} right={0} width={50}/>
             <Planta2 top={0} right={60} width={30}/>
@@ -223,6 +259,28 @@ const Login = () => {
                                     onMouseDown={handleMouseDownPassword}
                                     >
                                     {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                                }
+                            />
+                        </FormControl>
+
+                        <FormControl variant="standard">
+                            <InputLabel htmlFor="standard-adornment-password">Repetir Contraseña</InputLabel>
+                            <Input
+                                id="standard-adornment-password"
+                                type={showPassword2 ? 'text' : 'password'}
+                                name='password2'
+                                value={datos.password2}
+                                onChange={(e) => Onchange(e)}
+                                endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword2}
+                                    onMouseDown={handleMouseDownPassword2}
+                                    >
+                                    {showPassword2 ? <VisibilityOff /> : <Visibility />}
                                     </IconButton>
                                 </InputAdornment>
                                 }
