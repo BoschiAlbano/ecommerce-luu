@@ -154,7 +154,7 @@ const Login = () => {
             <CardContent className='flex flex-col justify-center items-center relative '>
 
                 <div className="sm:w-[300px] py-5">
-                    <img src="/assets/logo.png" alt="Descripcion del logo" />
+                    <img src="/assets/Logo.png" alt="Descripcion del logo" />
                 </div>
 
                 <div className={`${register ? "card-inner" : "card-inner2"} relative`}>
