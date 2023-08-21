@@ -28,7 +28,7 @@ import Alert from '@mui/material/Alert';
 const Login = () => {
 
     //Datos Formilario Login
-    const [datos, setDatos] = useState({email: "", password: "", password2: "" });
+    const [datos, setDatos] = useState({email: "", password: "", password2: ""});
 
     // Errores Mensajes
     const [error, setError] = useState({mostrar: false, msj: ""});
@@ -50,9 +50,9 @@ const Login = () => {
       event.preventDefault();
     };
 
+
     useEffect(() => {
         setDatos({email: "", password: "", password2: "" })
-
     }, [register]);
 
     const Onchange = (e) => {
@@ -60,6 +60,9 @@ const Login = () => {
     }
     const OnSubmitLogin = async (e) => {
         e.preventDefault()
+
+        // verificar campos Vacios
+        if (VerificarCampos()) {return}
 
         try {
 
@@ -84,8 +87,9 @@ const Login = () => {
     const OnSubmitRegister = async (e) => {
         e.preventDefault()
 
+        // verificar campos Vacios
+        if (VerificarCampos()) {return}
         // comprobar si las contraseñas son iguales
-
         if (datos.password != datos.password2) {
 
             setError({mostrar: true, msj: "Las Contraseñas no son iguales"})
@@ -97,27 +101,31 @@ const Login = () => {
             return;
         }
 
-        setError({mostrar: true, msj: "No esta implementado"})
-
-        setTimeout(() => {
-            setError({mostrar: false, msj: ""})
-        }, 3000);
-
-        return;
-
         try {
-
-            const { data, error } = await supabase.auth.signInWithPassword({
+            
+            const { data, error } = await supabase.auth.signUp(
+                {
                 email: datos.email,
-                password: datos.password
-            })
+                password: datos.password,
+                }
+            )
 
             if(error){
                 console.log(error)
                 return;
             }
 
+
+            // Todo OK, limpiar Campos
             console.log(data.user)
+
+            setError({mostrar: true, msj: "Registrado con Exito, Verifica tú Email"})
+
+            setTimeout(() => {
+                setError({mostrar: false, msj: ""})
+                setRegister(!register)
+            }, 3000);
+
 
         } catch (error) {
             // Manejar errores generales
@@ -169,8 +177,22 @@ const Login = () => {
     }
 
 
+    const VerificarCampos = () => {
+        if (datos.password.length === 0 || datos.email.length === 0) {
+            setError({mostrar: true, msj: "Hay campos vacios"})
+
+            setTimeout(() => {
+                setError({mostrar: false, msj: ""})
+            }, 3000);
+
+            return true;
+        }
+
+        return false
+    }
+
     return (
-        <Card className="py-5 px-10  sm:overflow-visible overflow-hidden sm:h-auto sm:w-auto h-full w-full"
+        <Card className="py-5 px-10 sm:overflow-visible overflow-hidden sm:h-auto sm:w-auto h-full w-full"
         style={{
             background: "rgba(255,255,255,0.3)",
             position: "relative",
@@ -178,9 +200,10 @@ const Login = () => {
 
             <div className="absolute top-0 right-0 w-full flex justify-center items-center"> 
                 {error.mostrar 
-                ? <Alert className="w-full mx-5 mt-1" severity="error">{error.msj} </Alert> 
+                ? <Alert className="w-full mx-5 mt-1 animacion-alerta" severity="error">{error.msj} </Alert> 
                 : null}
             </div>
+
 
             <Planta1 top={0} right={0} width={50}/>
             <Planta2 top={0} right={60} width={30}/>
@@ -189,18 +212,17 @@ const Login = () => {
 
             <CardContent className='flex flex-col justify-center items-center relative '>
 
-                <div className="sm:w-[300px] py-5">
+                <div className=" py-5 sm:w-[20rem]">
                     <img src="/assets/Logo.png" alt="Descripcion del logo" />
                 </div>
 
-                <div className={`${register ? "card-inner" : "card-inner2"} relative`}>
+                <div className={`${register ? "card-inner" : "card-inner2"} relative w-full px-5`}>
 
+                    {/* Login */}
                     <form className={`${register ? "hidden" : "flex"} flex-col gap-4 card-front`} onSubmit={(e) => {OnSubmitLogin(e)}}>
 
                         <TextField id="input-with-sx" label="Email" variant="standard" type="text" name='email' placeholder='email' value={datos.email} onChange={(e) => Onchange(e)}/>
                         
-                        {/* <TextField id="input-with-sx" label="Contraseña" variant="standard" type="password" name='password' placeholder='Password' value={datos.password} onChange={(e) => Onchange(e)}/> */}
-
                         <FormControl variant="standard">
                             <InputLabel htmlFor="standard-adornment-password">Contraseña</InputLabel>
                             <Input
@@ -236,10 +258,11 @@ const Login = () => {
 
                         </Stack>
                     
-                        <p className="cursor-pointer hover:text-[#1976D2]" onClick={() => setRegister(true)}>Aún no estás Registrado? Hacelo ahora!!</p>
+                        <p className="cursor-pointer hover:text-[#1976D2] text-center" onClick={() => setRegister(true)}>Aún no estás Registrado? Hacelo ahora!!</p>
 
                     </form>
                     
+                    {/* Register */}
                     <form className={`${register ? "flex": "hidden"} flex-col gap-4 card-back`} onSubmit={(e) => {OnSubmitRegister(e)}}>
                         <TextField id="input-with-sx" label="Email" variant="standard" type="text" name='email' placeholder='email' value={datos.email} onChange={(e) => Onchange(e)}/>
 
@@ -289,7 +312,8 @@ const Login = () => {
 
                         <BotonPlantas Texto={"Registrarse"}></BotonPlantas>
 
-                        <p className="cursor-pointer hover:text-[#1976D2]" onClick={() => setRegister(false)}>Volver a Login</p>
+
+                        <p className="cursor-pointer hover:text-[#1976D2] text-center" onClick={() => setRegister(false)}>Volver a Login</p>
 
                     </form>
 
@@ -301,19 +325,3 @@ const Login = () => {
 }
 
 export default Login;
-
-
-
-/*
-<div class="card">
-  <div class="card-inner">
-    <div class="card-front">
-      <p>Front Side</p>
-    </div>
-    <div class="card-back">
-      <p>Back Side</p>
-    </div>
-  </div>
-</div>
-
- */

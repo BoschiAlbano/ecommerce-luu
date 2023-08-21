@@ -18,8 +18,8 @@ const Login = () => {
     return (
 
 
-        <div className="w-full h-screen grid justify-center items-center ">
-            
+        <div className="h-screen w-screen grid justify-items-center items-center">
+
             {/* <section className="w-[300px]">
                 <Auth
                     supabaseClient={supabase}
