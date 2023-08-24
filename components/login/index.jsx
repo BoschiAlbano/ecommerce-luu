@@ -9,8 +9,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { TextField } from '@mui/material';
 
-import BotonPlantas from '../bonones/botonPlanta';
-
 import Planta1 from '../plantas/planta1';
 import Planta2 from '../plantas/planta2';
 import Planta3 from '../plantas/planta3';
@@ -192,7 +190,7 @@ const Login = () => {
     }
 
     return (
-        <Card className="py-5 px-10 sm:overflow-visible overflow-hidden sm:h-auto sm:w-auto h-full w-full"
+        <Card className="py-0 px-0 sm:py-5 sm:px-10   overflow-hidden sm:h-[80%] sm:w-[25%] sm:min-w-[400px] h-full w-full"
         style={{
             background: "rgba(255,255,255,0.3)",
             position: "relative",
@@ -205,14 +203,15 @@ const Login = () => {
             </div>
 
 
-            <Planta1 top={0} right={0} width={50}/>
-            <Planta2 top={0} right={60} width={30}/>
-            <Planta3 top={0} left={0} width={60}/>
+            <Planta3 top={0} left={0} width={20} hover={true}/>
+            <Planta2 top={0} right={0} width={10} hover={true}/>
+            <Planta1 top={0} right={50} width={15} hover={true}/>
 
 
-            <CardContent className='flex flex-col justify-center items-center relative '>
 
-                <div className=" py-5 sm:w-[20rem]">
+            <CardContent className='flex flex-col justify-center items-center '>
+
+                <div className=" py-5 sm:w-[auto]">
                     <img src="/assets/Logo.png" alt="Descripcion del logo" />
                 </div>
 
@@ -245,7 +244,9 @@ const Login = () => {
                             />
                         </FormControl>
 
-                        <BotonPlantas Texto={"Ingresar"}></BotonPlantas>
+                        <Button className="p-3 bg-[#1976D2]" variant="contained" type="submit">
+                            Ingresar
+                        </Button>
 
                         <Stack direction="column" spacing={2}>
 
@@ -310,7 +311,9 @@ const Login = () => {
                             />
                         </FormControl>
 
-                        <BotonPlantas Texto={"Registrarse"}></BotonPlantas>
+                        <Button className="p-3 bg-[#1976D2]" variant="contained" type="submit">
+                            Ingresar
+                        </Button>
 
 
                         <p className="cursor-pointer hover:text-[#1976D2] text-center" onClick={() => setRegister(false)}>Volver a Login</p>
@@ -320,6 +323,8 @@ const Login = () => {
                 </div>
 
             </CardContent>
+
+            
         </Card>
     );
 }

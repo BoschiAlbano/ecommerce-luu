@@ -3,6 +3,7 @@ import { supabase } from '@/supabase/cliente';
 import { useRouter } from 'next/router';
 import Componente_Login from '@/components/login';
 
+
 const Login = () => {
 
     const navigation = useRouter();
@@ -18,7 +19,7 @@ const Login = () => {
     return (
 
 
-        <div className="h-screen w-screen grid justify-items-center items-center">
+        <div className="contenedor-login ">
 
             {/* <section className="w-[300px]">
                 <Auth
@@ -30,7 +31,6 @@ const Login = () => {
             </section> */}
 
             <Componente_Login/>
-
 
         </div>
     );

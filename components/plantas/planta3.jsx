@@ -1,17 +1,19 @@
 import React from 'react';
 
-const Planta3 = ({top, bottom, right, left, width}) => {
+const Planta3 = ({top, bottom, right, left, width, hover = false}) => {
 
     const iconStyle = {
         top: `${top}px`,
         right: `${right}px`,
-        width: `${width}px`,
+        width: `${width}%`,
         bottom: `${bottom}px`,
         left: `${left}px`,
+        animation: hover ? 'slay-3 2s cubic-bezier(0.52, 0, 0.58, 1) 1s infinite' : 'none',
+        transform: hover ? 'rotate(0)' : 'none',
     };
 
     return (
-        <div className="icon-3" style={iconStyle}>
+        <div className='icon-3' style={iconStyle}>
         <svg 
             version="1.1" 
             style={{

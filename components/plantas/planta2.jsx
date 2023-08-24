@@ -1,13 +1,15 @@
 import React from 'react';
 
-const Planta2 = ({top, bottom, right, left, width}) => {
+const Planta2 = ({top, bottom, right, left, width, hover = false}) => {
 
     const iconStyle = {
         top: `${top}px`,
         right: `${right}px`,
-        width: `${width}px`,
+        width: `${width}%`,
         bottom: `${bottom}px`,
         left: `${left}px`,
+        animation: hover ? 'slay-2 3s cubic-bezier(0.52, 0, 0.58, 1) 1s infinite' : 'none',
+        transform: hover ? 'rotate(0)' : 'none',
     };
 
     return (

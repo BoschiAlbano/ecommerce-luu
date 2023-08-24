@@ -17,25 +17,44 @@
 }
 
 body {
-  /* color: rgb(var(--foreground-rgb)); */
-  height: 100vh;
-  width: 100%;
-
-
   background:
     /* top, transparent red */ 
     linear-gradient(90deg,
       rgba(107, 151, 222, 0.80)5%, 
-      rgba(106, 112, 228, 0.60)50%),
-    /* bottom, image */
-    url("/assets/fondo4.png") no-repeat center;
-
+      rgba(106, 112, 228, 0.60)50%);
   background-size: cover;
-
-
 }
 
 
+body::-webkit-scrollbar{
+  width: 10px;
+  background: #6a70e499;
+
+}
+
+body::-webkit-scrollbar-thumb{
+  background: #6b97decc;
+  border-radius: 5px;
+}
+
+
+
+#ScrollMenu::-webkit-scrollbar{
+  width: 0rem;
+  background: transparent;
+}
+
+#ScrollMenu::-webkit-scrollbar-thumb{
+  background: transparent;
+  border-radius: 10px;
+  
+}
+/* #ScrollMenu:hover::-webkit-scrollbar-thumb{
+  background: rgba(115, 125, 128, 0.76);
+} */
+/* #ScrollMenu:hover::-webkit-scrollbar{
+  width: 10px;
+} */
 
 
 /* Plantas */
@@ -49,20 +68,23 @@ body {
   transition: all .5s ease-in-out;
   filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, .3));
 
-  animation: slay-1 3s cubic-bezier(0.52, 0, 0.58, 1) infinite;
-  transform: rotate(10deg);
+  z-index: 101;
+
+  fill: #000000b4;
+  /* animation: slay-1 3s cubic-bezier(0.52, 0, 0.58, 1) infinite;
+  transform: rotate(10deg); */
 }
 @keyframes slay-1 {
   0% {
-    transform: rotate(10deg);
+    transform: rotate(0deg);
   }
 
   50% {
-    transform: rotate(-5deg);
+    transform: rotate(5deg);
   }
 
   100% {
-    transform: rotate(10deg);
+    transform: rotate(0deg);
   }
 }
 .icon-2 {
@@ -73,10 +95,14 @@ body {
   transform-origin: 50% 0;
   transform: rotate(10deg);
   transition: all 1s ease-in-out;
-  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, .5));
+  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5));
+  
+  z-index: 102;
 
-  animation: slay-2 3s cubic-bezier(0.52, 0, 0.58, 1) 1s infinite;
-  transform: rotate(0);
+  fill: #000000b4;
+
+  /* animation: slay-2 3s cubic-bezier(0.52, 0, 0.58, 1) 1s infinite;
+  transform: rotate(0); */
 }
 @keyframes slay-2 {
   0% {
@@ -99,11 +125,16 @@ body {
   transform-origin: 50% 0;
   transform: rotate(-5deg);
   transition: all 1s ease-in-out;
-  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, .5));
+  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5));
 
-  animation: slay-3 2s cubic-bezier(0.52, 0, 0.58, 1) 1s infinite;
-  transform: rotate(0);
+  z-index: 103;
+  fill: #000000b4;
+
+  /* color: #bb1a1ab4; */
+  /* animation: slay-3 2s cubic-bezier(0.52, 0, 0.58, 1) 1s infinite;
+  transform: rotate(0); */
 }
+
 @keyframes slay-3 {
   0% {
     transform: rotate(0deg);
@@ -118,7 +149,30 @@ body {
   }
 }
 
+
 /* Tarjeta Login / Register */
+
+.contenedor-login{
+
+  height: 100vh;
+
+  background:
+    /* top, transparent red */ 
+    linear-gradient(90deg,
+      rgba(107, 151, 222, 0.80)5%, 
+      rgba(106, 112, 228, 0.60)50%),
+    /* bottom, image */
+    url("/assets/fondo4.png") no-repeat center;
+
+  background-size: cover;
+  
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+}
 
 .card-inner {
   position: relative;
@@ -148,3 +202,169 @@ body {
 
 .animacion-alerta{animation:blur-in-expand 0.5s linear both} 
 @keyframes blur-in-expand{0%{transform:scale(0);filter:blur(12px);opacity:0}100%{transform:scale(1);filter:blur(0);opacity:1}}
+
+
+/* Menu */
+
+.Contenedor-Menu-Vertical {
+  display: grid;
+  grid-template-columns: 20% auto;
+
+  gap: 0.5rem;
+
+  height: 85%;
+}
+
+
+
+.Grilla_Tarjetas{
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(
+      300px,
+      1fr
+    )
+  );
+
+  gap: 10px;
+}
+
+
+
+
+/* boton */
+
+
+.button {
+  font-size: 18px;
+  color: #000000b4;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  position: relative;
+  border: none;
+  background: none;
+  text-transform: uppercase;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: color;
+}
+
+.button:focus,
+.button:hover {
+  color: #fec195b4;
+}
+
+.button:focus:after,
+.button:hover:after {
+  width: 100%;
+  left: 0%;
+}
+
+.button:after {
+  content: "";
+  pointer-events: none;
+  bottom: -2px;
+  left: 50%;
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: #fec195b4;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: width, left;
+}
+
+
+/* Boton Carrito */
+
+.btn-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  background-color: transparent;
+  position: relative;
+}
+
+.btn-cart::after {
+  content: attr(data-quantity);
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  font-size: 15px;
+  font-weight: bold;
+  color: #ffffff;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  opacity: 0;
+  visibility: hidden;
+  transition: .2s linear;
+  top: 0%;
+}
+
+.icon-cart {
+  width: 24.38px;
+  height: 30.52px;
+  transition: .2s linear;
+}
+
+.icon-cart path {
+  fill: #6a70e499;
+  transition: .2s linear;
+}
+
+.btn-cart:hover > .icon-cart {
+  transform: scale(1.2);
+}
+
+.btn-cart:hover > .icon-cart path {
+  fill: #6b97decc;
+}
+
+.btn-cart:hover::after {
+  visibility: visible;
+  opacity: 1;
+  top: 40%;
+}
+
+.quantity {
+  display: none;
+}
+
+
+
+/* Separador */
+
+.separador{
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  text-transform: uppercase;
+  font-family: inherit;
+  font-weight: 800;
+  color: #000000b4;
+
+  width: 100%;
+}
+
+.separador::before, .separador::after {
+  margin: 0px 2rem;
+  flex-grow: 1;
+  height: 4px;
+  content: '\a0';
+  background-color: #E8DEF8;
+  position: relative;
+
+}
+
+.separador:hover{
+  color: #E8DEF8;
+
+}
+
+.saltar:hover{animation:jello-horizontal .9s linear both} 
+@keyframes jello-horizontal{0%{transform:scale3d(1,1,1)}30%{transform:scale3d(1.25,.75,1)}40%{transform:scale3d(.75,1.25,1)}50%{transform:scale3d(1.15,.85,1)}65%{transform:scale3d(.95,1.05,1)}75%{transform:scale3d(1.05,.95,1)}100%{transform:scale3d(1,1,1)}}
