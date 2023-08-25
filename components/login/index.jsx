@@ -190,7 +190,7 @@ const Login = () => {
     }
 
     return (
-        <Card className="py-0 px-0 sm:py-5 sm:px-10   overflow-hidden sm:h-[80%] sm:w-[25%] sm:min-w-[400px] h-full w-full"
+        <Card className="py-0 px-0 sm:py-5 sm:px-10 lg:py-1 lg:px-3 lg:h-[90%] sm:h-[80%] sm:w-[25%] lg:w-[15%] sm:min-w-[400px] h-full w-full "
         style={{
             background: "rgba(255,255,255,0.3)",
             position: "relative",
@@ -211,7 +211,7 @@ const Login = () => {
 
             <CardContent className='flex flex-col justify-center items-center '>
 
-                <div className=" py-5 sm:w-[auto]">
+                <div className=" py-5 sm:w-[auto] lg:w-[60%]">
                     <img src="/assets/Logo.png" alt="Descripcion del logo" />
                 </div>
 
