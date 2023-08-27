@@ -206,13 +206,34 @@ body::-webkit-scrollbar-thumb{
 
 /* Menu */
 
-.Contenedor-Menu-Vertical {
+.Grilla-nav{
+  height: 100vh;
   display: grid;
-  grid-template-columns: 20% auto;
+  grid-template-rows: 8% 82% 8%;
 
   gap: 0.5rem;
+  /* padding: 0.5rem 0rem; */
+}
 
-  height: 85%;
+.Contenedor-Menu-Vertical {
+
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 0.5rem;
+  padding: 0.5rem 0rem;
+
+}
+
+@media (min-width: 1024px ) {
+  
+  /* .Grilla-nav{
+    padding: 0.5rem 0rem;
+  } */
+  
+  .Contenedor-Menu-Vertical {
+    display: grid;
+    grid-template-columns: 20% auto;
+  }
 }
 
 
@@ -280,9 +301,9 @@ body::-webkit-scrollbar-thumb{
 /* Boton Carrito */
 
 .btn-cart {
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
   width: 50px;
   height: 50px;
   border-radius: 10px;
@@ -352,7 +373,6 @@ body::-webkit-scrollbar-thumb{
 }
 
 .separador::before, .separador::after {
-  margin: 0px 2rem;
   flex-grow: 1;
   height: 4px;
   content: '\a0';

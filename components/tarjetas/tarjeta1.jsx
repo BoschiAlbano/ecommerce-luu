@@ -6,6 +6,9 @@ import { CardActionArea } from '@mui/material';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 
+import Masonry from '@mui/lab/Masonry'
+import Box from '@mui/material/Box';
+
 // datos de api
 const tarjetas = [
     {
@@ -44,27 +47,42 @@ const tarjetas = [
 
 const Tarjeta1 = () => {
     return (
-        <div className="Grilla_Tarjetas">
-
-            <ImageList variant="masonry" cols={3} gap={8}>
-                
-                {tarjetas.map((item, index) => {
-                    return(
-                        <ImageListItem key={index}>
-                            <Card>
-                                <CardActionArea>
-                                    <CardContent className="flex justify-center items-center">
-                                        <img src={item.imagen} alt={item.descripcion} loading='lazy' />
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        </ImageListItem> 
-                    )
-                })}
-            </ImageList>
-
-        </div>
+        <Masonry columns={{ xs: 2, sm: 4, lg: 5 }} spacing={1}>
+            {tarjetas.map((item, index) => {
+            return(
+                <Card key={index}>
+                    <CardActionArea>
+                        <CardContent className="flex justify-center items-center p-0">
+                            <img className="object-contain" src={item.imagen} alt={item.descripcion} loading='lazy' />
+                        </CardContent>
+                    </CardActionArea>
+                </Card>
+            )
+        })}
+        </Masonry>
     );
 }
 
 export default Tarjeta1;
+
+
+{/* <div className="Grilla_Tarjetas">
+
+<ImageList variant="masonry" cols={3} gap={8}>
+                
+{tarjetas.map((item, index) => {
+    return(
+        <ImageListItem key={index}>
+            <Card>
+                <CardActionArea>
+                    <CardContent className="flex justify-center items-center">
+                        <img src={item.imagen} alt={item.descripcion} loading='lazy' />
+                    </CardContent>
+                </CardActionArea>
+            </Card>
+        </ImageListItem> 
+    )
+})}
+</ImageList>
+
+</div> */}

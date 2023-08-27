@@ -12,17 +12,13 @@ export default function Home() {
   return (
     <Menu>
 
-      <div className="grid sm:grid-cols-2 grid-cols-1">
-
-        <Banner/>
-
+      <div className="sm:mt-5 sm:px-5 sm:h-[60%] h-[50%]">
         <Carrusel/>
-
       </div>
 
-      <div className="w-full flex flex-col justify-center items-center mt-5 px-5">
+      <div className="w-full flex flex-col justify-center items-center sm:mt-5 sm:px-5">
 
-        <Link href={`Productos/Destacados`} className="separador my-5" >
+        <Link href={`Productos/Destacados`} className="separador before:sm:mx-8 after:sm:mx-8 before:mx-2 after:mx-2 my-5" >
             <div className="flex flex-col justify-normal items-center">
               <h1 className="text-2xl">Destacados</h1>
               <p className="text-sm">(ver mas)</p>
@@ -31,7 +27,7 @@ export default function Home() {
         <Tarjeta1/>
           
 
-          <Link href={`Productos/Destacados`} className="separador my-5" >
+          <Link href={`Productos/Destacados`} className="separador before:sm:mx-8 after:sm:mx-8 before:mx-2 after:mx-2 my-5" >
             <div className="flex flex-col justify-normal items-center">
               <h1 className="text-2xl">Exterior</h1>
               <p className="text-sm">(ver mas)</p>
