@@ -48,7 +48,7 @@ const Menu = ({ children }) => {
                 {/* Menu Horizontal __ */}
                 <header className='rounded-xl flex justify-center items-center bg-[rgba(255,255,255,0.3)] relative'>
 
-                    <div className='sm:hidden flex left-0 px-2'>
+                    <div className='lg:hidden sm:absolute lg:relative flex left-0 px-2'>
                         <button className="text-[#000000b4]" onClick={() => setOpenMenu(!openMenu)}><MenuIcon sx={{ fontSize: 35 }} /></button>
                     </div>
 
@@ -82,27 +82,15 @@ const Menu = ({ children }) => {
                     <div id='ScrollMenu' className="rounded-xl bg-[rgb(255,255,255)] overflow-auto sm:overflow-y-auto bg-[rgba(255,255,255,0.3)]">
                         {children}
                     </div>
+
                 </nav>
-
-                {/* Pie de pagina */}
-                <footer className='p-1 w-full flex flex-col items-center rounded-xl bg-[rgba(255,255,255,0.3)] justify-center gap-10'>
-
-
-                    <div className="grid grid-cols-4 w-full justify-items-center">
-                        <p className="text-xl font-bold text-[#000000b4]">Pie de Pagina</p>
-                        <p className="text-xl font-bold text-[#000000b4]">Pie de Pagina</p>
-                        <p className="text-xl font-bold text-[#000000b4]">Pie de Pagina</p>
-                        <p className="text-xl font-bold text-[#000000b4]">Pie de Pagina</p>
-
-                    </div>
-                </footer>
 
             </div>
 
 
-            <div className={`${openMenu ? 'flex' : 'hidden'} sm:hidden w-full h-full absolute bg-[rgba(255,255,255,0.64)] z-[999] transition-all duration-300 transform ${openMenu ? 'translate-x-0' : '-translate-x-full'} `}>
+            <div className={`${openMenu ? 'flex' : 'hidden'} lg:hidden w-full h-full absolute bg-[rgba(255,255,255,0.64)] z-[999] `}>
 
-            {/* className={`menu hidden xl:block xl:w-64 bg-gray-800 text-white h-full py-4 px-6 transition-all duration-300 transform ${menuOpen ? 'translate-x-0' : '-translate-x-64'}`} */}
+                {/* className={`menu hidden xl:block xl:w-64 bg-gray-800 text-white h-full py-4 px-6 transition-all duration-300 transform ${menuOpen ? 'translate-x-0' : '-translate-x-64'}`} */}
 
                 <button className="text-[#000000b4] absolute top-0 right-0 p-6 z-[888]" onClick={() => setOpenMenu(!openMenu)}><MenuIcon sx={{ fontSize: 35 }} /></button>
 

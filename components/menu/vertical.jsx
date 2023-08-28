@@ -24,15 +24,15 @@ const Vertical = () => {
         {/* Iconos Redes */}
         <section className='mt-2 p-1 w-full rounded-xl flex flex-row justify-evenly items-center'>
 
-            <Link className="lg:w-[15%] min-w-[35px] saltar" href={"/facebook"}>
+            <Link className="lg:w-[12%] min-w-[35px] saltar" href={"/facebook"}>
                 <img src="/assets/facebook.png" alt="Logo de Faceboock" />
             </Link>
 
-            <Link className="lg:w-[15%] min-w-[35px] saltar" href={"/facebook"}>
+            <Link className="lg:w-[12%] min-w-[35px] saltar" href={"/facebook"}>
                 <img src="/assets/instagram.png" alt="Logo de Faceboock" />
             </Link>
 
-            <Link className="lg:w-[15%] min-w-[35px] saltar" href={"/facebook"}>
+            <Link className="lg:w-[12%] min-w-[35px] saltar" href={"/facebook"}>
                 <img src="/assets/whatsapp.png" alt="Logo de Faceboock" />
             </Link>
 

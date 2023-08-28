@@ -28,7 +28,7 @@ const Categorias = () => {
         
         <div className='flex flex-col w-full justify-center items-center'>
 
-            <img src="./assets/Logo.png" alt="Descripcion de logo" className="p-3 w-[50%]" />
+            <img src="./assets/Logo.png" alt="Descripcion de logo" className="p-3 w-[80%] sm:w-[40%] md:w-[40%] lg:w-[80%]" />
 
             <h1 className="text-2xl text-[#000000b4] text-left border-b-[2px] border-[#E8DEF8] p-3 mt-3 mb-6 uppercase font-[inherit] font-extrabold">Categorias</h1>
 
@@ -44,11 +44,6 @@ const Categorias = () => {
                     })
                 }
 
-            </div>
-
-
-            <div className="absolute bottom-0">
-                
             </div>
         </div>
 
