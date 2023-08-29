@@ -28,15 +28,16 @@ const Categorias = () => {
         
         <div className='flex flex-col w-full justify-center items-center'>
 
-            <img src="./assets/Logo.png" alt="Descripcion de logo" className="p-3 w-[80%] sm:w-[40%] md:w-[40%] lg:w-[80%]" />
-
+            <Link href={'/'} className="p-3 w-[80%] sm:w-[40%] md:w-[40%] lg:w-[80%]">
+                <img src={`${process.env.NEXT_PUBLIC_HOST}/assets/Logo.png`} alt="Descripcion de logo"  />
+            </Link>
             <h1 className="text-2xl text-[#000000b4] text-left border-b-[2px] border-[#E8DEF8] p-3 mt-3 mb-6 uppercase font-[inherit] font-extrabold">Categorias</h1>
 
             <div className="w-full flex flex-col items-center">
                 {
                     categorias.map((item) => {
                         return (
-                            <Link key={item.id} href={`Productos/Categoria/${item.id}`} 
+                            <Link key={item.id} href={`/categoria/${item.id}`} 
                             className="button mb-4 w-44 rounded-xl flex justify-center items-center text-xl font-[roboto]" 
                             >{item.descripcion}</Link>
 
