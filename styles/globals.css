@@ -20,8 +20,8 @@ body {
   background:
     /* top, transparent red */ 
     linear-gradient(90deg,
-      rgba(107, 151, 222, 0.80)5%, 
-      rgba(106, 112, 228, 0.60)50%);
+      rgba(220, 229, 245, 0.8)5%, 
+      rgba(235, 229, 121, 0.6)50%);
   background-size: cover;
 }
 
