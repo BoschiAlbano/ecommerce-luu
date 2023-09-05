@@ -1,14 +1,13 @@
-import React, { useRef } from 'react';
+'use client';
+import React, { useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import 'swiper/css/zoom';
-// import 'swiper/css/pagination';
 
 const imgs = [
     'https://swiperjs.com/demos/images/nature-1.jpg',
@@ -27,14 +26,7 @@ const imgs = [
 import { FreeMode, Navigation, Thumbs, Zoom } from 'swiper/modules';
 
 export default function Producto_Img() {
-    const thumbsSwiper = useRef(null);
-    const mainSwiper = useRef(null);
-
-    // Configurar el Swiper de los pulgares
-    // useEffect(() => {
-    //     if (thumbsSwiper.current !== null) {
-    //     }
-    // }, [thumbsSwiper]);
+    const [imgChica, setImgChica] = useState(null);
 
     return (
         <>
@@ -46,38 +38,36 @@ export default function Producto_Img() {
                 loop={true}
                 spaceBetween={10}
                 navigation={true}
-                thumbs={{ swiper: thumbsSwiper.current }}
-                modules={[FreeMode, Navigation, Thumbs, Zoom]}
-                // pagination={{ clickable: true }}
-                className="mySwiper2 rounded-xl"
-                onSwiper={(swiper) => {
-                    // Asignar la instancia de Swiper principal a la referencia
-                    mainSwiper.current = swiper;
+                thumbs={{
+                    swiper: imgChica && !imgChica.destroyed ? imgChica : null,
                 }}
+                modules={[FreeMode, Navigation, Thumbs, Zoom]}
+                className="mySwiper2 rounded-xl"
                 zoom={true}
             >
                 {imgs.map((item, index) => {
                     return (
                         <SwiperSlide key={index}>
                             <div id="zoom" className="swiper-zoom-container">
-                                <img className="rounded-xl" src={item} />
+                                <img
+                                    className="rounded-xl object-fill"
+                                    src={item}
+                                />
                             </div>
                         </SwiperSlide>
                     );
                 })}
             </Swiper>
+
             <Swiper
-                loop={true}
+                loop={false}
                 spaceBetween={10}
                 slidesPerView={4}
                 freeMode={true}
                 watchSlidesProgress={true}
                 modules={[FreeMode, Navigation, Thumbs]}
                 className="mySwiper rounded-xl"
-                onSwiper={(swiper) => {
-                    // Asignar la instancia de Swiper de los pulgares a la referencia
-                    thumbsSwiper.current = swiper;
-                }}
+                onSwiper={setImgChica}
             >
                 {imgs.map((item, index) => {
                     return (

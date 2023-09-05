@@ -7,39 +7,42 @@ import Planta3 from '../plantas/planta3';
 import Planta1 from '../plantas/planta1';
 import Planta2 from '../plantas/planta2';
 
-const Vertical = () => {
+const Vertical = ({ datos }) => {
     return (
         <div className=" hidden rounded-xl lg:flex flex-col justify-between items-center bg-[rgba(255,255,255,0.3)] relative">
+            <Categorias datos={datos} />
 
-        <Categorias />
+            <Planta2 width={15} top={0} left={10} hover={true} />
 
-        <Planta2 width={15} top={0} left={10} hover={true} />
+            <Planta1 width={15} top={0} left={50} hover={true} />
 
-        <Planta1 width={15} top={0} left={50} hover={true} />
+            <Planta3 width={20} top={0} right={0} hover={true} />
 
-        <Planta3 width={20} top={0} right={0} hover={true} />
+            {/* Iconos Redes */}
+            <section className="mt-2 p-1 w-full rounded-xl flex flex-row justify-evenly items-center">
+                <Link
+                    className="lg:w-[12%] min-w-[35px] saltar opacity-[0.7]"
+                    href={'/facebook'}
+                >
+                    <img src="/assets/facebook.png" alt="Logo de Faceboock" />
+                </Link>
 
+                <Link
+                    className="lg:w-[12%] min-w-[35px] saltar opacity-[0.7]"
+                    href={'/facebook'}
+                >
+                    <img src="/assets/instagram.png" alt="Logo de Faceboock" />
+                </Link>
 
-
-        {/* Iconos Redes */}
-        <section className='mt-2 p-1 w-full rounded-xl flex flex-row justify-evenly items-center'>
-
-            <Link className="lg:w-[12%] min-w-[35px] saltar" href={"/facebook"}>
-                <img src="/assets/facebook.png" alt="Logo de Faceboock" />
-            </Link>
-
-            <Link className="lg:w-[12%] min-w-[35px] saltar" href={"/facebook"}>
-                <img src="/assets/instagram.png" alt="Logo de Faceboock" />
-            </Link>
-
-            <Link className="lg:w-[12%] min-w-[35px] saltar" href={"/facebook"}>
-                <img src="/assets/whatsapp.png" alt="Logo de Faceboock" />
-            </Link>
-
-        </section>
-
-    </div>
+                <Link
+                    className="lg:w-[12%] min-w-[35px] saltar opacity-[0.7]"
+                    href={'/facebook'}
+                >
+                    <img src="/assets/whatsapp.png" alt="Logo de Faceboock" />
+                </Link>
+            </section>
+        </div>
     );
-}
+};
 
 export default Vertical;

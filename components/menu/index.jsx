@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { supabase } from '@/supabase/cliente';
 import { useRouter } from 'next/router';
-import Categorias from './categorias';
+import ListarCategorias from './categorias';
 
 import Link from 'next/link';
 
@@ -15,6 +15,9 @@ import ClearIcon from '@mui/icons-material/Clear';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import Vertical from './vertical';
+
+// Datos de APi - estas se cargan en el menu Vertical y en el que esta oculto para cell
+import { Categorias } from '../DataBaseEjemplo';
 
 const Menu = ({ children }) => {
     const navigation = useRouter();
@@ -53,7 +56,7 @@ const Menu = ({ children }) => {
                     className="flex flex-col justify-between items-center bg-[#ffffff4d] relative overflow-y-scroll overflow-x-hidden"
                     onClick={() => setOpenMenu(!openMenu)}
                 >
-                    <Categorias />
+                    <ListarCategorias datos={Categorias} />
 
                     <button
                         className="button px-3 text-xl font-[inherit] font-extrabold text-[#000000b4]"
@@ -167,7 +170,7 @@ const Menu = ({ children }) => {
 
                     <nav className="Contenedor-Menu-Vertical grid-cols-1 w-full h-full">
                         {/* Menu Vertical | */}
-                        <Vertical />
+                        <Vertical datos={Categorias} />
 
                         {/* Contenido */}
                         <div

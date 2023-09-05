@@ -3,55 +3,32 @@ import Menu from '@/components/menu';
 import { useRouter } from 'next/router';
 import ProductoImg from '@/components/swiperjs';
 
-// datos de api
-const tarjetas = [
-    {
-        id: 1,
-        imagen: 'https://acdn.mitiendanube.com/stores/001/018/213/products/fcvn638911-66790f331acc4045bb16006555347574-640-0.jpg',
-        descripcion: 'Imagen de prueba',
-    },
-    {
-        id: 2,
-        imagen: 'https://i.pinimg.com/1200x/71/c1/7d/71c17d742cbb238c04721a0c3f1be07f.jpg',
-        descripcion: 'Imagen de prueba',
-    },
-    {
-        id: 3,
-        imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUIZKwdD5p9uwnZblWu9bFweegB-McGZhZTw&usqp=CAU',
-        descripcion: 'Imagen de prueba',
-    },
-    {
-        id: 4,
-        imagen: 'https://fotografias.larazon.es/clipping/cmsimages02/2023/03/01/0F9FC835-FA99-4C08-9A0B-EB8C9E9F3C50/planta-forma-huevo_98.jpg?crop=750,422,x0,y166&width=1900&height=1069&optimize=low&format=webply',
-        descripcion: 'Imagen de prueba',
-    },
-    {
-        id: 5,
-        imagen: 'https://hips.hearstapps.com/es.h-cdn.co/mcres/images/mi-casa/ideas-decoracion/como-poner-las-plantas-dentro-de-casa/planta-estilizada/116100-1-esl-ES/planta-estilizada.jpg',
-        descripcion: 'Imagen de prueba',
-    },
-    {
-        id: 6,
-        imagen: 'https://www.elblogdelatabla.com/wp-content/uploads/2021/02/macetas-maceteros-soporte-plantas-interior2Bcox-cox2B1000px.jpg',
-        descripcion: 'Imagen de prueba',
-    },
-    {
-        id: 7,
-        imagen: 'https://i.blogs.es/c9ba58/4c9c664eb12a47efa6f9ca4920e52e07-1-/450_1000.jpeg',
-        descripcion: 'Imagen de prueba',
-    },
-    {
-        id: 8,
-        imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRfpgh7yeHlBItNSGiUJeaByYc1xqsvma58tk2F3F_1dvnm-WljJjg1aMd9fhh1j51FzE&usqp=CAU',
-        descripcion: 'Imagen de prueba',
-    },
-];
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import { TextField } from '@mui/material';
+
+import Agregar from '@/components/bonones/agregar';
 
 const Producto = () => {
     const router = useRouter();
     const { id } = router.query;
 
+    const [value, setValue] = useState(1);
+
     // traer imagenes de api con id del producto
+
+    const handleInputChange = (event) => {
+        const newValue = parseInt(event.target.value);
+
+        if (isNaN(newValue)) {
+            setValue('');
+        }
+
+        // No permite valores negativos
+        if (!isNaN(newValue) && newValue >= 1 && newValue <= 11) {
+            setValue(newValue);
+        }
+    };
 
     return (
         <Menu>
@@ -61,9 +38,63 @@ const Producto = () => {
                         <ProductoImg />
                     </section>
 
-                    <section className=" bg-[#ffffff4d] h-full rounded-xl">
-                        Descripcion de producto
-                    </section>
+                    <Card className="bg-[#ffffff4d] h-full rounded-xl">
+                        <CardContent
+                            className="h-full w-full flex flex-col sm:gap-10 gap-3 items-center overflow-y-scroll"
+                            id={'ScrollProducto'}
+                        >
+                            <h1 className="font-[roboto] font-extrabold sm:text-3xl text-2xl ">
+                                Nombre de Prodcuto
+                            </h1>
+
+                            <h1 className="font-[roboto] sm:text-lg text-sm">
+                                Lorem, ipsum dolor sit amet consectetur
+                                adipisicing elit. Provident, molestias suscipit
+                                dolor rem animi placeat ipsam corrupti,
+                                molestiae natus non, explicabo iusto iste cum
+                                veniam culpa unde cupiditate odit quibusdam?
+                                Lorem, ipsum dolor sit amet consectetur
+                                adipisicing elit. Provident, molestias suscipit
+                                dolor rem animi placeat ipsam corrupti,
+                                molestiae natus non, explicabo iusto iste cum
+                                veniam culpa unde cupiditate odit quibusdam?
+                                Lorem, ipsum dolor sit amet consectetur
+                                adipisicing elit. Provident, molestias suscipit
+                                dolor rem animi placeat ipsam corrupti,
+                                molestiae natus non, explicabo iusto iste cum
+                                veniam culpa unde cupiditate odit quibusdam?
+                                Lorem, ipsum dolor sit amet consectetur
+                            </h1>
+
+                            <div className="w-[90%] flex h-[3rem] gap-2">
+                                <TextField
+                                    className="w-[50%]"
+                                    id="outlined-number"
+                                    label="Cantidad"
+                                    type="number"
+                                    variant="outlined"
+                                    onChange={handleInputChange}
+                                    value={value}
+                                    inputProps={{
+                                        style: {
+                                            height: '3rem',
+                                            paddingTop: '0px',
+                                            paddingBottom: '0px',
+                                            paddingLeft: '1rem',
+                                            paddingRight: '1rem',
+                                        },
+                                        min: 1, // Establece el valor mínimo a 1
+                                        max: 11,
+                                        inputMode: 'none', // Desactiva la entrada de texto
+                                    }}
+                                />
+
+                                <div className="w-[50%]">
+                                    <Agregar></Agregar>
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
                 </div>
             </div>
         </Menu>
