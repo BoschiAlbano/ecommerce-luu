@@ -9,7 +9,7 @@ import Planta2 from '../plantas/planta2';
 
 const Vertical = ({ datos }) => {
     return (
-        <div className=" hidden rounded-xl lg:flex flex-col justify-between items-center bg-[rgba(255,255,255,0.3)] relative">
+        <div className=" hidden rounded-xl lg:flex flex-col justify-between items-center bg-[--Secciones-Color] relative">
             <Categorias datos={datos} />
 
             <Planta2 width={15} top={0} left={10} hover={true} />

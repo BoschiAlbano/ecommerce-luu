@@ -7,7 +7,7 @@ const Categorias = ({ datos }) => {
         <div className="flex flex-col w-full justify-center items-center">
             <Link
                 href={'/'}
-                className="p-3 w-[80%] sm:w-[40%] md:w-[40%] lg:w-[80%]"
+                className="w-[70%] sm:w-[40%] md:w-[40%] lg:w-[70%]"
             >
                 <img
                     src={`${process.env.NEXT_PUBLIC_HOST}/assets/Logo.png`}

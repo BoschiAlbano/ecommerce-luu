@@ -12,7 +12,7 @@ const Categoria = () => {
 
     return (
         <Menu>
-            <div className="w-full flex flex-col justify-center items-center sm:mt-5 sm:px-5">
+            <div className=" pt-24 h-full w-[95%]">
                 <Tarjeta1
                     Productos={Productos.filter((prod) => prod.categoria == id)}
                 />
