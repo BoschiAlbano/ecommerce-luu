@@ -34,7 +34,7 @@ const Tarjeta1 = ({ Productos }) => {
                                 </Link>
 
                                 <p className="font-[roboto] font-extrabold uppercase text-1xl sm:text-2xl text-[#000000b4] mt-4">
-                                    $600
+                                    ${item.precio}
                                 </p>
 
                                 <h1 className="font-[roboto] font-extrabold uppercase text-xs sm:text-xl text-[#000000b4] mt-2">

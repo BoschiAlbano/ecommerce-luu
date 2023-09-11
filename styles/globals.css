@@ -11,7 +11,7 @@
 
     --Secciones-Color: #ffffff;
 
-    --Menu-Desplegable-Color: #ffffffef;
+    --Menu-Desplegable-Color: #ffffff;
 
     --Buscar-Color-Borde: #075563b4;
 
@@ -476,17 +476,10 @@ body.menu-open {
 }
 
 .gradiente-borde {
-    border-top: 20px solid;
-    border-image: linear-gradient(
-        to right,
-        var(--Degradado-Color-1),
-        var(--Degradado-Color-2)
-    );
-    border-image-slice: 1;
-    border-image-source: linear-gradient(
-        to right,
-        var(--Degradado-Color-1),
-        var(--Degradado-Color-2)
+    background: linear-gradient(
+        90deg,
+        var(--Degradado-Color-1) 0%,
+        var(--Degradado-Color-2) 100%
     );
 }
 
@@ -620,6 +613,19 @@ body.menu-open {
 }
 
 /* Carrusel */
+.contenedor-Carrusel {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    place-content: center;
+}
+
+@media (max-width: 1024px) {
+    .contenedor-Carrusel {
+        display: grid;
+        grid-template-columns: 100%;
+    }
+}
+
 .mySwiperCarrusel .swiper-slide img {
     display: block;
     width: 100%;
@@ -639,7 +645,6 @@ body.menu-open {
     --swiper-navigation-size: 40px;
     --swiper-theme-color: var(--Buscar-Color-Borde);
 }
-
 .mySwiperCarrusel .swiper-scrollbar {
     /* --swiper-scrollbar-bg-color: var(--color1); */
     --swiper-scrollbar-drag-bg-color: var(--Buscar-Color-Borde);
@@ -663,7 +668,7 @@ body.menu-open {
 .mySwiperTarjetas .swiper-button-prev,
 .mySwiperTarjetas .swiper-button-next {
     --swiper-navigation-size: 40px;
-    --swiper-theme-color: var(--color1);
+    --swiper-theme-color: var(--Buscar-Color-Borde);
 }
 /* Productos */
 .mySwiperProducto .swiper-slide {
@@ -682,17 +687,25 @@ body.menu-open {
 .mySwiperProducto .swiper-button-prev,
 .mySwiperProducto .swiper-button-next {
     --swiper-navigation-size: 40px;
-    --swiper-theme-color: var(--Scrollbar-thumb-Color);
+    --swiper-theme-color: var(--Buscar-Color-Borde);
 }
 /* Visor de imagen */
 .mySwiperVisor .swiper-slide img {
-    height: 100%;
+    /* height: 100%; */
     object-fit: contain;
 }
+.mySwiperVisor .swiper-button-prev,
 #zoom {
     background: var(--Transparente);
 }
 
 #zoom > img {
     object-fit: cover;
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(90deg, #d2669962 5%, #f5d28762 50%),
+        url('/assets/fondo4.png') no-repeat center;
+    background-size: cover;
 }

@@ -44,7 +44,7 @@ export default function Tarjeta2({ Productos }) {
                 {Productos.map((item, index) => {
                     return (
                         <SwiperSlide style={{ width: 'initial' }} key={index}>
-                            <div className="opacity-[0.7] hover:opacity-[1] hover:scale-95 transition-all duration-300">
+                            <div className="opacity-[0.9] hover:opacity-[1] hover:scale-95 transition-all duration-300">
                                 <div className="h-[350px] rounded-[0.5rem] bg-[--Transparente] relative shadow-2xl">
                                     <div className="overflow-hidden h-full">
                                         <div className="absolute left-0 top-0 p-2">

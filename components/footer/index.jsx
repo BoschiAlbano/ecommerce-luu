@@ -1,22 +1,24 @@
+import Link from 'next/link';
 import React from 'react';
 
-const Footer = () => {
+const Footer = ({ categorias = [] }) => {
     return (
-        <footer className="bg-white lg:grid lg:grid-cols-5">
-            <div className="relative block h-32 lg:col-span-2 lg:h-full">
-                <img
-                    src={`${process.env.NEXT_PUBLIC_HOST}/assets/fondo.jpg`}
+        <footer className="bg-[--Secciones-Color] lg:grid lg:grid-cols-5 mb-4">
+            <div className="relative block h-32 lg:col-span-2 lg:h-full footer">
+                {/* <img
+                    src={`${process.env.NEXT_PUBLIC_HOST}/assets/fondo4.png`}
                     alt=""
                     className="absolute inset-0 h-full w-full object-cover"
-                />
+                /> */}
             </div>
 
             <div className="px-4 py-16 sm:px-6 lg:col-span-3 lg:px-8">
                 <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+                    {/* Informacion - Redes */}
                     <div>
                         <p>
                             <span className="text-xs uppercase tracking-wide text-gray-500">
-                                Call us
+                                Telefono
                             </span>
 
                             <a
@@ -27,9 +29,9 @@ const Footer = () => {
                             </a>
                         </p>
 
-                        <ul className="mt-8 space-y-1 text-sm text-gray-700">
-                            <li>Monday to Friday: 10am - 5pm</li>
-                            <li>Weekend: 10am - 3pm</li>
+                        <ul className="mt-8 space-y-1 text-sm text-[--Texto-Color]">
+                            <li>Lunes a Viernes: 10am - 5pm</li>
+                            <li>Fines de Semana: 10am - 3pm</li>
                         </ul>
 
                         <ul className="mt-8 flex gap-6">
@@ -38,7 +40,7 @@ const Footer = () => {
                                     href="/"
                                     rel="noreferrer"
                                     target="_blank"
-                                    className="text-gray-700 transition hover:opacity-75"
+                                    className="text-[--Texto-Color] transition hover:opacity-75"
                                 >
                                     <span className="sr-only">Facebook</span>
 
@@ -152,59 +154,28 @@ const Footer = () => {
                     </div>
 
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        {/* Categorias*/}
                         <div>
                             <p className="font-medium text-gray-900">
-                                Services
+                                Categorias
                             </p>
 
                             <ul className="mt-6 space-y-4 text-sm">
-                                <li>
-                                    <a
-                                        href="#"
-                                        className="text-gray-700 transition hover:opacity-75"
-                                    >
-                                        1on1 Coaching
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a
-                                        href="#"
-                                        className="text-gray-700 transition hover:opacity-75"
-                                    >
-                                        Company Review
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a
-                                        href="#"
-                                        className="text-gray-700 transition hover:opacity-75"
-                                    >
-                                        Accounts Review
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a
-                                        href="#"
-                                        className="text-gray-700 transition hover:opacity-75"
-                                    >
-                                        HR Consulting
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a
-                                        href="#"
-                                        className="text-gray-700 transition hover:opacity-75"
-                                    >
-                                        SEO Optimisation
-                                    </a>
-                                </li>
+                                {categorias.map((item, index) => {
+                                    return (
+                                        <li key={index}>
+                                            <Link
+                                                href="#"
+                                                className="text-gray-700 transition hover:opacity-75"
+                                            >
+                                                {item.descripcion}
+                                            </Link>
+                                        </li>
+                                    );
+                                })}
                             </ul>
                         </div>
-
+                        {/* Compania*/}
                         <div>
                             <p className="font-medium text-gray-900">Company</p>
 
@@ -239,8 +210,8 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-
-                <div className="mt-12 border-t border-gray-100 pt-12">
+                {/* Termino y condiciones */}
+                <div className="mt-12 border-t border-[--Buscar-Color-Borde] pt-12">
                     <div className="sm:flex sm:items-center sm:justify-between">
                         <ul className="flex flex-wrap gap-4 text-xs">
                             <li>

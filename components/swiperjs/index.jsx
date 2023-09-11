@@ -75,6 +75,26 @@ export default function Producto_Img() {
         });
     };
 
+    // Manejo de Doble click en dispositivos mobiles. (❌no se puede usar el doble click en mobile❌)
+    let clicks = [];
+    let time = '';
+    const doubleClick = (e) => {
+        e.preventDefault();
+
+        clicks.push(new Date().getTime());
+
+        window.clearTimeout(time);
+
+        time = window.setTimeout(() => {
+            if (
+                clicks.length > 1 &&
+                clicks[clicks.length - 1] - clicks[clicks.length - 2] < 500
+            ) {
+                handleOpen();
+            }
+        }, 500);
+    };
+
     return (
         <div className="flex flex-col justify-start items-center h-full">
             {/* Carrusel de img */}
@@ -108,7 +128,9 @@ export default function Producto_Img() {
                         return (
                             <SwiperSlide key={index} style={{}}>
                                 <img
-                                    onDoubleClick={() => handleOpen()}
+                                    // onDoubleClick={() => handleOpen()}
+                                    onClick={(e) => doubleClick(e)}
+                                    ontouchta
                                     className="rounded-xl"
                                     src={item.imagen}
                                 />
@@ -125,7 +147,7 @@ export default function Producto_Img() {
                     Nombre de Prodcuto
                 </h1>
                 {/* Descripcion */}
-                <h1 className="font-[roboto] sm:text-lg text-sm">
+                <h1 className="font-[roboto] sm:text-lg text-sm sm:mx-[5%] mx-0">
                     Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                     Provident, molestias suscipit dolor rem animi placeat ipsam
                     corrupti, molestiae natus non, explicabo iusto iste cum

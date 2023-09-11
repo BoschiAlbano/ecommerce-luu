@@ -1,6 +1,5 @@
 import React from 'react';
 import Menu from '@/components/menu';
-// import Carrusel from '@/components/carrusel';
 import Tarjeta1 from '@/components/tarjetas/tarjeta1';
 import Link from 'next/link';
 import Tarjeta2 from '@/components/tarjetas/tarjeta2';
@@ -14,14 +13,17 @@ export default function Home() {
         <>
             <Menu>
                 <div className="pt-24 h-full w-[95%]">
-                    <div className=" sm:flex block flex-row justify-center items-center sm:h-[500px] h-auto bg-[--Secciones-Color]">
-                        <Link href={'/'} className="sm:flex hidden">
+                    <div className=" sm:h-[500px] bg-[--Secciones-Color] contenedor-Carrusel">
+                        <div className="lg:flex hidden justify-center items-center sm:h-[500px]">
                             <img
                                 src={`${process.env.NEXT_PUBLIC_HOST}/assets/Logo.png`}
                                 alt="Descripcion de logo"
+                                className=" object-contain h-[100%]"
                             />
-                        </Link>
-                        <Carrusel2 slides={Banners} />
+                        </div>
+                        <div className="flex justify-center items-center sm:h-[500px]">
+                            <Carrusel2 slides={Banners} />
+                        </div>
                     </div>
 
                     <div className="w-full flex flex-col justify-center items-center mt-5 gap-4">
@@ -31,9 +33,7 @@ export default function Home() {
                                 className="separador before:sm:mx-8 after:sm:mx-8 before:mx-2 after:mx-2 my-10 w-full"
                             >
                                 <div className="flex flex-col justify-normal items-center">
-                                    <h1 className="text-2xl">
-                                        Novedades para vos!
-                                    </h1>
+                                    <h1 className="text-2xl">Novedades</h1>
                                     <p className="text-sm">(ver mas)</p>
                                 </div>
                             </Link>

@@ -94,7 +94,8 @@ const Menu = ({ children }) => {
                                     openMenu
                                         ? 'translate-x-[0%]'
                                         : 'translate-x-[-100%]'
-                                } transition-transform duration-300 lg:translate-x-[-100%] w-full h-screen absolute flex bg-[--Menu-Desplegable-Color] z-[999] overflow-hidden top-0 left-0`}
+                                } transition-transform duration-300 lg:translate-x-[-100%] w-full min-h-[100vh] h-full absolute flex flex-col bg-[--Menu-Desplegable-Color] z-[999] overflow-hidden top-0 left-0 justify-between`}
+                                onClick={() => setOpenMenu(!openMenu)}
                             >
                                 <button
                                     className="text-[#000000b4] absolute top-0 right-0 p-6 z-[888]"
@@ -103,14 +104,11 @@ const Menu = ({ children }) => {
                                     <ClearIcon sx={{ fontSize: 35 }} />
                                 </button>
 
-                                <div
-                                    className="flex flex-col justify-between w-full  items-center overflow-y-scroll overflow-x-hidden"
-                                    onClick={() => setOpenMenu(!openMenu)}
-                                >
+                                <div className="flex flex-col w-full items-center overflow-y-scroll overflow-x-hidden justify-between">
                                     <ListarCategorias datos={Categorias} />
 
                                     <button
-                                        className="button px-3 text-xl font-[inherit] font-extrabold text-[#000000b4]"
+                                        className="button px-3 text-xl font-[inherit] font-extrabold text-[#000000b4] mb-6"
                                         onClick={() => sigOutUser()}
                                     >
                                         Cerrar Sesion
@@ -141,9 +139,9 @@ const Menu = ({ children }) => {
                                     />
 
                                     {/* Iconos Redes */}
-                                    <section className="mb-5 p-1 w-full rounded-xl flex flex-row justify-evenly items-center">
+                                    <section className="p-1 w-full rounded-xl flex flex-row justify-evenly items-center">
                                         <Link
-                                            className="w-[10%] min-w-[35px] saltar"
+                                            className="w-[10%] min-w-[35px] max-w-[45px] saltar"
                                             href={'/facebook'}
                                         >
                                             <img
@@ -153,7 +151,7 @@ const Menu = ({ children }) => {
                                         </Link>
 
                                         <Link
-                                            className="w-[10%] min-w-[35px] saltar"
+                                            className="w-[10%] min-w-[35px] max-w-[45px] saltar"
                                             href={'/facebook'}
                                         >
                                             <img
@@ -163,7 +161,7 @@ const Menu = ({ children }) => {
                                         </Link>
 
                                         <Link
-                                            className="w-[10%] min-w-[35px] saltar"
+                                            className="w-[10%] min-w-[35px] max-w-[45px] saltar"
                                             href={'/facebook'}
                                         >
                                             <img
@@ -173,12 +171,23 @@ const Menu = ({ children }) => {
                                         </Link>
                                     </section>
                                 </div>
+
+                                {/* Pie de Menu. (❌ la barra del navegador en dispositivos mobiles cuando se esconde no se muestra la parte inferior del menu ya que es un h-screen ❌) */}
+                                <div className="h-[60px] w-full items-center">
+                                    <div className=" flex h-full">
+                                        <div className="gradiente-borde w-full h-full flex flex-col justify-center items-center">
+                                            <h1 className="text-[--Texto-Color] font-extrabold text-xl">
+                                                Boschi Albano Jose
+                                            </h1>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             {/* Barra de Color degradado*/}
-                            <div className="gradiente-borde w-full"></div>
+                            <div className="gradiente-borde w-full h-[20px]"></div>
                             {/* Header */}
                             <div className="flex justify-evenly items-center relative py-2 sm:w-[95%] w-[100%] bg-[--Secciones-Color]">
-                                {/* Menu */}
+                                {/* Icono Menu */}
                                 <div className="lg:hidden sm:absolute lg:relative flex left-0 px-2 z-[200]">
                                     <button
                                         className="text-[#000000b4]"
@@ -239,6 +248,9 @@ const Menu = ({ children }) => {
                                             }
                                             onMouseLeave={() =>
                                                 SetCategoriaOpen(false)
+                                            }
+                                            onClick={() =>
+                                                SetCategoriaOpen(!categoriaOpen)
                                             }
                                         >
                                             Categorias
@@ -336,7 +348,7 @@ const Menu = ({ children }) => {
 
                 {/* Footer */}
                 <div className="mt-4 w-[95%]">
-                    <Footer />
+                    <Footer categorias={Categorias} />
                 </div>
             </div>
         </>
