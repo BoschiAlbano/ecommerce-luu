@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-    --color1: #d26698;
+    --color1: #d16698;
     --color2: #f5d287;
 
     --Colo1-rgb: 248, 248, 236;
@@ -185,8 +185,8 @@ body.menu-open {
     height: 100vh;
     background: linear-gradient(
             90deg,
-            rgba(107, 151, 222, 0.8) 5%,
-            rgba(106, 112, 228, 0.6) 50%
+            rgba(209, 102, 152, 0.5) 5%,
+            rgba(245, 210, 135, 0.5) 50%
         ),
         url('/assets/fondo4.png') no-repeat center;
     background-size: cover;
@@ -221,7 +221,7 @@ body.menu-open {
     transform: rotateY(180deg);
 }
 
-.animacion-alerta {
+.animacion-alerta-Open {
     animation: blur-in-expand 0.5s linear both;
 }
 @keyframes blur-in-expand {
@@ -708,4 +708,126 @@ body.menu-open {
     background: linear-gradient(90deg, #d2669962 5%, #f5d28762 50%),
         url('/assets/fondo4.png') no-repeat center;
     background-size: cover;
+}
+
+/* Spinner */
+
+.loader {
+    width: 80px;
+    height: 50px;
+    position: relative;
+}
+
+.loader-text {
+    position: absolute;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    color: black;
+    animation: text_713 3.5s ease both infinite;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+/* #3b83f6d5 0%, #6365f1d7 100%); */
+.load {
+    background-color: #4b4ee0;
+    border-radius: 50px;
+    display: block;
+    height: 16px;
+    width: 16px;
+    bottom: 0;
+    position: absolute;
+    transform: translateX(64px);
+    animation: loading_713 3.5s ease both infinite;
+}
+
+.load::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: #6365f1d7;
+    border-radius: inherit;
+    animation: loading2_713 3.5s ease both infinite;
+}
+
+@keyframes text_713 {
+    0% {
+        letter-spacing: 1px;
+        transform: translateX(0px);
+    }
+
+    40% {
+        letter-spacing: 2px;
+        transform: translateX(26px);
+    }
+
+    80% {
+        letter-spacing: 1px;
+        transform: translateX(32px);
+    }
+
+    90% {
+        letter-spacing: 2px;
+        transform: translateX(0px);
+    }
+
+    100% {
+        letter-spacing: 1px;
+        transform: translateX(0px);
+    }
+}
+
+@keyframes loading_713 {
+    0% {
+        width: 16px;
+        transform: translateX(0px);
+    }
+
+    40% {
+        width: 100%;
+        transform: translateX(0px);
+    }
+
+    80% {
+        width: 16px;
+        transform: translateX(64px);
+    }
+
+    90% {
+        width: 100%;
+        transform: translateX(0px);
+    }
+
+    100% {
+        width: 16px;
+        transform: translateX(0px);
+    }
+}
+
+@keyframes loading2_713 {
+    0% {
+        transform: translateX(0px);
+        width: 16px;
+    }
+
+    40% {
+        transform: translateX(0%);
+        width: 80%;
+    }
+
+    80% {
+        width: 100%;
+        transform: translateX(0px);
+    }
+
+    90% {
+        width: 80%;
+        transform: translateX(15px);
+    }
+
+    100% {
+        transform: translateX(0px);
+        width: 16px;
+    }
 }

@@ -10,6 +10,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import Lupa from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import Footer from '../footer';
+import Spinner from '../Spinner';
 
 // Datos de APi - estas se cargan en el menu Vertical y en el que esta oculto para cell
 import { Categorias } from '../DataBaseEjemplo';
@@ -24,10 +25,16 @@ const Menu = ({ children }) => {
 
     const [categoriaOpen, SetCategoriaOpen] = useState(false);
 
+    const [spinner, SetSpinner] = useState(true);
+
     useEffect(() => {
+        SetSpinner(true);
+
         supabase.auth.onAuthStateChange(async (event, session) => {
             if (!session) {
-                navigation.push('/login');
+                navigation.push('/');
+            } else {
+                SetSpinner(false);
             }
         });
     }, []);
@@ -64,6 +71,10 @@ const Menu = ({ children }) => {
     // hacer transparente el menu al bajar
     useEffect(() => {
         const EventoMenu = () => {
+            if (spinner) {
+                return;
+            }
+
             const _menu = MenuRef.current;
             const { y } = _menu.getBoundingClientRect();
 
@@ -104,7 +115,7 @@ const Menu = ({ children }) => {
                                     <ClearIcon sx={{ fontSize: 35 }} />
                                 </button>
 
-                                <div className="flex flex-col w-full items-center overflow-y-scroll overflow-x-hidden justify-between">
+                                <div className="flex flex-col w-full items-center overflow-y-scroll overflow-x-hidden justify-between h-screen">
                                     <ListarCategorias datos={Categorias} />
 
                                     <button
@@ -173,7 +184,7 @@ const Menu = ({ children }) => {
                                 </div>
 
                                 {/* Pie de Menu. (❌ la barra del navegador en dispositivos mobiles cuando se esconde no se muestra la parte inferior del menu ya que es un h-screen ❌) */}
-                                <div className="h-[60px] w-full items-center">
+                                {/* <div className="h-[60px] w-full items-center">
                                     <div className=" flex h-full">
                                         <div className="gradiente-borde w-full h-full flex flex-col justify-center items-center">
                                             <h1 className="text-[--Texto-Color] font-extrabold text-xl">
@@ -181,7 +192,7 @@ const Menu = ({ children }) => {
                                             </h1>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                             {/* Barra de Color degradado*/}
                             <div className="gradiente-borde w-full h-[20px]"></div>
@@ -241,7 +252,6 @@ const Menu = ({ children }) => {
                                 <div className="lg:flex hidden absolute right-0">
                                     <div className="relative ">
                                         <div
-                                            href={'/'}
                                             className="button px-3 text-xl font-[inherit] font-extrabold text-[#000000b4] relative"
                                             onMouseEnter={() =>
                                                 SetCategoriaOpen(true)
@@ -296,7 +306,7 @@ const Menu = ({ children }) => {
                                     </div>
 
                                     <Link
-                                        href={'/'}
+                                        href={'/home'}
                                         className="button px-3 text-xl font-[inherit] font-extrabold text-[#000000b4]"
                                     >
                                         Home
@@ -339,18 +349,24 @@ const Menu = ({ children }) => {
                 </div>
             </div>
 
-            {/* contenido */}
-            <div
-                ref={MenuRef}
-                className=" h-full w-full flex flex-col items-center relative"
-            >
-                {children}
-
-                {/* Footer */}
-                <div className="mt-4 w-[95%]">
-                    <Footer categorias={Categorias} />
+            {spinner ? (
+                <div className=" h-full w-full flex flex-col items-center relative pt-24">
+                    <Spinner />
                 </div>
-            </div>
+            ) : (
+                <div
+                    ref={MenuRef}
+                    className=" h-full w-full flex flex-col items-center relative"
+                >
+                    {/* Contenido */}
+                    {children}
+
+                    {/* Footer */}
+                    <div className="mt-4 w-[95%]">
+                        <Footer categorias={Categorias} />
+                    </div>
+                </div>
+            )}
         </>
     );
 };

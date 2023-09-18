@@ -267,7 +267,7 @@ export default function Producto_Img() {
                                         className="swiper-zoom-container"
                                     >
                                         <img
-                                            className="rounded-xl object-fill"
+                                            className="rounded-xl object-fill px-1"
                                             src={item.imagen}
                                             onClick={(event) => {
                                                 event.stopPropagation();

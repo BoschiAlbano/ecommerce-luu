@@ -4,6 +4,7 @@ const Corazon = ({ favorito = false }) => {
     const [checked, SetChecked] = useState(favorito);
 
     const handleOnClick = () => {
+        console.log(checked);
         SetChecked(!checked);
 
         // Logica Cambiar para guardar el estado el local store o en la base de datos? mercado lo hace por api los trae y los almacena en local
@@ -15,8 +16,8 @@ const Corazon = ({ favorito = false }) => {
                 id="Give-It-An-Id"
                 className="checkbox"
                 type="checkbox"
-                checked={checked}
-                onClick={() => handleOnClick}
+                defaultChecked={checked}
+                onChange={() => handleOnClick}
             />
             <div className="svg-container">
                 <svg className="svg-outline" viewBox="0 0 24 24">

@@ -6,7 +6,7 @@ const Categorias = ({ datos }) => {
     return (
         <div className="flex flex-col w-full justify-center items-center">
             <Link
-                href={'/'}
+                href={'/home'}
                 className="w-[70%] sm:w-[40%] md:w-[40%] lg:w-[70%] pb-4 pt-6 "
             >
                 <img
