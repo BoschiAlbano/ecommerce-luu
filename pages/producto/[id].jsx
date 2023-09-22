@@ -1,16 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductoImg from '@/components/swiperjs';
 import Menu from '@/components/menu';
 import { useRouter } from 'next/router';
+import Spinner from '@/components/Spinner';
+
+import { Productos } from '@/components/DataBaseEjemplo';
 
 const Producto = () => {
     const router = useRouter();
     const { id } = router.query;
 
+    const [loading, setLoading] = useState(true);
+    const [producto, setProducto] = useState({});
+
+    useEffect(() => {
+        console.log('Efecto de Api Producto');
+
+        setLoading(true);
+
+        // ❗ Fetch de este produto y traer sus imagenes
+        setProducto(Productos.filter((item) => item.id == id));
+
+        setLoading(false);
+    }, [id]);
+
     return (
         <Menu>
             <div className="pt-24 h-full w-[95%] ">
-                <ProductoImg />
+                {loading ? <Spinner /> : <ProductoImg producto={producto[0]} />}
             </div>
         </Menu>
     );

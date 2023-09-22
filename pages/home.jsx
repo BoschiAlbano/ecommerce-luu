@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import Menu from '@/components/menu';
-import Tarjeta1 from '@/components/tarjetas/tarjeta1';
+import Masonry from '@/components/tarjetas/Masonry';
 import Link from 'next/link';
-import Tarjeta2 from '@/components/tarjetas/tarjeta2';
+import Swiper from '@/components/tarjetas/Swiper';
 import Carrusel2 from '@/components/carrusel/index2';
-
-// datos de api
-import { Productos, Banners } from '@/components/DataBaseEjemplo';
+import ApiContext from '@/context/ApiContext';
 
 export default function Home() {
+    const { productos, banners } = useContext(ApiContext);
+
     return (
         <>
             <Menu>
@@ -22,7 +22,7 @@ export default function Home() {
                             />
                         </div>
                         <div className="flex justify-center items-center sm:h-[500px]">
-                            <Carrusel2 slides={Banners} />
+                            <Carrusel2 slides={banners} />
                         </div>
                     </div>
 
@@ -39,8 +39,8 @@ export default function Home() {
                             </Link>
 
                             <div className="sm:mx-[2rem] mx-[0rem]">
-                                <Tarjeta2
-                                    Productos={Productos.filter(
+                                <Swiper
+                                    Productos={productos.filter(
                                         (prod) => prod.destacado == true
                                     )}
                                 />
@@ -58,8 +58,8 @@ export default function Home() {
                             </Link>
 
                             <div className="sm:mx-[2rem] mx-[0rem]">
-                                <Tarjeta1
-                                    Productos={Productos.filter(
+                                <Masonry
+                                    Productos={productos.filter(
                                         (prod) => prod.categoria == 2
                                     )}
                                 />

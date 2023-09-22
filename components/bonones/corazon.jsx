@@ -1,23 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import FavoritosContext from '@/context/FavoritosContext';
 
-const Corazon = ({ favorito = false }) => {
-    const [checked, SetChecked] = useState(favorito);
+const Corazon = ({ articulo = {} }) => {
+    const { id, descripcion } = articulo;
+
+    const [checked, SetChecked] = useState(false);
+
+    const { handleLocalstorage, store } = useContext(FavoritosContext);
+
+    useEffect(() => {
+        const buscar = store.findIndex((item) => item.id === id);
+
+        if (buscar === -1) {
+            SetChecked(false);
+        } else {
+            SetChecked(true);
+        }
+    }, [store]);
 
     const handleOnClick = () => {
-        console.log(checked);
+        // metodo del contexto.
+        handleLocalstorage({ id, descripcion });
         SetChecked(!checked);
-
-        // Logica Cambiar para guardar el estado el local store o en la base de datos? mercado lo hace por api los trae y los almacena en local
     };
 
     return (
         <div title="Like" className="heart-container">
             <input
-                id="Give-It-An-Id"
+                name={descripcion}
                 className="checkbox"
                 type="checkbox"
-                defaultChecked={checked}
-                onChange={() => handleOnClick}
+                onChange={() => handleOnClick()}
+                checked={checked}
             />
             <div className="svg-container">
                 <svg className="svg-outline" viewBox="0 0 24 24">

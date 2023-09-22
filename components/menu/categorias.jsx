@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-const Categorias = ({ datos }) => {
+const Categorias = ({ datos = [] }) => {
     return (
         <div className="flex flex-col w-full justify-center items-center">
             <Link

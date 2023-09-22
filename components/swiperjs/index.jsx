@@ -9,8 +9,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import 'swiper/css/zoom';
 
-import { Productos } from '../DataBaseEjemplo';
-
 import { TextField } from '@mui/material';
 
 import Agregar from '@/components/bonones/agregar';
@@ -20,11 +18,11 @@ import CloseIcon from '@mui/icons-material/Close';
 // import required modules
 import { FreeMode, Navigation, Thumbs, Zoom } from 'swiper/modules';
 
-export default function Producto_Img() {
+export default function Producto_Img({ producto = {} }) {
+    const { imagenes = [] } = producto;
+
     const [imgChica, setImgChica] = useState(null);
     const [value, setValue] = useState(1);
-
-    // const [modal, setmodal] = useState(false);
 
     const [modal, setmodal] = useState(false);
     const handleOpen = () => {
@@ -41,7 +39,11 @@ export default function Producto_Img() {
         }
 
         // No permite valores negativos
-        if (!isNaN(newValue) && newValue >= 1 && newValue <= 11) {
+        if (
+            !isNaN(newValue) &&
+            newValue >= 1 &&
+            newValue <= producto.cantidad
+        ) {
             setValue(newValue);
         }
     };
@@ -124,15 +126,13 @@ export default function Producto_Img() {
                     className="mySwiperProducto"
                     onSwiper={setImgChica}
                 >
-                    {Productos.map((item, index) => {
+                    {imagenes.map((item, index) => {
                         return (
                             <SwiperSlide key={index} style={{}}>
                                 <img
-                                    // onDoubleClick={() => handleOpen()}
                                     onClick={(e) => doubleClick(e)}
-                                    ontouchta
                                     className="rounded-xl"
-                                    src={item.imagen}
+                                    src={item}
                                 />
                             </SwiperSlide>
                         );
@@ -144,86 +144,50 @@ export default function Producto_Img() {
             <div className="flex flex-col w-[100%]  gap-10 items-center  px-4 py-10 rounded-xl bg-[--Secciones-Color]">
                 {/* Titulo */}
                 <h1 className="font-[roboto] font-extrabold sm:text-3xl text-2xl ">
-                    Nombre de Prodcuto
+                    {producto.titulo}
                 </h1>
                 {/* Descripcion */}
                 <h1 className="font-[roboto] sm:text-lg text-sm sm:mx-[5%] mx-0">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Provident, molestias suscipit dolor rem animi placeat ipsam
-                    corrupti, molestiae natus non, explicabo iusto iste cum
-                    veniam culpa unde cupiditate odit quibusdam? Lorem, ipsum
-                    dolor sit amet consectetur adipisicing elit. Provident,
-                    molestias suscipit dolor rem animi placeat ipsam corrupti,
-                    molestiae natus non, explicabo iusto iste cum veniam culpa
-                    unde cupiditate odit quibusdam? Lorem, ipsum dolor sit amet
-                    consectetur adipisicing elit. Provident, molestias suscipit
-                    dolor rem animi placeat ipsam corrupti, molestiae natus non,
-                    explicabo iusto iste cum veniam culpa unde cupiditate odit
-                    quibusdam? Lorem, ipsum dolor sit amet consectetur Lorem,
-                    ipsum dolor sit amet consectetur adipisicing elit.
-                    Provident, molestias suscipit dolor rem animi placeat ipsam
-                    corrupti, molestiae natus non, explicabo iusto iste cum
-                    veniam culpa unde cupiditate odit quibusdam? Lorem, ipsum
-                    dolor sit amet consectetur adipisicing elit. Provident,
-                    molestias suscipit dolor rem animi placeat ipsam corrupti,
-                    molestiae natus non, explicabo iusto iste cum veniam culpa
-                    unde cupiditate odit quibusdam? Lorem, ipsum dolor sit amet
-                    consectetur adipisicing elit. Provident, molestias suscipit
-                    dolor rem animi placeat ipsam corrupti, molestiae natus non,
-                    explicabo iusto iste cum veniam culpa unde cupiditate odit
-                    quibusdam? Lorem, ipsum dolor sit amet consectetur Lorem,
-                    ipsum dolor sit amet consectetur adipisicing elit.
-                    Provident, molestias suscipit dolor rem animi placeat ipsam
-                    corrupti, molestiae natus non, explicabo iusto iste cum
-                    veniam culpa unde cupiditate odit quibusdam? Lorem, ipsum
-                    dolor sit amet consectetur adipisicing elit. Provident,
-                    molestias suscipit dolor rem animi placeat ipsam corrupti,
-                    molestiae natus non, explicabo iusto iste cum veniam culpa
-                    unde cupiditate odit quibusdam? Lorem, ipsum dolor sit amet
-                    consectetur adipisicing elit. Provident, molestias suscipit
-                    dolor rem animi placeat ipsam corrupti, molestiae natus non,
-                    explicabo iusto iste cum veniam culpa unde cupidit Lorem,
-                    ipsum dolor sit amet consectetur adipisicing elit.
-                    Provident, molestias suscipit dolor rem animi placeat ipsam
-                    corrupti, molestiae natus non, explicabo iusto iste cum
-                    veniam culpa unde cupiditate odit quibusdam? Lorem, ipsum
-                    dolor sit amet consectetur adipisicing elit. Provident,
-                    molestias suscipit dolor rem animi placeat ipsam corrupti,
-                    molestiae natus non, explicabo iusto iste cum veniam culpa
-                    unde cupiditate odit quibusdam? Lorem, ipsum dolor sit amet
-                    consectetur adipisicing elit. Provident, molestias suscipit
-                    dolor rem animi placeat ipsam corrupti, molestiae natus non,
-                    explicabo iusto iste cum veniam culpa unde cupiditate odit
-                    quibusdam? Lorem, ipsum dolor sit amet consecteturate odit
-                    quibusdam? Lorem, ipsum dolor sit amet consectetur
+                    {producto.descripcion}
                 </h1>
 
-                {/* Cantidad - Agregar Carrito */}
-                <div className="w-[90%] sm:w-[80%] md:w-[60%] lg:w-[50%] xl:w-[40%] 2xl:w-[30%]  flex h-[3rem] gap-2">
-                    <TextField
-                        className="w-[50%]"
-                        id="outlined-number"
-                        label="Cantidad"
-                        type="number"
-                        variant="outlined"
-                        onChange={handleInputChange}
-                        value={value}
-                        inputProps={{
-                            style: {
-                                height: '3rem',
-                                paddingTop: '0px',
-                                paddingBottom: '0px',
-                                paddingLeft: '1rem',
-                                paddingRight: '1rem',
-                            },
-                            min: 1, // Establece el valor mínimo a 1
-                            max: 11,
-                            inputMode: 'none', // Desactiva la entrada de texto
-                        }}
-                    />
+                <div className="w-full flex flex-col justify-center items-center">
+                    {/* Precio */}
+                    <p className="mb-4 p-0 font-extrabold text-xl">
+                        {`Precio: $${producto.precio} ARG`}
+                    </p>
+                    {/* Cantidad - Agregar Carrito */}
+                    <div className="w-[90%] sm:w-[80%] md:w-[60%] lg:w-[50%] xl:w-[40%] 2xl:w-[30%]  flex h-[3rem] gap-2">
+                        <TextField
+                            className="w-[50%]"
+                            id="outlined-number"
+                            label={
+                                producto.cantidad == 0
+                                    ? 'sin Stock'
+                                    : `Stock ${producto.cantidad} Unidades`
+                            }
+                            type="number"
+                            variant="outlined"
+                            onChange={handleInputChange}
+                            value={producto.cantidad == 0 ? 0 : value}
+                            color={producto.cantidad == 0 ? 'error' : 'primary'}
+                            inputProps={{
+                                style: {
+                                    height: '3rem',
+                                    paddingTop: '0px',
+                                    paddingBottom: '0px',
+                                    paddingLeft: '1rem',
+                                    paddingRight: '1rem',
+                                },
+                                min: 1, // Establece el valor mínimo a 1
+                                max: 11,
+                                inputMode: 'none', // Desactiva la entrada de texto
+                            }}
+                        />
 
-                    <div className="w-[50%]">
-                        <Agregar></Agregar>
+                        <div className="w-[50%]">
+                            <Agregar producto={producto} cant={value}></Agregar>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -259,7 +223,7 @@ export default function Producto_Img() {
                         className="mySwiperVisor rounded-xl"
                         zoom={true}
                     >
-                        {Productos.map((item, index) => {
+                        {imagenes.map((item, index) => {
                             return (
                                 <SwiperSlide key={index}>
                                     <div
@@ -268,7 +232,7 @@ export default function Producto_Img() {
                                     >
                                         <img
                                             className="rounded-xl object-fill px-1"
-                                            src={item.imagen}
+                                            src={item}
                                             onClick={(event) => {
                                                 event.stopPropagation();
                                             }}

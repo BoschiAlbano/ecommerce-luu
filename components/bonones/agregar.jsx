@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import IconCarrito from '@mui/icons-material/ShoppingCart';
 
-const Agregar = () => {
+import FavoritosContext from '@/context/FavoritosContext';
+
+const Agregar = ({ producto = {}, cant = 1 }) => {
+    const { handleCarrito } = useContext(FavoritosContext);
+
+    const ADD_Carrito = () => {
+        handleCarrito(producto, cant);
+    };
+
     return (
         <button
             type="button"
             className={`Degradado w-full h-[3rem] p-4 mb-4 flex items-center group overflow-hidden rounded text-white justify-center`}
+            onClick={() => {
+                ADD_Carrito();
+            }}
         >
             <div className="text-sm ml-4 font-medium font-[roboto] transition-all sm:group-hover:mr-2 mr-2 sm:mr-0">
                 Agregar

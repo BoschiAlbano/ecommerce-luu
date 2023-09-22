@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import { supabase } from '@/supabase/cliente';
 import { useRouter } from 'next/router';
 import ListarCategorias from './categorias';
@@ -11,9 +11,8 @@ import Lupa from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import Footer from '../footer';
 import Spinner from '../Spinner';
-
-// Datos de APi - estas se cargan en el menu Vertical y en el que esta oculto para cell
-import { Categorias } from '../DataBaseEjemplo';
+import Carrito from '../bonones/carrito';
+import ApiContext from '@/context/ApiContext';
 
 const Menu = ({ children }) => {
     const navigation = useRouter();
@@ -26,6 +25,8 @@ const Menu = ({ children }) => {
     const [categoriaOpen, SetCategoriaOpen] = useState(false);
 
     const [spinner, SetSpinner] = useState(true);
+
+    const { categorias } = useContext(ApiContext);
 
     useEffect(() => {
         SetSpinner(true);
@@ -116,7 +117,7 @@ const Menu = ({ children }) => {
                                 </button>
 
                                 <div className="flex flex-col w-full items-center overflow-y-scroll overflow-x-hidden justify-between h-screen">
-                                    <ListarCategorias datos={Categorias} />
+                                    <ListarCategorias datos={categorias} />
 
                                     <button
                                         className="button px-3 text-xl font-[inherit] font-extrabold text-[#000000b4] mb-6"
@@ -222,30 +223,9 @@ const Menu = ({ children }) => {
                                         />
                                         <Lupa className="cursor-pointer saltar"></Lupa>
                                     </div>
-                                    <button
-                                        data-quantity="0"
-                                        className="btn-cart flex justify-center items-center z-[200]"
-                                        onClick={() => {
-                                            alert(
-                                                'Implementar Carrito de Compras'
-                                            );
-                                        }}
-                                    >
-                                        <svg
-                                            className="icon-cart"
-                                            viewBox="0 0 24.38 30.52"
-                                            height="30.52"
-                                            width="24.38"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <title>Carrito</title>
-                                            <path
-                                                transform="translate(-3.62 -0.85)"
-                                                d="M28,27.3,26.24,7.51a.75.75,0,0,0-.76-.69h-3.7a6,6,0,0,0-12,0H6.13a.76.76,0,0,0-.76.69L3.62,27.3v.07a4.29,4.29,0,0,0,4.52,4H23.48a4.29,4.29,0,0,0,4.52-4ZM15.81,2.37a4.47,4.47,0,0,1,4.46,4.45H11.35a4.47,4.47,0,0,1,4.46-4.45Zm7.67,27.48H8.13a2.79,2.79,0,0,1-3-2.45L6.83,8.34h3V11a.76.76,0,0,0,1.52,0V8.34h8.92V11a.76.76,0,0,0,1.52,0V8.34h3L26.48,27.4a2.79,2.79,0,0,1-3,2.44Zm0,0"
-                                            ></path>
-                                        </svg>
-                                        <span className="quantity"></span>
-                                    </button>
+
+                                    {/* Boton Carrito */}
+                                    <Carrito />
                                 </div>
 
                                 {/* Home y cerrar sesion */}
@@ -287,7 +267,7 @@ const Menu = ({ children }) => {
                                                 }`}
                                             >
                                                 <div className="w-full flex flex-col items-center">
-                                                    {Categorias.map((item) => {
+                                                    {categorias.map((item) => {
                                                         return (
                                                             <Link
                                                                 key={item.id}
@@ -363,7 +343,7 @@ const Menu = ({ children }) => {
 
                     {/* Footer */}
                     <div className="mt-4 w-[95%]">
-                        <Footer categorias={Categorias} />
+                        <Footer categorias={categorias} />
                     </div>
                 </div>
             )}
