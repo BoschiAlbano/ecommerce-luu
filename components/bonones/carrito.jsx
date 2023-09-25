@@ -3,7 +3,7 @@ import FavoritosContext from '@/context/FavoritosContext';
 import ApiContext from '@/context/ApiContext';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-
+import MenuIcon from '@mui/icons-material/Clear';
 import Producto from '../carrito/Produto';
 
 const Carrito = () => {
@@ -44,22 +44,42 @@ const Carrito = () => {
             </button>
 
             <Modal open={open} onClose={handleClose}>
-                <Box className="Contenedor_Carrito">
-                    {carrito.length == 0 ? null : (
-                        <div>
-                            {carrito.map((item, index) => {
-                                return (
-                                    // Producto Carrito
-                                    <Producto
-                                        key={index}
-                                        P_Original={BuscarProducto(item.id)}
-                                        P_Carrito={item}
-                                    />
-                                );
-                            })}
+                <div className="Borde_Degradado absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 sm:h-[80%] h-[100%] rounded-sm w-[100%] sm:w-[80%] md:w-[70%] lg:w-[70%] xl:w-[60%] 2xl:w-[50%]">
+                    <Box
+                        id={'ScrollProducto'}
+                        className=" bg-white w-full h-full flex flex-col  items-center  relative overflow-auto "
+                    >
+                        <h1 className="text-2xl font-extrabold mt-4">
+                            Carrito de Compras
+                        </h1>
+
+                        {carrito.length == 0 ? null : (
+                            <div className="flex flex-col justify-start items-center w-[100%]">
+                                {carrito.map((item, index) => {
+                                    return (
+                                        // Producto Carrito
+                                        <Producto
+                                            key={index}
+                                            P_Original={BuscarProducto(item.id)}
+                                            P_Carrito={item}
+                                            CloseModal={handleClose}
+                                        />
+                                    );
+                                })}
+                            </div>
+                        )}
+
+                        {/* Icono Menu */}
+                        <div className="absolute flex right-0 top-0  m-2">
+                            <button
+                                className="text-[#000000b4]"
+                                onClick={handleClose}
+                            >
+                                <MenuIcon sx={{ fontSize: 35 }} />
+                            </button>
                         </div>
-                    )}
-                </Box>
+                    </Box>
+                </div>
             </Modal>
         </>
     );
