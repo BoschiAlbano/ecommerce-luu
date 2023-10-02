@@ -27,7 +27,7 @@ const UseFavoritos = ({ children }) => {
         }
     };
 
-    const handleCarrito = (Produto, Cant) => {
+    const handleCarrito = (Produto, Cant, Modificar) => {
         // buscar id en el localStorage
         let item = [].concat(carrito);
 
@@ -35,7 +35,6 @@ const UseFavoritos = ({ children }) => {
         const Id = item.findIndex((item) => item.id === Produto.id);
 
         if (Id === -1) {
-            console.log('Agrego');
             // Agrego
             if (Produto.cantidad > 0) {
                 item.push({ ...Produto, cantidad: Cant });
@@ -47,8 +46,13 @@ const UseFavoritos = ({ children }) => {
                 alert(`No hay stock para el Producto - ${Produto.titulo} -`);
             }
         } else {
-            console.log('Actualizo');
-            // Elimino
+            // Modifico
+            if (Modificar) {
+                // Viene de Productos que de deja seleccionar la cantidad - entoces remplazo si existe el producto
+                item[Id].cantidad = Cant;
+                setCarrito(item);
+                return;
+            }
             if (Produto.cantidad >= item[Id].cantidad + Cant) {
                 item[Id].cantidad += 1;
                 setCarrito(item);
@@ -62,9 +66,40 @@ const UseFavoritos = ({ children }) => {
             }
         }
     };
+
+    const handleCarritoDelete = (id) => {
+        // buscar id en el localStorage
+        let item = [].concat(carrito);
+
+        // Comprobar si existe el articulo
+        const Id = item.findIndex((item) => item.id === id);
+
+        if (Id === -1) return;
+
+        item.splice(Id, 1);
+
+        setCarrito(item);
+    };
+
+    const BuscarProductoCarrito = (id) => {
+        // buscar id en el localStorage
+        const Id = carrito.findIndex((item) => item.id === id);
+
+        if (Id === -1) return 0;
+
+        return carrito[Id];
+    };
+
     return (
         <FavoritosContext.Provider
-            value={{ handleLocalstorage, store, handleCarrito, carrito }}
+            value={{
+                handleLocalstorage,
+                store,
+                handleCarrito,
+                carrito,
+                handleCarritoDelete,
+                BuscarProductoCarrito,
+            }}
         >
             {children}
         </FavoritosContext.Provider>

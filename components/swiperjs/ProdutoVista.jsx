@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
@@ -14,11 +14,14 @@ import { TextField } from '@mui/material';
 import Agregar from '@/components/bonones/agregar';
 
 import CloseIcon from '@mui/icons-material/Close';
+import FavoritosContext from '@/context/FavoritosContext';
 
 // import required modules
 import { FreeMode, Navigation, Thumbs, Zoom } from 'swiper/modules';
 
 export default function Producto_Img({ producto = {} }) {
+    const { BuscarProductoCarrito, carrito } = useContext(FavoritosContext);
+
     const { imagenes = [] } = producto;
 
     const [imgChica, setImgChica] = useState(null);
@@ -47,6 +50,12 @@ export default function Producto_Img({ producto = {} }) {
             setValue(newValue);
         }
     };
+
+    useEffect(() => {
+        const val = BuscarProductoCarrito(producto.id);
+        if (val === 0 || val === undefined) return;
+        setValue(val.cantidad);
+    }, [producto, carrito]);
 
     // Bloquear Scroll de pantalla
     useEffect(() => {
@@ -186,7 +195,11 @@ export default function Producto_Img({ producto = {} }) {
                         />
 
                         <div className="w-[50%]">
-                            <Agregar producto={producto} cant={value}></Agregar>
+                            <Agregar
+                                producto={producto}
+                                cant={value}
+                                modificar={true}
+                            ></Agregar>
                         </div>
                     </div>
                 </div>

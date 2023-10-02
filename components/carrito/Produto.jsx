@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { TextField } from '@mui/material';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import EyeIcon from '@mui/icons-material/RemoveRedEye';
 import Link from 'next/link';
+import FavoritosContext from '@/context/FavoritosContext';
 
 const Producto = ({ P_Carrito = {}, P_Original = {}, CloseModal }) => {
     const [value, setValue] = useState(P_Carrito.cantidad);
+    const { handleCarritoDelete, handleCarrito } = useContext(FavoritosContext);
 
     const handleInputChange = (event) => {
         const newValue = parseInt(event.target.value);
@@ -23,10 +25,13 @@ const Producto = ({ P_Carrito = {}, P_Original = {}, CloseModal }) => {
         ) {
             setValue(newValue);
         }
+
+        // mmodificar de local Storage
+        handleCarrito(P_Original, newValue, true);
     };
 
     const Eliminar = () => {
-        alert('Eliminar de carrito');
+        handleCarritoDelete(P_Original.id);
     };
 
     return (
@@ -70,7 +75,7 @@ const Producto = ({ P_Carrito = {}, P_Original = {}, CloseModal }) => {
                 />
                 {/* Eliminar */}
                 <div onClick={() => Eliminar()}>
-                    <DeleteIcon className=" text-[var(--Texto-Color)]" />
+                    <DeleteIcon className=" text-[var(--Texto-Color)] cursor-pointer" />
                 </div>
                 {/* Eliminar */}
                 <div onClick={() => CloseModal()}>

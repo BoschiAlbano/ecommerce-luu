@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import ProductoImg from '@/components/swiperjs';
+import ProductoImg from '@/components/swiperjs/ProdutoVista';
 import Menu from '@/components/menu';
 import { useRouter } from 'next/router';
 import Spinner from '@/components/Spinner';
@@ -14,8 +14,6 @@ const Producto = () => {
     const [producto, setProducto] = useState({});
 
     useEffect(() => {
-        console.log('Efecto de Api Producto');
-
         setLoading(true);
 
         // ❗ Fetch de este produto y traer sus imagenes
