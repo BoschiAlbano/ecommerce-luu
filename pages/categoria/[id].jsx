@@ -15,10 +15,9 @@ const Categoria = () => {
 
     const [loading, setLoading] = useState(true);
     const [producto, setProducto] = useState([]);
+    const [Categoria, setCategoria] = useState([]);
 
     const { productos, categorias } = useContext(ApiContext);
-
-    const categ = categorias.find((item) => item.id == id);
 
     useEffect(() => {
         console.log('Efecto de Api Categoria');
@@ -27,13 +26,15 @@ const Categoria = () => {
         // ❗ Fetch  o usar el contexto y filtrar
         setProducto(productos.filter((item) => item.categoriaId == id));
 
+        setCategoria(categorias.find((item) => item.id == id));
+
         setLoading(false);
     }, [id]);
 
     return (
         <Menu
             title={`Del Interior - ${
-                categ.descripcion ? categ.descripcion : 'Categorias'
+                Categoria.descripcion ? Categoria.descripcion : 'Categorias'
             }`}
         >
             <div className=" pt-24 h-full w-[85%]">
