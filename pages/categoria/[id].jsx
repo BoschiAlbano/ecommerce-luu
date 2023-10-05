@@ -18,6 +18,8 @@ const Categoria = () => {
 
     const { productos, categorias } = useContext(ApiContext);
 
+    const Descripcion = categorias.find((item) => item.id == id).descripcion;
+
     useEffect(() => {
         console.log('Efecto de Api Categoria');
         setLoading(true);
@@ -29,11 +31,7 @@ const Categoria = () => {
     }, [id]);
 
     return (
-        <Menu
-            title={`Del Interior - ${
-                categorias.find((item) => item.id == id).descripcion
-            }`}
-        >
+        <Menu title={`Del Interior - ${Descripcion}`}>
             <div className=" pt-24 h-full w-[85%]">
                 {loading ? (
                     <Spinner />
