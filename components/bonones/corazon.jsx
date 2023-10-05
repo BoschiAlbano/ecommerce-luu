@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import FavoritosContext from '@/context/FavoritosContext';
 
 const Corazon = ({ articulo = {} }) => {
-    const { id, descripcion } = articulo;
+    const { id, titulo } = articulo;
 
     const [checked, SetChecked] = useState(false);
 
@@ -20,14 +20,14 @@ const Corazon = ({ articulo = {} }) => {
 
     const handleOnClick = () => {
         // metodo del contexto.
-        handleLocalstorage({ id, descripcion });
+        handleLocalstorage({ id, titulo });
         SetChecked(!checked);
     };
 
     return (
         <div title="Like" className="heart-container">
             <input
-                name={descripcion}
+                name={titulo}
                 className="checkbox"
                 type="checkbox"
                 onChange={() => handleOnClick()}

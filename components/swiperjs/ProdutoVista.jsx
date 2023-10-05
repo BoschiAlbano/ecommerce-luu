@@ -22,7 +22,7 @@ import { FreeMode, Navigation, Thumbs, Zoom } from 'swiper/modules';
 export default function Producto_Img({ producto = {} }) {
     const { BuscarProductoCarrito, carrito } = useContext(FavoritosContext);
 
-    const { imagenes = [] } = producto;
+    const { Imagenes = [] } = producto;
 
     const [imgChica, setImgChica] = useState(null);
     const [value, setValue] = useState(1);
@@ -99,32 +99,32 @@ export default function Producto_Img({ producto = {} }) {
         time = window.setTimeout(() => {
             if (
                 clicks.length > 1 &&
-                clicks[clicks.length - 1] - clicks[clicks.length - 2] < 500
+                clicks[clicks.length - 1] - clicks[clicks.length - 2] < 200
             ) {
                 handleOpen();
             }
-        }, 500);
+        }, 200);
     };
 
     return (
         <div className="flex flex-col justify-start items-center h-full">
             {/* Carrusel de img */}
-            <div className="flex flex-col gap-2 w-[100%] bg-[--Secciones-Color]">
+            <div className="flex flex-col gap-2 w-[100%] bg-[--Secciones-Color] sm:p-6 p-1">
                 <Swiper
                     loop={false}
                     spaceBetween={10}
-                    slidesPerView={3}
+                    slidesPerView={2}
                     breakpoints={{
                         640: {
-                            slidesPerView: 3,
+                            slidesPerView: 2,
                             spaceBetween: 10,
                         },
                         768: {
-                            slidesPerView: 5,
+                            slidesPerView: 4,
                             spaceBetween: 10,
                         },
                         1024: {
-                            slidesPerView: 7,
+                            slidesPerView: 5,
                             spaceBetween: 10,
                         },
                     }}
@@ -135,17 +135,31 @@ export default function Producto_Img({ producto = {} }) {
                     className="mySwiperProducto"
                     onSwiper={setImgChica}
                 >
-                    {imagenes.map((item, index) => {
-                        return (
-                            <SwiperSlide key={index} style={{}}>
-                                <img
-                                    onClick={(e) => doubleClick(e)}
-                                    className="rounded-xl"
-                                    src={item}
-                                />
-                            </SwiperSlide>
-                        );
-                    })}
+                    {Imagenes.length == 0 ? (
+                        <SwiperSlide style={{}}>
+                            <img
+                                onClick={(e) => doubleClick(e)}
+                                className="rounded-xl"
+                                src={producto.imagen}
+                            />
+                        </SwiperSlide>
+                    ) : (
+                        Imagenes.map((item, index) => {
+                            return (
+                                <SwiperSlide key={index} style={{}}>
+                                    <img
+                                        onClick={(e) => doubleClick(e)}
+                                        className="rounded-xl"
+                                        src={
+                                            item.url
+                                                ? item.url
+                                                : '/assets/Sinfondo.png'
+                                        }
+                                    />
+                                </SwiperSlide>
+                            );
+                        })
+                    )}
                 </Swiper>
             </div>
 
@@ -236,24 +250,45 @@ export default function Producto_Img({ producto = {} }) {
                         className="mySwiperVisor rounded-xl"
                         zoom={true}
                     >
-                        {imagenes.map((item, index) => {
-                            return (
-                                <SwiperSlide key={index}>
-                                    <div
-                                        id="zoom"
-                                        className="swiper-zoom-container"
-                                    >
-                                        <img
-                                            className="rounded-xl object-fill px-1"
-                                            src={item}
-                                            onClick={(event) => {
-                                                event.stopPropagation();
-                                            }}
-                                        />
-                                    </div>
-                                </SwiperSlide>
-                            );
-                        })}
+                        {Imagenes.length == 0 ? (
+                            <SwiperSlide>
+                                <div
+                                    id="zoom"
+                                    className="swiper-zoom-container"
+                                >
+                                    <img
+                                        className="rounded-xl object-fill px-1"
+                                        src={producto.imagen}
+                                        onClick={(event) => {
+                                            event.stopPropagation();
+                                        }}
+                                    />
+                                </div>
+                            </SwiperSlide>
+                        ) : (
+                            Imagenes.map((item, index) => {
+                                return (
+                                    <SwiperSlide key={index}>
+                                        <div
+                                            id="zoom"
+                                            className="swiper-zoom-container"
+                                        >
+                                            <img
+                                                className="rounded-xl object-fill px-1"
+                                                src={
+                                                    item.url
+                                                        ? item.url
+                                                        : '/assets/Sinfondo.png'
+                                                }
+                                                onClick={(event) => {
+                                                    event.stopPropagation();
+                                                }}
+                                            />
+                                        </div>
+                                    </SwiperSlide>
+                                );
+                            })
+                        )}
                     </Swiper>
                 </div>
             </div>

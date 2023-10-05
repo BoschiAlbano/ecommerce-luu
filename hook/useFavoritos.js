@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FavoritosContext from '@/context/FavoritosContext';
-
 import { useLocalStorage } from '@/components/localStorage/hook';
+import Alert from '@/components/alert/alert';
 
 const UseFavoritos = ({ children }) => {
     const [store, setValue] = useLocalStorage('Favoritos', []);
     const [carrito, setCarrito] = useLocalStorage('Carrito', []);
+
+    const [alert, setAlert] = useState({
+        open: false,
+        vertical: 'bottom',
+        horizontal: 'right',
+        msj: '',
+        severity: '',
+    });
 
     const handleLocalstorage = ({ id, descripcion }) => {
         // buscar id en el localStorage
@@ -15,15 +23,27 @@ const UseFavoritos = ({ children }) => {
         const Id = item.findIndex((item) => item.id === id);
 
         if (Id === -1) {
-            console.log('Agrego');
             // Agrego
             item.push({ id, descripcion });
             setValue(item);
+
+            setAlert({
+                ...alert,
+                msj: `El Producto - ${descripcion} - fue Agregado a favoritos`,
+                severity: 'success',
+                open: true,
+            });
         } else {
-            console.log('Elimino');
             // Elimino
             item.splice(Id, 1);
             setValue(item);
+
+            setAlert({
+                ...alert,
+                msj: `El Producto - ${descripcion} - fue Eliminado de favoritos`,
+                severity: 'warning',
+                open: true,
+            });
         }
     };
 
@@ -39,11 +59,19 @@ const UseFavoritos = ({ children }) => {
             if (Produto.cantidad > 0) {
                 item.push({ ...Produto, cantidad: Cant });
                 setCarrito(item);
-                alert(
-                    `El Producto - ${Produto.titulo} - fue Agregado al carrito de Compras`
-                );
+                setAlert({
+                    ...alert,
+                    msj: `El Producto - ${Produto.titulo} - fue Agregado al carrito de Compras`,
+                    severity: 'success',
+                    open: true,
+                });
             } else {
-                alert(`No hay stock para el Producto - ${Produto.titulo} -`);
+                setAlert({
+                    ...alert,
+                    msj: `No hay stock para el Producto - ${Produto.titulo} -`,
+                    severity: 'warning',
+                    open: true,
+                });
             }
         } else {
             // Modifico
@@ -51,18 +79,30 @@ const UseFavoritos = ({ children }) => {
                 // Viene de Productos que de deja seleccionar la cantidad - entoces remplazo si existe el producto
                 item[Id].cantidad = Cant;
                 setCarrito(item);
+                setAlert({
+                    ...alert,
+                    msj: `El Producto - ${Produto.titulo} - fue Modficiado en el carrito de Compras - Cantidad ${item[Id].cantidad}`,
+                    severity: 'success',
+                    open: true,
+                });
                 return;
             }
             if (Produto.cantidad >= item[Id].cantidad + Cant) {
                 item[Id].cantidad += 1;
                 setCarrito(item);
-                alert(
-                    `El Producto - ${Produto.titulo} - fue Agregado al carrito de Compras - Cantidad ${item[Id].cantidad}`
-                );
+                setAlert({
+                    ...alert,
+                    msj: `El Producto - ${Produto.titulo} - fue Agregado al carrito de Compras - Cantidad ${item[Id].cantidad}`,
+                    severity: 'success',
+                    open: true,
+                });
             } else {
-                alert(
-                    `No hay stock para el Producto - ${Produto.titulo} - Stock Actual ${Produto.cantidad} Unidades`
-                );
+                setAlert({
+                    ...alert,
+                    msj: `No hay stock para el Producto - ${Produto.titulo} - Stock Actual ${Produto.cantidad} Unidades`,
+                    severity: 'warning',
+                    open: true,
+                });
             }
         }
     };
@@ -99,9 +139,11 @@ const UseFavoritos = ({ children }) => {
                 carrito,
                 handleCarritoDelete,
                 BuscarProductoCarrito,
+                alert,
             }}
         >
             {children}
+            {alert.open ? <Alert state={alert} setState={setAlert} /> : null}
         </FavoritosContext.Provider>
     );
 };

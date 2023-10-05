@@ -1,40 +1,34 @@
-import Menu from '@/components/menu';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
-
+import Menu from '@/components/menu';
 import Tarjeta1 from '@/components/tarjetas/Masonry';
+import Spinner from '@/components/Spinner';
 import ApiContext from '@/context/ApiContext';
-
 // Datos Api
 // import { Productos } from '@/components/DataBaseEjemplo';
 
-import Spinner from '@/components/Spinner';
-const Categoria = () => {
+const Index = () => {
     const router = useRouter();
-    const { id } = router.query;
+    const { cadena } = router.query;
 
     const [loading, setLoading] = useState(true);
     const [producto, setProducto] = useState([]);
 
-    const { productos, categorias } = useContext(ApiContext);
+    const { productos } = useContext(ApiContext);
 
     useEffect(() => {
         console.log('Efecto de Api Categoria');
         setLoading(true);
 
-        // ❗ Fetch  o usar el contexto y filtrar
-        setProducto(productos.filter((item) => item.categoriaId == id));
+        // ❗ Fetch o contexto
+        setProducto(productos);
 
         setLoading(false);
-    }, [id]);
+    }, [cadena]);
 
     return (
-        <Menu
-            title={`Del Interior - ${
-                categorias.find((item) => item.id == id).descripcion
-            }`}
-        >
-            <div className=" pt-24 h-full w-[85%]">
+        <Menu>
+            <div className=" pt-24 h-full sm:w-[85%] w-full">
                 {loading ? (
                     <Spinner />
                 ) : (
@@ -47,4 +41,4 @@ const Categoria = () => {
     );
 };
 
-export default Categoria;
+export default Index;

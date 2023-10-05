@@ -13,8 +13,9 @@ import Footer from '../footer';
 import Spinner from '../Spinner';
 import Carrito from '../bonones/carrito';
 import ApiContext from '@/context/ApiContext';
+import Head from 'next/head';
 
-const Menu = ({ children }) => {
+const Menu = ({ title = 'Del Interior', children }) => {
     const navigation = useRouter();
 
     const [openMenu, setOpenMenu] = useState(false);
@@ -27,6 +28,8 @@ const Menu = ({ children }) => {
     const [spinner, SetSpinner] = useState(true);
 
     const { categorias } = useContext(ApiContext);
+
+    const [texto, setTexto] = useState('');
 
     useEffect(() => {
         SetSpinner(true);
@@ -89,8 +92,44 @@ const Menu = ({ children }) => {
         };
     }, []);
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        if (texto) {
+            navigation.push(`/buscar/${texto}`);
+        } else {
+            navigation.push(`/buscar`);
+        }
+    };
+
+    let titulo = title;
+
+    useEffect(() => {
+        window.addEventListener('blur', () => {
+            document.title = '¡No te vayas! 😱';
+        });
+
+        window.addEventListener('focus', () => {
+            document.title = titulo;
+        });
+    }, []);
+
     return (
         <>
+            <Head>
+                <title>{titulo}</title>
+                <meta
+                    name="Del Interior - Deco & Bienestar"
+                    content='¡Bienvenido a "Del Interior - Deco & Bienestar"! Tu destino en línea para encontrar los productos más encantadores y funcionales para embellecer y mejorar tu hogar desde adentro. Nuestra amplia gama de productos está diseñada para elevar tu espacio interior, creando un ambiente de calidez y comodidad.
+
+Explora nuestra selección cuidadosamente curada de muebles elegantes, decoración con estilo, iluminación cautivadora y accesorios únicos que transformarán cualquier habitación en un santuario de bienestar. Desde piezas modernas hasta opciones clásicas, tenemos algo para todos los gustos y estilos.
+
+En "Del Interior", no solo nos enfocamos en la estética, sino también en la calidad y el confort. Queremos que te sientas en armonía en tu hogar, y nuestros productos están diseñados para hacer precisamente eso.
+
+¡Descubre una experiencia de compra sin igual en "Del Interior - Deco & Bienestar" y haz que tu hogar refleje tu personalidad y estilo con productos que te inspirarán día tras día!'
+                />
+                <link rel="icon" href="/assets/Icono.ico" />
+            </Head>
             <div className="relative flex flex-col justify-center items-center">
                 <div className="flex flex-col justify-start items-center sm:w-[95%] w-full gap-2">
                     {/* Header */}
@@ -198,7 +237,7 @@ const Menu = ({ children }) => {
                             {/* Barra de Color degradado*/}
                             <div className="gradiente-borde w-full h-[20px]"></div>
                             {/* Header */}
-                            <div className="flex justify-evenly items-center relative py-2 sm:w-[95%] w-[100%] bg-[--Secciones-Color]">
+                            <div className="flex justify-evenly items-center relative py-2  w-[100%] bg-[--Secciones-Color]">
                                 {/* Icono Menu */}
                                 <div className="lg:hidden sm:absolute lg:relative flex left-0 px-2 z-[200]">
                                     <button
@@ -216,13 +255,23 @@ const Menu = ({ children }) => {
                                     <h1 className="sm:flex hidden px-3 text-xl font-[inherit] font-extrabold text-[--Texto-Color]">
                                         Buscar
                                     </h1>
-                                    <div className="flex flex-row justify-center items-center border-2 rounded-xl border-[--Buscar-Color-Borde] p-1">
+                                    <form
+                                        onSubmit={(e) => handleSubmit(e)}
+                                        className="flex flex-row justify-center items-center border-2 rounded-xl border-[--Buscar-Color-Borde] p-1"
+                                    >
                                         <input
                                             className="bg-transparent w-full outline-none text-center font-extrabold text-[000000b4]"
                                             type="text"
+                                            onChange={(e) => {
+                                                setTexto(e.target.value);
+                                            }}
+                                            value={texto}
                                         />
-                                        <Lupa className="cursor-pointer saltar"></Lupa>
-                                    </div>
+
+                                        <button type="submit">
+                                            <Lupa className="cursor-pointer saltar"></Lupa>
+                                        </button>
+                                    </form>
 
                                     {/* Boton Carrito */}
                                     <Carrito />
@@ -328,7 +377,6 @@ const Menu = ({ children }) => {
                     </header>
                 </div>
             </div>
-
             {spinner ? (
                 <div className=" h-full w-full flex flex-col items-center relative pt-24">
                     <Spinner />
@@ -342,7 +390,7 @@ const Menu = ({ children }) => {
                     {children}
 
                     {/* Footer */}
-                    <div className="mt-4 w-[95%]">
+                    <div className="mt-4 sm:w-[85%] w-[100%]">
                         <Footer categorias={categorias} />
                     </div>
                 </div>

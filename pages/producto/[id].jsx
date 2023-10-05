@@ -3,8 +3,9 @@ import ProductoImg from '@/components/swiperjs/ProdutoVista';
 import Menu from '@/components/menu';
 import { useRouter } from 'next/router';
 import Spinner from '@/components/Spinner';
+import { supabase } from '@/supabase/cliente';
 
-import { Productos } from '@/components/DataBaseEjemplo';
+// import { Productos } from '@/components/DataBaseEjemplo';
 
 const Producto = () => {
     const router = useRouter();
@@ -17,14 +18,41 @@ const Producto = () => {
         setLoading(true);
 
         // ❗ Fetch de este produto y traer sus imagenes
-        setProducto(Productos.filter((item) => item.id == id));
+        // setProducto(Productos.filter((item) => item.id == id));
+
+        async function Api_Imagenes_Articulo(id) {
+            try {
+                let { data: Articulos, error } = await supabase
+                    .from('Articulos')
+                    .select(
+                        `
+                *,
+                Imagenes (
+                    *
+                )`
+                    )
+                    .eq('id', id);
+
+                if (error) {
+                    console.log(error);
+                    return;
+                }
+                console.log(Articulos);
+
+                setProducto(Articulos);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        Api_Imagenes_Articulo(id);
 
         setLoading(false);
     }, [id]);
 
     return (
-        <Menu>
-            <div className="pt-24 h-full w-[95%] ">
+        <Menu title="Del Interior - Producto">
+            <div className="pt-24 h-full sm:w-[85%] w-[100%] ">
                 {loading ? <Spinner /> : <ProductoImg producto={producto[0]} />}
             </div>
         </Menu>

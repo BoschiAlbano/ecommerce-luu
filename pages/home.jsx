@@ -7,12 +7,12 @@ import Carrusel2 from '@/components/carrusel/index2';
 import ApiContext from '@/context/ApiContext';
 
 export default function Home() {
-    const { productos, banners } = useContext(ApiContext);
+    const { productos, banners, categorias } = useContext(ApiContext);
 
     return (
         <>
-            <Menu>
-                <div className="pt-24 h-full w-[95%]">
+            <Menu title="Del Interior - Home">
+                <div className="pt-24 h-full w-[85%]">
                     <div className=" sm:h-[500px] bg-[--Secciones-Color] contenedor-Carrusel">
                         <div className="lg:flex hidden justify-center items-center sm:h-[500px]">
                             <img
@@ -33,7 +33,7 @@ export default function Home() {
                                 className="separador before:sm:mx-8 after:sm:mx-8 before:mx-2 after:mx-2 my-10 w-full"
                             >
                                 <div className="flex flex-col justify-normal items-center">
-                                    <h1 className="text-2xl">Novedades</h1>
+                                    <h1 className="text-2xl">Destacados</h1>
                                     <p className="text-sm">(ver mas)</p>
                                 </div>
                             </Link>
@@ -46,25 +46,36 @@ export default function Home() {
                                 />
                             </div>
                         </div>
-                        <div className="bg-[--Secciones-Color] w-full">
-                            <Link
-                                href={`categoria/2`}
-                                className="separador before:sm:mx-8 after:sm:mx-8 before:mx-2 after:mx-2 my-10 w-full"
-                            >
-                                <div className="flex flex-col justify-normal items-center">
-                                    <h1 className="text-2xl">Exterior</h1>
-                                    <p className="text-sm">(ver mas)</p>
-                                </div>
-                            </Link>
 
-                            <div className="sm:mx-[2rem] mx-[0rem]">
-                                <Masonry
-                                    Productos={productos.filter(
-                                        (prod) => prod.categoria == 2
-                                    )}
-                                />
-                            </div>
-                        </div>
+                        {categorias.map((item) => {
+                            return (
+                                <div
+                                    key={item.id}
+                                    className="bg-[--Secciones-Color] w-full"
+                                >
+                                    <Link
+                                        href={`categoria/${item.id}`}
+                                        className="separador before:sm:mx-8 after:sm:mx-8 before:mx-2 after:mx-2 my-10 w-full"
+                                    >
+                                        <div className="flex flex-col justify-normal items-center">
+                                            <h1 className="text-2xl">
+                                                {item.descripcion}
+                                            </h1>
+                                            <p className="text-sm">(ver mas)</p>
+                                        </div>
+                                    </Link>
+
+                                    <div className="sm:mx-[2rem] mx-[0rem]">
+                                        <Masonry
+                                            Productos={productos.filter(
+                                                (prod) =>
+                                                    prod.categoriaId == item.id
+                                            )}
+                                        />
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             </Menu>

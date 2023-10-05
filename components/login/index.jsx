@@ -21,7 +21,7 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-import Alert from '@mui/material/Alert';
+import Alert from '../alert/alert';
 
 const Login = () => {
     //Datos Formilario Login
@@ -210,17 +210,8 @@ const Login = () => {
                 position: 'relative',
             }}
         >
-            {/* Mensaje de Error */}
-            <div className="absolute top-0 right-0 w-full flex justify-center items-center z-[200]">
-                {error.mostrar ? (
-                    <Alert
-                        className={`w-full mx-5 mt-1 animacion-alerta-Open`}
-                        severity="error"
-                    >
-                        {error.msj}{' '}
-                    </Alert>
-                ) : null}
-            </div>
+            {/* Alerta */}
+            {error.mostrar ? <Alert msj={error.msj} severity="error" /> : null}
 
             {/* Plantas */}
             <Planta3 top={0} left={0} width={20} hover={true} />
