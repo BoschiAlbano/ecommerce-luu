@@ -204,7 +204,7 @@ const Login = () => {
 
     return (
         <Card
-            className="py-0 px-0 sm:px-3 sm:h-[80%] lg:h-[80%] sm:w-[25%] sm:min-w-[400px] lg:w-[15%] h-full w-full"
+            className="py-0 px-0 sm:px-3 sm:h-[80%] lg:h-[80%] h-full sm:w-[400px] w-full"
             style={{
                 background: 'rgba(255,255,255,0.4)',
                 position: 'relative',
@@ -214,13 +214,13 @@ const Login = () => {
             {error.mostrar ? <Alert msj={error.msj} severity="error" /> : null}
 
             {/* Plantas */}
-            <Planta3 top={0} left={0} width={20} hover={true} />
+            <Planta3 top={0} left={0} width={15} hover={true} />
             <Planta2 top={0} right={0} width={10} hover={true} />
             <Planta1 top={0} right={50} width={15} hover={true} />
 
             {/* Contenido */}
             <CardContent className="flex flex-col justify-start items-center h-full ">
-                <div className="mb-3 w-[100%] sm:h-[40%] flex justify-center items-center">
+                <div className="mb-3 w-[100%] sm:h-[30%] flex justify-center items-center">
                     <img
                         src="/assets/Logo.png"
                         alt="Descripcion del logo"

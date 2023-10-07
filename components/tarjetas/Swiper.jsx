@@ -19,15 +19,15 @@ export default function Tarjeta2({ Productos }) {
                 breakpoints={{
                     640: {
                         slidesPerView: 2,
-                        spaceBetween: 10,
+                        spaceBetween: 25,
                     },
                     768: {
                         slidesPerView: 3,
-                        spaceBetween: 10,
+                        spaceBetween: 25,
                     },
                     1024: {
                         slidesPerView: 5,
-                        spaceBetween: 10,
+                        spaceBetween: 25,
                     },
                 }}
                 pagination={{
@@ -38,7 +38,8 @@ export default function Tarjeta2({ Productos }) {
                 navigation={true}
                 modules={[Navigation, Pagination]}
                 className="mySwiperTarjetas"
-                style={{ paddingBottom: '30px' }}
+                id="mySwiperTarjetas"
+                // style={{ paddingBottom: '30px' }}
             >
                 {Productos.map((item, index) => {
                     return (

@@ -32,7 +32,7 @@ const Index = () => {
                 {loading ? (
                     <Spinner />
                 ) : (
-                    <div className=" h-screen bg-transparent">
+                    <div className=" min-h-screen h-full bg-transparent">
                         <Tarjeta1 Productos={producto} />
                     </div>
                 )}

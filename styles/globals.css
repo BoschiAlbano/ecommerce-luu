@@ -651,6 +651,9 @@ body.menu-open {
 }
 
 /* Tarjetas */
+#mySwiperTarjetas {
+    padding: 30px 15px;
+}
 .mySwiperTarjetas .swiper-slide img {
     display: block;
     width: 100%;

@@ -37,11 +37,11 @@ const Categoria = () => {
                 Categoria.descripcion ? Categoria.descripcion : 'Categorias'
             }`}
         >
-            <div className=" pt-24 h-full w-[85%]">
+            <div className=" pt-24 h-full sm:w-[85%] w-[100%]">
                 {loading ? (
                     <Spinner />
                 ) : (
-                    <div className=" h-screen bg-transparent">
+                    <div className=" min-h-screen h-full bg-transparent">
                         <Tarjeta1 Productos={producto} />
                     </div>
                 )}

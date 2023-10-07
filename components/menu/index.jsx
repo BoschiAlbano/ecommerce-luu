@@ -48,29 +48,29 @@ const Menu = ({ title = 'Del Interior', children }) => {
         //navigation.push("/login")
     }
 
-    // bloquear el body para que el menu no se mueva
-    useEffect(() => {
-        // Cuando el componente se monta
-        const bloquearScroll = () => {
-            document.body.classList.add('menu-open');
-        };
+    // // bloquear el body para que el menu no se mueva
+    // useEffect(() => {
+    //     // Cuando el componente se monta
+    //     const bloquearScroll = () => {
+    //         document.body.classList.add('menu-open');
+    //     };
 
-        // Cuando el componente se desmonta
-        const habilitarScroll = () => {
-            document.body.classList.remove('menu-open');
-        };
+    //     // Cuando el componente se desmonta
+    //     const habilitarScroll = () => {
+    //         document.body.classList.remove('menu-open');
+    //     };
 
-        if (openMenu) {
-            bloquearScroll();
-        } else {
-            habilitarScroll();
-        }
+    //     if (openMenu) {
+    //         bloquearScroll();
+    //     } else {
+    //         habilitarScroll();
+    //     }
 
-        // Asegurarse de eliminar la clase cuando el componente se desmonta
-        return () => {
-            habilitarScroll();
-        };
-    }, [openMenu]); // Ejecuta este efecto cuando openMenu cambie
+    //     // Asegurarse de eliminar la clase cuando el componente se desmonta
+    //     return () => {
+    //         habilitarScroll();
+    //     };
+    // }, [openMenu]); // Ejecuta este efecto cuando openMenu cambie
 
     // hacer transparente el menu al bajar
     useEffect(() => {
@@ -145,7 +145,7 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
                                     openMenu
                                         ? 'translate-x-[0%]'
                                         : 'translate-x-[-100%]'
-                                } transition-transform duration-300 lg:translate-x-[-100%] w-full min-h-[100vh] h-full absolute flex flex-col bg-[--Menu-Desplegable-Color] z-[999] overflow-hidden top-0 left-0 justify-between`}
+                                } transition-transform duration-300 lg:translate-x-[-100%] w-full  absolute flex flex-col bg-[--Menu-Desplegable-Color] z-[999] overflow-hidden top-0 left-0 justify-between`}
                                 onClick={() => setOpenMenu(!openMenu)}
                             >
                                 <button
@@ -222,17 +222,6 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
                                         </Link>
                                     </section>
                                 </div>
-
-                                {/* Pie de Menu. (❌ la barra del navegador en dispositivos mobiles cuando se esconde no se muestra la parte inferior del menu ya que es un h-screen ❌) */}
-                                {/* <div className="h-[60px] w-full items-center">
-                                    <div className=" flex h-full">
-                                        <div className="gradiente-borde w-full h-full flex flex-col justify-center items-center">
-                                            <h1 className="text-[--Texto-Color] font-extrabold text-xl">
-                                                Boschi Albano Jose
-                                            </h1>
-                                        </div>
-                                    </div>
-                                </div> */}
                             </div>
                             {/* Barra de Color degradado*/}
                             <div className="gradiente-borde w-full h-[20px]"></div>

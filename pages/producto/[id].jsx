@@ -52,8 +52,14 @@ const Producto = () => {
 
     return (
         <Menu title="Del Interior - Producto">
-            <div className="pt-24 h-full sm:w-[85%] w-[100%] ">
-                {loading ? <Spinner /> : <ProductoImg producto={producto[0]} />}
+            <div className="pt-24 h-full sm:w-[85%] w-[100%]">
+                {loading ? (
+                    <Spinner />
+                ) : (
+                    <div className=" min-h-screen h-full bg-[--Secciones-Color]">
+                        <ProductoImg producto={producto[0]} />
+                    </div>
+                )}
             </div>
         </Menu>
     );

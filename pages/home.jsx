@@ -12,8 +12,9 @@ export default function Home() {
     return (
         <>
             <Menu title="Del Interior - Home">
-                <div className="pt-24 h-full w-[85%]">
-                    <div className=" sm:h-[500px] bg-[--Secciones-Color] contenedor-Carrusel">
+                <div className="pt-24 h-full sm:w-[85%] w-full">
+                    {/* Carrusel del banner */}
+                    <div className=" sm:h-[500px] bg-[--Secciones-Color] contenedor-Carrusel sm:mx-[15px] mx-[0px]">
                         <div className="lg:flex hidden justify-center items-center sm:h-[500px]">
                             <img
                                 src={`${process.env.NEXT_PUBLIC_HOST}/assets/Logo.png`}
@@ -26,8 +27,9 @@ export default function Home() {
                         </div>
                     </div>
 
+                    {/* Swiper de Tarjetas Destacadas */}
                     <div className="w-full flex flex-col justify-center items-center mt-5 gap-4">
-                        <div className="bg-[--Secciones-Color] w-full">
+                        <div className="w-full">
                             <Link
                                 href={`destacados`}
                                 className="separador before:sm:mx-8 after:sm:mx-8 before:mx-2 after:mx-2 my-10 w-full"
@@ -38,20 +40,19 @@ export default function Home() {
                                 </div>
                             </Link>
 
-                            <div className="sm:mx-[2rem] mx-[0rem]">
-                                <Swiper
-                                    Productos={productos.filter(
-                                        (prod) => prod.destacado == true
-                                    )}
-                                />
-                            </div>
+                            <Swiper
+                                Productos={productos.filter(
+                                    (prod) => prod.destacado == true
+                                )}
+                            />
                         </div>
 
+                        {/* Masonry de Tarjetas categoria */}
                         {categorias.map((item) => {
                             return (
                                 <div
                                     key={item.id}
-                                    className="bg-[--Secciones-Color] w-full"
+                                    className="w-full" //bg-[--Secciones-Color]
                                 >
                                     <Link
                                         href={`categoria/${item.id}`}
@@ -65,7 +66,7 @@ export default function Home() {
                                         </div>
                                     </Link>
 
-                                    <div className="sm:mx-[2rem] mx-[0rem]">
+                                    <div className="sm:mx-[15px] mx-[5px]">
                                         <Masonry
                                             Productos={productos.filter(
                                                 (prod) =>

@@ -9,7 +9,7 @@ import Link from 'next/link';
 const Tarjeta = ({ item = {} }) => {
     return (
         <div className="card-productos vibrar">
-            <div className="card_box shadow-2xl">
+            <div className="card_box shadow-xl">
                 <div className="flex flex-col justify-center items-center overflow-hidden">
                     <div className="absolute left-0 top-0 p-2">
                         <Corazon articulo={item} />
@@ -28,7 +28,14 @@ const Tarjeta = ({ item = {} }) => {
                         ${item.precio}
                     </p>
 
-                    <h1 className="font-[roboto] font-extrabold uppercase text-xs sm:text-xl text-[#000000b4] mt-2">
+                    <h1
+                        className=" w-full px-1 text-center font-[roboto] font-extrabold uppercase text-xs sm:text-base text-[#000000b4] mt-2"
+                        style={{
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                        }}
+                    >
                         {item.titulo}
                     </h1>
 
