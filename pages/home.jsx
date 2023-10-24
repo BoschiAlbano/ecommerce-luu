@@ -1,34 +1,54 @@
-import React, { useContext, useEffect } from 'react';
-import Menu from '@/components/menu';
-import Masonry from '@/components/tarjetas/Masonry';
-import Link from 'next/link';
-import Swiper from '@/components/tarjetas/Swiper';
-import Carrusel2 from '@/components/carrusel/index2';
-import ApiContext from '@/context/ApiContext';
+import React, { useContext, useEffect } from "react";
+import Menu from "@/components/menu";
+import Masonry from "@/components/tarjetas/Masonry";
+import Link from "next/link";
+import Swiper from "@/components/tarjetas/Swiper";
+import Carrusel2 from "@/components/carrusel/index2";
+import ApiContext from "@/context/ApiContext";
+import { useRouter } from "next/router";
+import FavoritosContext from "@/context/FavoritosContext";
 
 export default function Home() {
-    const { productos, banners, categorias } = useContext(ApiContext);
+    const { productos, banners, categorias, ActualizarProductos } =
+        useContext(ApiContext);
+    const { setCarrito } = useContext(FavoritosContext);
+
+    const router = useRouter();
+
+    useEffect(() => {
+        const { status } = router.query;
+
+        console.log("Query");
+        console.log(router.query);
+        console.log("Estado del pago");
+        console.log(status);
+
+        if (status == "approved") {
+            setCarrito([]);
+            ActualizarProductos();
+            // router.push(process.env.NEXT_PUBLIC_HOST);
+        }
+    }, [router.query]);
 
     return (
         <>
             <Menu title="Del Interior - Home">
                 <div className="pt-24 h-full sm:w-[85%] w-full">
-                    {/* Carrusel del banner */}
-                    <div className=" sm:h-[500px] bg-[--Secciones-Color] contenedor-Carrusel sm:mx-[15px] mx-[0px]">
-                        <div className="lg:flex hidden justify-center items-center sm:h-[500px]">
-                            <img
-                                src={`${process.env.NEXT_PUBLIC_HOST}/assets/Logo.png`}
-                                alt="Descripcion de logo"
-                                className=" object-contain h-[100%]"
-                            />
-                        </div>
-                        <div className="flex justify-center items-center sm:h-[500px]">
+                    <div className="sm:h-[500px] sm:mx-[15px] mx-[0px]  contenedor-Carrusel items-center">
+                        {/* Logo */}
+                        <img
+                            src="/assets/Logo.png"
+                            className=" text-center lg:flex hidden"
+                            alt="Del Interior Logo"
+                        />
+                        {/* Carrusel del banner */}
+                        <div className="flex justify-center items-center rounded-xl overflow-hidden sm:h-[500px]">
                             <Carrusel2 slides={banners} />
                         </div>
                     </div>
 
-                    {/* Swiper de Tarjetas Destacadas */}
                     <div className="w-full flex flex-col justify-center items-center mt-5 gap-4">
+                        {/* Swiper de Tarjetas Destacadas */}
                         <div className="w-full">
                             <Link
                                 href={`destacados`}

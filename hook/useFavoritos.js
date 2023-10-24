@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import FavoritosContext from '@/context/FavoritosContext';
-import { useLocalStorage } from '@/components/localStorage/hook';
-import Alert from '@/components/alert/alert';
+import React, { useState } from "react";
+import FavoritosContext from "@/context/FavoritosContext";
+import { useLocalStorage } from "@/components/localStorage/hook";
+import Alert from "@/components/alert/alert";
 
 const UseFavoritos = ({ children }) => {
-    const [store, setValue] = useLocalStorage('Favoritos', []);
-    const [carrito, setCarrito] = useLocalStorage('Carrito', []);
+    const [store, setValue] = useLocalStorage("Favoritos", []);
+    const [carrito, setCarrito] = useLocalStorage("Carrito", []);
 
     const [alert, setAlert] = useState({
         open: false,
-        vertical: 'bottom',
-        horizontal: 'right',
-        msj: '',
-        severity: '',
+        vertical: "bottom",
+        horizontal: "right",
+        msj: "",
+        severity: "",
     });
 
     const handleLocalstorage = ({ id, descripcion }) => {
@@ -30,7 +30,7 @@ const UseFavoritos = ({ children }) => {
             setAlert({
                 ...alert,
                 msj: `El Producto - ${descripcion} - fue Agregado a favoritos`,
-                severity: 'success',
+                severity: "success",
                 open: true,
             });
         } else {
@@ -41,7 +41,7 @@ const UseFavoritos = ({ children }) => {
             setAlert({
                 ...alert,
                 msj: `El Producto - ${descripcion} - fue Eliminado de favoritos`,
-                severity: 'warning',
+                severity: "warning",
                 open: true,
             });
         }
@@ -62,14 +62,14 @@ const UseFavoritos = ({ children }) => {
                 setAlert({
                     ...alert,
                     msj: `El Producto - ${Produto.titulo} - fue Agregado al carrito de Compras`,
-                    severity: 'success',
+                    severity: "success",
                     open: true,
                 });
             } else {
                 setAlert({
                     ...alert,
                     msj: `No hay stock para el Producto - ${Produto.titulo} -`,
-                    severity: 'warning',
+                    severity: "warning",
                     open: true,
                 });
             }
@@ -82,7 +82,7 @@ const UseFavoritos = ({ children }) => {
                 setAlert({
                     ...alert,
                     msj: `El Producto - ${Produto.titulo} - fue Modficiado en el carrito de Compras - Cantidad ${item[Id].cantidad}`,
-                    severity: 'success',
+                    severity: "success",
                     open: true,
                 });
                 return;
@@ -93,14 +93,14 @@ const UseFavoritos = ({ children }) => {
                 setAlert({
                     ...alert,
                     msj: `El Producto - ${Produto.titulo} - fue Agregado al carrito de Compras - Cantidad ${item[Id].cantidad}`,
-                    severity: 'success',
+                    severity: "success",
                     open: true,
                 });
             } else {
                 setAlert({
                     ...alert,
                     msj: `No hay stock para el Producto - ${Produto.titulo} - Stock Actual ${Produto.cantidad} Unidades`,
-                    severity: 'warning',
+                    severity: "warning",
                     open: true,
                 });
             }
@@ -130,6 +130,18 @@ const UseFavoritos = ({ children }) => {
         return carrito[Id];
     };
 
+    const MostrarAlerta = ({
+        msj = "Sin Mensaje de Alerta",
+        severity = "success",
+    }) => {
+        setAlert({
+            ...alert,
+            msj,
+            severity,
+            open: true,
+        });
+    };
+
     return (
         <FavoritosContext.Provider
             value={{
@@ -140,6 +152,8 @@ const UseFavoritos = ({ children }) => {
                 handleCarritoDelete,
                 BuscarProductoCarrito,
                 alert,
+                MostrarAlerta,
+                setCarrito,
             }}
         >
             {children}

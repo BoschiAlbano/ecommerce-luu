@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { supabase } from '@/supabase/cliente';
 
 import Button from '@mui/material/Button';
@@ -21,20 +21,16 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-import Alert from '../alert/alert';
+import FavoritosContext from '@/context/FavoritosContext';
 
 const Login = () => {
+    // contexto para la alerta
+    const { MostrarAlerta } = useContext(FavoritosContext);
     //Datos Formilario Login
     const [datos, setDatos] = useState({
         email: '',
         password: '',
         password2: '',
-    });
-
-    // Errores Mensajes
-    const [error, setError] = useState({
-        mostrar: false,
-        msj: '',
     });
 
     // voltiar tarjeta
@@ -76,17 +72,11 @@ const Login = () => {
             });
 
             if (error) {
-                setError({
-                    mostrar: true,
+                MostrarAlerta({
                     msj: 'Error, Usuario o Contraseña son incorrectos',
+                    severity: 'error',
                 });
 
-                setTimeout(() => {
-                    setError({
-                        mostrar: false,
-                        msj: '',
-                    });
-                }, 3000);
                 return;
             }
 
@@ -106,11 +96,10 @@ const Login = () => {
         }
         // comprobar si las contraseñas son iguales
         if (datos.password != datos.password2) {
-            setError({ mostrar: true, msj: 'Las Contraseñas no son iguales' });
-
-            setTimeout(() => {
-                setError({ mostrar: false, msj: '' });
-            }, 3000);
+            MostrarAlerta({
+                msj: 'Las Contraseñas no son iguales',
+                severity: 'error',
+            });
 
             return;
         }
@@ -129,15 +118,10 @@ const Login = () => {
             // Todo OK, limpiar Campos
             console.log(data.user);
 
-            setError({
-                mostrar: true,
+            MostrarAlerta({
                 msj: 'Registrado con Exito, Verifica tú Email',
+                severity: 'success',
             });
-
-            setTimeout(() => {
-                setError({ mostrar: false, msj: '' });
-                setRegister(!register);
-            }, 3000);
         } catch (error) {
             // Manejar errores generales
             ErrorTryCatch(error);
@@ -182,12 +166,7 @@ const Login = () => {
 
     const VerificarCampos = () => {
         if (datos.password.length === 0 || datos.email.length === 0) {
-            setError({ mostrar: true, msj: 'Hay campos vacios' });
-
-            setTimeout(() => {
-                setError({ mostrar: false, msj: '' });
-            }, 3000);
-
+            MostrarAlerta({ msj: 'Hay campos vacios', severity: 'error' });
             return true;
         }
 
@@ -195,11 +174,10 @@ const Login = () => {
     };
 
     const ErrorTryCatch = (mensaje) => {
-        setError({ mostrar: true, msj: mensaje });
-
-        setTimeout(() => {
-            setError({ mostrar: false, msj: '' });
-        }, 3000);
+        MostrarAlerta({
+            msj: mensaje,
+            severity: 'error',
+        });
     };
 
     return (
@@ -211,7 +189,7 @@ const Login = () => {
             }}
         >
             {/* Alerta */}
-            {error.mostrar ? <Alert msj={error.msj} severity="error" /> : null}
+            {/* {error.mostrar ? <Alert msj={error.msj} severity="error" /> : null} */}
 
             {/* Plantas */}
             <Planta3 top={0} left={0} width={15} hover={true} />

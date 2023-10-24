@@ -1,0 +1,25 @@
+URL de retorno cunado el pago se realiza
+
+https://ede0-181-117-24-211.ngrok-free.app/home?
+collection_id=65573273752
+&
+collection_status=approved
+&
+payment_id=65573273752
+&
+status=approved
+&
+external_reference=null
+&
+payment_type=account_money
+&
+merchant_order_id=12649837024
+&
+preference_id=1512312240-a7fcaa1d-0169-47e0-983f-adb3aa1c6b53
+&
+site_id=MLA
+&
+processing_mode=aggregator
+&
+merchant_account_id=null
+

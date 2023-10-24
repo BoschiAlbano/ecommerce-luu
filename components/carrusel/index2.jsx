@@ -25,13 +25,13 @@ export default function Carrusel2({ slides }) {
                 slidesPerView={1}
                 spaceBetween={30}
                 autoplay={{
-                    delay: 2500,
+                    delay: 3500,
                     disableOnInteraction: false,
                 }}
                 keyboard={{
                     enabled: true,
                 }}
-                navigation={true}
+                navigation={false}
                 modules={[
                     Keyboard,
                     Pagination,

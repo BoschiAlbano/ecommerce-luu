@@ -23,7 +23,7 @@ const Destacados = () => {
 
     return (
         <Menu title="Del Interior - Destacados">
-            <div className="pt-24 h-full w-[85%]">
+            <div className="pt-24 h-full sm:w-[85%] w-[100%]">
                 {loading ? (
                     <Spinner />
                 ) : (

@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import MenuIcon from '@mui/icons-material/Clear';
 import Producto from '../carrito/Produto';
+import MercadoPago from './mercadoPago';
 
 const Carrito = () => {
     const { carrito } = useContext(FavoritosContext);
@@ -78,6 +79,15 @@ const Carrito = () => {
                                 <MenuIcon sx={{ fontSize: 35 }} />
                             </button>
                         </div>
+
+                        {/* Boton mercado pago */}
+                        {cantidad != 0 ? (
+                            <MercadoPago productos={carrito} />
+                        ) : (
+                            <h1 className=" text-rose-400">
+                                No hay productos en el carrito
+                            </h1>
+                        )}
                     </Box>
                 </div>
             </Modal>

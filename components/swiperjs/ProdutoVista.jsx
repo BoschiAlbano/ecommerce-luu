@@ -109,27 +109,29 @@ export default function Producto_Img({ producto = {} }) {
     return (
         <div className="flex flex-col justify-start items-center h-full">
             {/* Carrusel de img */}
-            <div className="flex flex-col gap-2 w-[100%] bg-[--Secciones-Color] sm:p-6 p-1">
+            <section className="p-3 w-full">
                 <Swiper
-                    loop={false}
                     spaceBetween={10}
                     slidesPerView={2}
+                    loop={true}
                     breakpoints={{
                         640: {
-                            slidesPerView: 2,
-                            spaceBetween: 10,
+                            slidesPerView: 3,
+                            spaceBetween: 5,
+                            loop: false,
                         },
                         768: {
                             slidesPerView: 4,
-                            spaceBetween: 10,
+                            spaceBetween: 5,
+                            loop: false,
                         },
                         1024: {
                             slidesPerView: 5,
                             spaceBetween: 10,
+                            loop: false,
                         },
                     }}
                     freeMode={true}
-                    watchSlidesProgress={true}
                     navigation={true}
                     modules={[FreeMode, Navigation, Thumbs]}
                     className="mySwiperProducto"
@@ -161,8 +163,7 @@ export default function Producto_Img({ producto = {} }) {
                         })
                     )}
                 </Swiper>
-            </div>
-
+            </section>
             {/* Descripcion del producto */}
             <div className="flex flex-col w-[100%]  gap-10 items-center  px-4 py-10 rounded-xl bg-[--Secciones-Color]">
                 {/* Titulo */}
@@ -221,22 +222,17 @@ export default function Producto_Img({ producto = {} }) {
 
             {/* Visor de img */}
             <div
-                onClick={() => handleClose()}
                 className={`absolute bg-[--Transparente2] z-[1000] top-0 right-0 w-full h-screen flex-col justify-center items-center ${
                     modal ? 'flex' : 'hidden'
                 }`}
             >
                 <CloseIcon
                     onClick={() => handleClose()}
-                    className="text-white absolute w-[50px] h-[50px] right-0 top-0 z-10 cursor-pointer pr-2 pt-2"
+                    className="text-white absolute w-12 h-12 right-0 top-0 z-10 cursor-pointer pr-2 pt-2"
                 ></CloseIcon>
 
-                <div className="w-[100%] h-[80%] relative">
+                <div className="w-[100%] h-[100%] relative">
                     <Swiper
-                        style={{
-                            '--swiper-navigation-color': '#ffffff4d',
-                            '--swiper-pagination-color': '#ffffff4d',
-                        }}
                         loop={true}
                         spaceBetween={10}
                         navigation={true}
@@ -255,6 +251,8 @@ export default function Producto_Img({ producto = {} }) {
                                 <div
                                     id="zoom"
                                     className="swiper-zoom-container"
+                                    data-swiper-zoom="3"
+                                    onClick={() => handleClose()}
                                 >
                                     <img
                                         className="rounded-xl object-fill px-1"
@@ -272,9 +270,11 @@ export default function Producto_Img({ producto = {} }) {
                                         <div
                                             id="zoom"
                                             className="swiper-zoom-container"
+                                            data-swiper-zoom="3"
+                                            onClick={() => handleClose()}
                                         >
                                             <img
-                                                className="rounded-xl object-fill px-1"
+                                                className="rounded-xl px-1"
                                                 src={
                                                     item.url
                                                         ? item.url
