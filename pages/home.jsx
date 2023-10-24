@@ -18,11 +18,6 @@ export default function Home() {
     useEffect(() => {
         const { status } = router.query;
 
-        console.log("Query");
-        console.log(router.query);
-        console.log("Estado del pago");
-        console.log(status);
-
         if (status == "approved") {
             setCarrito([]);
             ActualizarProductos();
@@ -42,7 +37,7 @@ export default function Home() {
                             alt="Del Interior Logo"
                         />
                         {/* Carrusel del banner */}
-                        <div className="flex justify-center items-center rounded-xl overflow-hidden sm:h-[500px]">
+                        <div className="flex justify-center items-center sm:rounded-xl overflow-hidden sm:h-[500px] h-full">
                             <Carrusel2 slides={banners} />
                         </div>
                     </div>

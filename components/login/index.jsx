@@ -1,36 +1,36 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { supabase } from '@/supabase/cliente';
+import React, { useState, useEffect, useContext } from "react";
+import { supabase } from "@/supabase/cliente";
 
-import Button from '@mui/material/Button';
-import GoogleIcon from '@mui/icons-material/Google';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import Stack from '@mui/material/Stack';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import { TextField } from '@mui/material';
+import Button from "@mui/material/Button";
+import GoogleIcon from "@mui/icons-material/Google";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import Stack from "@mui/material/Stack";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import { TextField } from "@mui/material";
 
-import Planta1 from '../plantas/planta1';
-import Planta2 from '../plantas/planta2';
-import Planta3 from '../plantas/planta3';
+import Planta1 from "../plantas/planta1";
+import Planta2 from "../plantas/planta2";
+import Planta3 from "../plantas/planta3";
 
-import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormControl from '@mui/material/FormControl';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import IconButton from "@mui/material/IconButton";
+import Input from "@mui/material/Input";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import FormControl from "@mui/material/FormControl";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-import FavoritosContext from '@/context/FavoritosContext';
+import FavoritosContext from "@/context/FavoritosContext";
 
 const Login = () => {
     // contexto para la alerta
     const { MostrarAlerta } = useContext(FavoritosContext);
     //Datos Formilario Login
     const [datos, setDatos] = useState({
-        email: '',
-        password: '',
-        password2: '',
+        email: "",
+        password: "",
+        password2: "",
     });
 
     // voltiar tarjeta
@@ -51,7 +51,7 @@ const Login = () => {
     };
 
     useEffect(() => {
-        setDatos({ email: '', password: '', password2: '' });
+        setDatos({ email: "", password: "", password2: "" });
     }, [register]);
 
     const Onchange = (e) => {
@@ -73,8 +73,8 @@ const Login = () => {
 
             if (error) {
                 MostrarAlerta({
-                    msj: 'Error, Usuario o Contraseña son incorrectos',
-                    severity: 'error',
+                    msj: "Error, Usuario o Contraseña son incorrectos",
+                    severity: "error",
                 });
 
                 return;
@@ -97,8 +97,8 @@ const Login = () => {
         // comprobar si las contraseñas son iguales
         if (datos.password != datos.password2) {
             MostrarAlerta({
-                msj: 'Las Contraseñas no son iguales',
-                severity: 'error',
+                msj: "Las Contraseñas no son iguales",
+                severity: "error",
             });
 
             return;
@@ -119,8 +119,8 @@ const Login = () => {
             console.log(data.user);
 
             MostrarAlerta({
-                msj: 'Registrado con Exito, Verifica tú Email',
-                severity: 'success',
+                msj: "Registrado con Exito, Verifica tú Email",
+                severity: "success",
             });
         } catch (error) {
             // Manejar errores generales
@@ -132,7 +132,7 @@ const Login = () => {
     const Github = async () => {
         try {
             const { data, error } = await supabase.auth.signInWithOAuth({
-                provider: 'github',
+                provider: "github",
             });
 
             if (error) {
@@ -149,7 +149,7 @@ const Login = () => {
     const Google = async () => {
         try {
             const { data, error } = await supabase.auth.signInWithOAuth({
-                provider: 'Google',
+                provider: "Google",
             });
 
             if (error) {
@@ -166,7 +166,7 @@ const Login = () => {
 
     const VerificarCampos = () => {
         if (datos.password.length === 0 || datos.email.length === 0) {
-            MostrarAlerta({ msj: 'Hay campos vacios', severity: 'error' });
+            MostrarAlerta({ msj: "Hay campos vacios", severity: "error" });
             return true;
         }
 
@@ -176,7 +176,7 @@ const Login = () => {
     const ErrorTryCatch = (mensaje) => {
         MostrarAlerta({
             msj: mensaje,
-            severity: 'error',
+            severity: "error",
         });
     };
 
@@ -184,8 +184,8 @@ const Login = () => {
         <Card
             className="py-0 px-0 sm:px-3 sm:h-[80%] lg:h-[80%] h-full sm:w-[400px] w-full"
             style={{
-                background: 'rgba(255,255,255,0.4)',
-                position: 'relative',
+                background: "rgba(255,255,255,0.4)",
+                position: "relative",
             }}
         >
             {/* Alerta */}
@@ -208,13 +208,13 @@ const Login = () => {
 
                 <div
                     className={`${
-                        register ? 'card-inner' : 'card-inner2'
+                        register ? "card-inner" : "card-inner2"
                     } relative w-full px-5`}
                 >
                     {/* Login */}
                     <form
                         className={`${
-                            register ? 'hidden' : 'flex'
+                            register ? "hidden" : "flex"
                         } flex-col gap-4 card-front`}
                         onSubmit={(e) => {
                             OnSubmitLogin(e);
@@ -237,7 +237,7 @@ const Login = () => {
                             </InputLabel>
                             <Input
                                 id="standard-adornment-password"
-                                type={showPassword ? 'text' : 'password'}
+                                type={showPassword ? "text" : "password"}
                                 name="password"
                                 value={datos.password}
                                 onChange={(e) => Onchange(e)}
@@ -297,7 +297,7 @@ const Login = () => {
                     {/* Register */}
                     <form
                         className={`${
-                            register ? 'flex' : 'hidden'
+                            register ? "flex" : "hidden"
                         } flex-col gap-4 card-back`}
                         onSubmit={(e) => {
                             OnSubmitRegister(e);
@@ -320,7 +320,7 @@ const Login = () => {
                             </InputLabel>
                             <Input
                                 id="standard-adornment-password"
-                                type={showPassword ? 'text' : 'password'}
+                                type={showPassword ? "text" : "password"}
                                 name="password"
                                 value={datos.password}
                                 onChange={(e) => Onchange(e)}
@@ -350,7 +350,7 @@ const Login = () => {
                             </InputLabel>
                             <Input
                                 id="standard-adornment-password"
-                                type={showPassword2 ? 'text' : 'password'}
+                                type={showPassword2 ? "text" : "password"}
                                 name="password2"
                                 value={datos.password2}
                                 onChange={(e) => Onchange(e)}

@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
-import FavoritosContext from '@/context/FavoritosContext';
-import ApiContext from '@/context/ApiContext';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import MenuIcon from '@mui/icons-material/Clear';
-import Producto from '../carrito/Produto';
-import MercadoPago from './mercadoPago';
+import React, { useContext, useEffect, useState } from "react";
+import FavoritosContext from "@/context/FavoritosContext";
+import ApiContext from "@/context/ApiContext";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import MenuIcon from "@mui/icons-material/Clear";
+import Producto from "../carrito/Produto";
+import MercadoPago from "./mercadoPago";
 
 const Carrito = () => {
     const { carrito } = useContext(FavoritosContext);
@@ -45,9 +45,9 @@ const Carrito = () => {
             </button>
 
             <Modal open={open} onClose={handleClose}>
-                <div className="Borde_Degradado absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 sm:h-[80%] h-[100%] rounded-sm w-[100%] sm:w-[80%] md:w-[70%] lg:w-[70%] xl:w-[60%] 2xl:w-[50%]">
+                <div className="Borde_Degradado absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 sm:h-[80%] h-[90%] rounded-sm w-[95%] sm:w-[80%] md:w-[70%] lg:w-[70%] xl:w-[60%] 2xl:w-[50%]">
                     <Box
-                        id={'ScrollProducto'}
+                        id={"ScrollProducto"}
                         className=" bg-white w-full h-full flex flex-col  items-center  relative overflow-auto "
                     >
                         <h1 className="text-2xl font-extrabold mt-4">

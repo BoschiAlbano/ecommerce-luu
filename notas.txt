@@ -1,55 +1,58 @@
-1 - Funcion Supabase para generar la transaccion de stock
+1 - proveedores de autenticacion google y github
+    Supabase Url Redirect: https://supabase.com/dashboard/project/ensarqmurbpfpgwpynqp/auth/url-configuration
+    Google: https://console.cloud.google.com/apis/credentials?project=ecommerce-luu
 
-create or replace function actualizarArticulosConTransYDiferencia (articulosArray JSONB) returns JSONB as $$
-DECLARE
-    articuloRecord RECORD;
-    articuloId UUID;
-    cantidad_Parametro INT;
-    cantidad_Actual INT;
-    resultado JSONB;
-    resta INT;
-BEGIN
-        
+2 - Funcion Supabase para generar la transaccion de stock
+    create or replace function actualizarArticulosConTransYDiferencia (articulosArray JSONB) returns JSONB as $$
+    DECLARE
+        articuloRecord RECORD;
+        articuloId UUID;
+        cantidad_Parametro INT;
+        cantidad_Actual INT;
+        resultado JSONB;
+        resta INT;
     BEGIN
-    
-        -- Utilizamos un conjunto de registros para iterar sobre el arreglo JSONB
-        FOR articuloRecord IN SELECT * FROM jsonb_array_elements(articulosArray)
-        LOOP
-
-            -- Extrae el id y la cantidad del objeto
-            articuloId := (articuloRecord.value->>'id')::UUID;
-            cantidad_Parametro := (articuloRecord.value->>'quantity')::INT;
-
-
-            -- Buscar Articulo
-            SELECT "cantidad" INTO cantidad_Actual FROM "Articulos" WHERE "id" = articuloId;
-
-            -- Calcula la resta entre la cantidad actual y la cantidad parametro
-            resta := cantidad_Actual - cantidad_Parametro;
-
-            -- Actualiza la tabla Articulos
-            UPDATE "Articulos"
-            SET "cantidad" = resta  -- Califica la columna
-            WHERE "id" = articuloId;  -- Califica la columna
-
-            IF found THEN
-                -- La actualización se realizó con éxito
-                -- Aquí puedes realizar alguna acción adicional si es necesario
-            ELSE
-                -- La actualización no se realizó con éxito
-                -- Puedes manejar esta situación de acuerdo a tus necesidades
-                RAISE EXCEPTION 'Al menos una actualización falló';
-            END IF;
-
-        END LOOP;
+            
+        BEGIN
         
-        resultado = jsonb_build_object('mensaje', 'Actualizaciones exitosas');
-        RETURN resultado;
-    EXCEPTION
-        WHEN others THEN
-            resultado = jsonb_build_object('error del try', SQLERRM);
+            -- Utilizamos un conjunto de registros para iterar sobre el arreglo JSONB
+            FOR articuloRecord IN SELECT * FROM jsonb_array_elements(articulosArray)
+            LOOP
+
+                -- Extrae el id y la cantidad del objeto
+                articuloId := (articuloRecord.value->>'id')::UUID;
+                cantidad_Parametro := (articuloRecord.value->>'quantity')::INT;
+
+
+                -- Buscar Articulo
+                SELECT "cantidad" INTO cantidad_Actual FROM "Articulos" WHERE "id" = articuloId;
+
+                -- Calcula la resta entre la cantidad actual y la cantidad parametro
+                resta := cantidad_Actual - cantidad_Parametro;
+
+                -- Actualiza la tabla Articulos
+                UPDATE "Articulos"
+                SET "cantidad" = resta  -- Califica la columna
+                WHERE "id" = articuloId;  -- Califica la columna
+
+                IF found THEN
+                    -- La actualización se realizó con éxito
+                    -- Aquí puedes realizar alguna acción adicional si es necesario
+                ELSE
+                    -- La actualización no se realizó con éxito
+                    -- Puedes manejar esta situación de acuerdo a tus necesidades
+                    RAISE EXCEPTION 'Al menos una actualización falló';
+                END IF;
+
+            END LOOP;
+            
+            resultado = jsonb_build_object('mensaje', 'Actualizaciones exitosas');
             RETURN resultado;
+        EXCEPTION
+            WHEN others THEN
+                resultado = jsonb_build_object('error del try', SQLERRM);
+                RETURN resultado;
+        END;
+        
     END;
-    
-END;
-$$ language plpgsql;
+    $$ language plpgsql;
