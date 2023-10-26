@@ -1,23 +1,23 @@
-'use client';
-import React, { useState, useEffect, useContext } from 'react';
+"use client";
+import React, { useState, useEffect, useContext } from "react";
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/free-mode';
-import 'swiper/css/navigation';
-import 'swiper/css/thumbs';
-import 'swiper/css/zoom';
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+import "swiper/css/zoom";
 
-import { TextField } from '@mui/material';
+import { TextField } from "@mui/material";
 
-import Agregar from '@/components/bonones/agregar';
+import Agregar from "@/components/bonones/agregar";
 
-import CloseIcon from '@mui/icons-material/Close';
-import FavoritosContext from '@/context/FavoritosContext';
+import CloseIcon from "@mui/icons-material/Close";
+import FavoritosContext from "@/context/FavoritosContext";
 
 // import required modules
-import { FreeMode, Navigation, Thumbs, Zoom } from 'swiper/modules';
+import { FreeMode, Navigation, Thumbs, Zoom } from "swiper/modules";
 
 export default function Producto_Img({ producto = {} }) {
     const { BuscarProductoCarrito, carrito } = useContext(FavoritosContext);
@@ -38,7 +38,7 @@ export default function Producto_Img({ producto = {} }) {
         const newValue = parseInt(event.target.value);
 
         if (isNaN(newValue)) {
-            setValue('');
+            setValue("");
         }
 
         // No permite valores negativos
@@ -60,11 +60,11 @@ export default function Producto_Img({ producto = {} }) {
     // Bloquear Scroll de pantalla
     useEffect(() => {
         const bloquearScroll = () => {
-            document.body.classList.add('menu-open');
+            document.body.classList.add("menu-open");
         };
 
         const habilitarScroll = () => {
-            document.body.classList.remove('menu-open');
+            document.body.classList.remove("menu-open");
         };
 
         if (modal) {
@@ -82,13 +82,13 @@ export default function Producto_Img({ producto = {} }) {
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
-            behavior: 'smooth',
+            behavior: "smooth",
         });
     };
 
     // Manejo de Doble click en dispositivos mobiles. (❌no se puede usar el doble click en mobile❌)
     let clicks = [];
-    let time = '';
+    let time = "";
     const doubleClick = (e) => {
         e.preventDefault();
 
@@ -155,7 +155,7 @@ export default function Producto_Img({ producto = {} }) {
                                         src={
                                             item.url
                                                 ? item.url
-                                                : '/assets/Sinfondo.png'
+                                                : "/assets/Sinfondo.png"
                                         }
                                     />
                                 </SwiperSlide>
@@ -165,47 +165,47 @@ export default function Producto_Img({ producto = {} }) {
                 </Swiper>
             </section>
             {/* Descripcion del producto */}
-            <div className="flex flex-col w-[100%]  gap-10 items-center  px-4 py-10 rounded-xl bg-[--Secciones-Color]">
+            <div className="flex flex-col w-[100%]  gap-10 items-center  px-4 py-10 rounded-xl ">
                 {/* Titulo */}
-                <h1 className="font-[roboto] font-extrabold sm:text-3xl text-2xl ">
+                <h1 className="font-[roboto] font-extrabold sm:text-3xl text-2xl text-[--Texto-Color] ">
                     {producto.titulo}
                 </h1>
                 {/* Descripcion */}
-                <h1 className="font-[roboto] sm:text-lg text-sm sm:mx-[5%] mx-0">
+                <h1 className="font-[roboto] sm:text-lg text-sm sm:mx-[5%] mx-0 text-[--Texto-Color]">
                     {producto.descripcion}
                 </h1>
 
                 <div className="w-full flex flex-col justify-center items-center">
                     {/* Precio */}
-                    <p className="mb-4 p-0 font-extrabold text-xl">
+                    <p className="mb-4 p-0 font-extrabold text-xl text-[--Texto-Color]">
                         {`Precio: $${producto.precio} ARG`}
                     </p>
                     {/* Cantidad - Agregar Carrito */}
-                    <div className="w-[90%] sm:w-[80%] md:w-[60%] lg:w-[50%] xl:w-[40%] 2xl:w-[30%]  flex h-[3rem] gap-2">
+                    <div className="w-[90%] sm:w-[80%] md:w-[60%] lg:w-[50%] xl:w-[40%] 2xl:w-[30%]  flex h-[3rem] gap-2 text-[--Texto-Color]">
                         <TextField
                             className="w-[50%]"
                             id="outlined-number"
                             label={
                                 producto.cantidad == 0
-                                    ? 'sin Stock'
+                                    ? "sin Stock"
                                     : `Stock ${producto.cantidad} Unidades`
                             }
                             type="number"
                             variant="outlined"
                             onChange={handleInputChange}
                             value={producto.cantidad == 0 ? 0 : value}
-                            color={producto.cantidad == 0 ? 'error' : 'primary'}
+                            color={producto.cantidad == 0 ? "error" : "primary"}
                             inputProps={{
                                 style: {
-                                    height: '3rem',
-                                    paddingTop: '0px',
-                                    paddingBottom: '0px',
-                                    paddingLeft: '1rem',
-                                    paddingRight: '1rem',
+                                    height: "3rem",
+                                    paddingTop: "0px",
+                                    paddingBottom: "0px",
+                                    paddingLeft: "1rem",
+                                    paddingRight: "1rem",
                                 },
                                 min: 1, // Establece el valor mínimo a 1
                                 max: 11,
-                                inputMode: 'none', // Desactiva la entrada de texto
+                                inputMode: "none", // Desactiva la entrada de texto
                             }}
                         />
 
@@ -223,7 +223,7 @@ export default function Producto_Img({ producto = {} }) {
             {/* Visor de img */}
             <div
                 className={`absolute bg-[--Transparente2] z-[1000] top-0 right-0 w-full h-screen flex-col justify-center items-center ${
-                    modal ? 'flex' : 'hidden'
+                    modal ? "flex" : "hidden"
                 }`}
             >
                 <CloseIcon
@@ -278,7 +278,7 @@ export default function Producto_Img({ producto = {} }) {
                                                 src={
                                                     item.url
                                                         ? item.url
-                                                        : '/assets/Sinfondo.png'
+                                                        : "/assets/Sinfondo.png"
                                                 }
                                                 onClick={(event) => {
                                                     event.stopPropagation();

@@ -1,21 +1,22 @@
-import React, { useEffect, useState, useRef, useContext } from 'react';
-import { supabase } from '@/supabase/cliente';
-import { useRouter } from 'next/router';
-import ListarCategorias from './categorias';
-import Link from 'next/link';
-import Planta3 from '../plantas/planta3';
-import Planta1 from '../plantas/planta1';
-import Planta2 from '../plantas/planta2';
-import ClearIcon from '@mui/icons-material/Clear';
-import Lupa from '@mui/icons-material/Search';
-import MenuIcon from '@mui/icons-material/Menu';
-import Footer from '../footer';
-import Spinner from '../Spinner';
-import Carrito from '../bonones/carrito';
-import ApiContext from '@/context/ApiContext';
-import Head from 'next/head';
+import React, { useEffect, useState, useRef, useContext } from "react";
+import { supabase } from "@/supabase/cliente";
+import { useRouter } from "next/router";
+import ListarCategorias from "./categorias";
+import Link from "next/link";
+import Planta3 from "../plantas/planta3";
+import Planta1 from "../plantas/planta1";
+import Planta2 from "../plantas/planta2";
+import ClearIcon from "@mui/icons-material/Clear";
+import Lupa from "@mui/icons-material/Search";
+import MenuIcon from "@mui/icons-material/Menu";
+import Footer from "../footer";
+import Spinner from "../Spinner";
+import Carrito from "../bonones/carrito";
+import ApiContext from "@/context/ApiContext";
+import Head from "next/head";
+import SwitchMaterial from "../switch";
 
-const Menu = ({ title = 'Del Interior', children }) => {
+const Menu = ({ title = "Del Interior", children }) => {
     const navigation = useRouter();
 
     const [openMenu, setOpenMenu] = useState(false);
@@ -29,14 +30,14 @@ const Menu = ({ title = 'Del Interior', children }) => {
 
     const { categorias } = useContext(ApiContext);
 
-    const [texto, setTexto] = useState('');
+    const [texto, setTexto] = useState("");
 
     useEffect(() => {
         SetSpinner(true);
 
         supabase.auth.onAuthStateChange(async (event, session) => {
             if (!session) {
-                navigation.push('/');
+                navigation.push("/");
             } else {
                 SetSpinner(false);
             }
@@ -86,9 +87,9 @@ const Menu = ({ title = 'Del Interior', children }) => {
             setTransparente(_background);
         };
 
-        window.addEventListener('scroll', EventoMenu);
+        window.addEventListener("scroll", EventoMenu);
         return () => {
-            window.removeEventListener('scroll', EventoMenu);
+            window.removeEventListener("scroll", EventoMenu);
         };
     }, []);
 
@@ -105,11 +106,11 @@ const Menu = ({ title = 'Del Interior', children }) => {
     let titulo = title;
 
     useEffect(() => {
-        window.addEventListener('blur', () => {
-            document.title = '¡No te vayas! 😱';
+        window.addEventListener("blur", () => {
+            document.title = "¡No te vayas! 😱";
         });
 
-        window.addEventListener('focus', () => {
+        window.addEventListener("focus", () => {
             document.title = titulo;
         });
     }, []);
@@ -135,7 +136,7 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
                     {/* Header */}
                     <header
                         className={`${
-                            transparente ? 'opacity-[1]' : 'opacity-[0.9]'
+                            transparente ? "opacity-[1]" : "opacity-[0.9]"
                         } fixed w-full z-20`}
                     >
                         <div className="flex flex-col justify-center items-center">
@@ -143,13 +144,13 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
                             <div
                                 className={`${
                                     openMenu
-                                        ? 'translate-x-[0%]'
-                                        : 'translate-x-[-100%]'
+                                        ? "translate-x-[0%]"
+                                        : "translate-x-[-100%]"
                                 } transition-transform duration-300 lg:translate-x-[-100%] w-full  absolute flex flex-col bg-[--Menu-Desplegable-Color] z-[999] overflow-hidden top-0 left-0 justify-between`}
                                 onClick={() => setOpenMenu(!openMenu)}
                             >
                                 <button
-                                    className="text-[#000000b4] absolute top-0 right-0 p-6 z-[888]"
+                                    className="text-[--Texto-Color] absolute top-0 right-0 p-6 z-[888]"
                                     onClick={() => setOpenMenu(!openMenu)}
                                 >
                                     <ClearIcon sx={{ fontSize: 35 }} />
@@ -193,7 +194,7 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
                                     <section className="p-1 w-full rounded-xl flex flex-row justify-evenly items-center">
                                         <Link
                                             className="w-[10%] min-w-[35px] max-w-[45px] saltar"
-                                            href={'/facebook'}
+                                            href={"/facebook"}
                                         >
                                             <img
                                                 src="/assets/facebook.png"
@@ -203,7 +204,7 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
 
                                         <Link
                                             className="w-[10%] min-w-[35px] max-w-[45px] saltar"
-                                            href={'/facebook'}
+                                            href={"/facebook"}
                                         >
                                             <img
                                                 src="/assets/instagram.png"
@@ -213,7 +214,7 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
 
                                         <Link
                                             className="w-[10%] min-w-[35px] max-w-[45px] saltar"
-                                            href={'/facebook'}
+                                            href={"/facebook"}
                                         >
                                             <img
                                                 src="/assets/whatsapp.png"
@@ -224,13 +225,15 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
                                 </div>
                             </div>
                             {/* Barra de Color degradado*/}
-                            <div className="gradiente-borde w-full h-[20px]"></div>
+                            <div className="gradiente-borde w-full h-[28px] flex justify-end items-center">
+                                <SwitchMaterial />
+                            </div>
                             {/* Header */}
                             <div className="flex justify-evenly items-center relative py-2  w-[100%] bg-[--Secciones-Color]">
                                 {/* Icono Menu */}
                                 <div className="lg:hidden sm:absolute lg:relative flex left-0 px-2 z-[200]">
                                     <button
-                                        className="text-[#000000b4]"
+                                        className="text-[--Texto-Color]"
                                         onClick={() =>
                                             setOpenMenu((openMenu) => !openMenu)
                                         }
@@ -249,7 +252,7 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
                                         className="flex flex-row justify-center items-center border-2 rounded-xl border-[--Buscar-Color-Borde] p-1"
                                     >
                                         <input
-                                            className="bg-transparent w-full outline-none text-center font-extrabold text-[000000b4]"
+                                            className="bg-transparent w-full outline-none text-center font-extrabold text-[--Texto-Color]"
                                             type="text"
                                             onChange={(e) => {
                                                 setTexto(e.target.value);
@@ -258,7 +261,7 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
                                         />
 
                                         <button type="submit">
-                                            <Lupa className="cursor-pointer saltar"></Lupa>
+                                            <Lupa className="cursor-pointer saltar text-[--Texto-Color]"></Lupa>
                                         </button>
                                     </form>
 
@@ -270,7 +273,7 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
                                 <div className="lg:flex hidden absolute right-0">
                                     <div className="relative ">
                                         <div
-                                            className="button px-3 text-xl font-[inherit] font-extrabold text-[#000000b4] relative"
+                                            className="button px-3 text-xl font-[inherit] font-extrabold text-[--Texto-Color] relative"
                                             onMouseEnter={() =>
                                                 SetCategoriaOpen(true)
                                             }
@@ -287,8 +290,8 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
                                         <div
                                             className={`absolute left-[-50%] shadow-xls w-[200%] ${
                                                 categoriaOpen
-                                                    ? 'overflow-visible'
-                                                    : 'hidden'
+                                                    ? "overflow-visible"
+                                                    : "hidden"
                                             }`}
                                             onMouseEnter={() =>
                                                 SetCategoriaOpen(true)
@@ -300,8 +303,8 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
                                             <div
                                                 className={`bg-[--Secciones-Color] mt-5 pt-3 shadow-xls w-full h-full rounded-md text-center ${
                                                     categoriaOpen
-                                                        ? 'overflow-visible'
-                                                        : 'hidden'
+                                                        ? "overflow-visible"
+                                                        : "hidden"
                                                 }`}
                                             >
                                                 <div className="w-full flex flex-col items-center">
@@ -324,7 +327,7 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
                                     </div>
 
                                     <Link
-                                        href={'/home'}
+                                        href={"/home"}
                                         className="button px-3 text-xl font-[inherit] font-extrabold text-[#000000b4]"
                                     >
                                         Home

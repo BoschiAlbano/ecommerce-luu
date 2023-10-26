@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Sistema claro */
 :root {
     --color1: #d16698;
     --color2: #f5d287;
@@ -38,25 +39,126 @@
 
     --Scrollbar-Color: #f4d186;
     --Scrollbar-thumb-Color: #d266999d;
+    --Carrito-Color: #ffffff;
 
     /* --Scrollbar-Color: #6a70e499;
     --Scrollbar-thumb-Color: #6b97decc; */
 }
-
+/* Sistema claro */
 @media (prefers-color-scheme: dark) {
     :root {
-        --foreground-rgb: 255, 255, 255;
-        --background-start-rgb: 0, 0, 0;
-        --background-end-rgb: 0, 0, 0;
+        --color1: #d16698;
+        --color2: #f5d287;
+
+        --Colo1-rgb: 39, 39, 37;
+        --Colo2-rgb: 39, 39, 37;
+
+        --Secciones-Color: #000000ad;
+        --Carrito-Color: #252525;
+        --Menu-Desplegable-Color: #000000;
+
+        --Buscar-Color-Borde: #075563b4;
+
+        --Texto-Color: #ffffffb4;
+        --Texto-Categorias-Hover: #075563b4;
+        --Efecto-Categorias: #075563b4;
+
+        --Total-Icono-Carrito: #ffffff;
+        --Icono-Carrito: #075563b4;
+        --Icono-Carrito-Hover: #219626;
+
+        --Planta-Color: #ffffffc7;
+
+        --Separador-Color: #ffffffb4;
+        --Separador-Color-Hover: #075563b4;
+        --Separador-Lineas: #075563b4;
+
+        --Tarjeta-Color: #00000041;
+        --Degradado-Color-1: var(--color1);
+        --Degradado-Color-2: var(--color2);
+        --Corazon-Color: #d26698;
+        --Transparente: #ffffff00;
+        --Transparente2: #0000009f;
+
+        --Scrollbar-Color: #f4d186;
+        --Scrollbar-thumb-Color: #d266999d;
     }
 }
 
-@media (preferes-color-scheme: light) {
-    :root {
-        --foreground-rgb: 0, 0, 0;
-        --background-start-rgb: 214, 219, 220;
-        --background-end-rgb: 255, 255, 255;
-    }
+/* Cambio con el switch */
+.dark {
+    --color1: #d16698;
+    --color2: #f5d287;
+
+    --Colo1-rgb: 39, 39, 37;
+    --Colo2-rgb: 39, 39, 37;
+
+    --Secciones-Color: #000000ad;
+    --Carrito-Color: #252525;
+    --Menu-Desplegable-Color: #000000;
+
+    --Buscar-Color-Borde: #075563b4;
+
+    --Texto-Color: #ffffffb4;
+    --Texto-Categorias-Hover: #075563b4;
+    --Efecto-Categorias: #075563b4;
+
+    --Total-Icono-Carrito: #ffffff;
+    --Icono-Carrito: #075563b4;
+    --Icono-Carrito-Hover: #219626;
+
+    --Planta-Color: #ffffffc7;
+
+    --Separador-Color: #ffffffb4;
+    --Separador-Color-Hover: #075563b4;
+    --Separador-Lineas: #075563b4;
+
+    --Tarjeta-Color: #00000041;
+    --Degradado-Color-1: var(--color1);
+    --Degradado-Color-2: var(--color2);
+    --Corazon-Color: #d26698;
+    --Transparente: #ffffff00;
+    --Transparente2: #0000009f;
+
+    --Scrollbar-Color: #f4d186;
+    --Scrollbar-thumb-Color: #d266999d;
+}
+.light {
+    --color1: #d16698;
+    --color2: #f5d287;
+
+    --Colo1-rgb: 248, 248, 236;
+    --Colo2-rgb: 248, 248, 236;
+
+    --Secciones-Color: #ffffff;
+
+    --Menu-Desplegable-Color: #ffffff;
+
+    --Buscar-Color-Borde: #075563b4;
+
+    --Texto-Color: #000000b4;
+    --Texto-Categorias-Hover: #075563b4;
+    --Efecto-Categorias: #075563b4;
+
+    --Total-Icono-Carrito: #000000;
+    --Icono-Carrito: #075563b4;
+    --Icono-Carrito-Hover: #219626;
+
+    --Planta-Color: #000000b4;
+
+    --Separador-Color: #000000b4;
+    --Separador-Color-Hover: #075563b4;
+    --Separador-Lineas: #075563b4;
+
+    --Tarjeta-Color: #ffffff;
+    --Degradado-Color-1: var(--color1);
+    --Degradado-Color-2: var(--color2);
+    --Corazon-Color: #d26698;
+    --Transparente: #da0d0d00;
+    --Transparente2: #0000009f;
+
+    --Scrollbar-Color: #f4d186;
+    --Scrollbar-thumb-Color: #d266999d;
 }
 
 body {
@@ -188,7 +290,7 @@ body.menu-open {
             rgba(209, 102, 152, 0.5) 5%,
             rgba(245, 210, 135, 0.5) 50%
         ),
-        url('/assets/fondo4.png') no-repeat center;
+        url("/assets/fondo4.png") no-repeat center;
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -296,7 +398,7 @@ body.menu-open {
 }
 
 .button:after {
-    content: '';
+    content: "";
     pointer-events: none;
     bottom: -2px;
     left: 50%;
@@ -331,8 +433,8 @@ body.menu-open {
     font-size: 15px;
     font-weight: bold;
     color: var(--Total-Icono-Carrito);
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-        'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
     opacity: 0;
     visibility: hidden;
     transition: 0.2s linear;
@@ -386,7 +488,7 @@ body.menu-open {
 .separador::after {
     flex-grow: 1;
     height: 4px;
-    content: '\a0';
+    content: "\a0";
     background-color: var(--Separador-Lineas);
     position: relative;
 }
@@ -608,9 +710,9 @@ body.menu-open {
 }
 
 /* Todos los swiper-slide */
-.swiper-slide {
-    /* background: red; */
-}
+/* .swiper-slide { */
+/* background: red; */
+/* } */
 
 /* Carrusel */
 .contenedor-Carrusel {
@@ -715,7 +817,7 @@ body.menu-open {
 /* Footer */
 .footer {
     background: linear-gradient(90deg, #d2669962 5%, #f5d28762 50%),
-        url('/assets/fondo4.png') no-repeat center;
+        url("/assets/fondo4.png") no-repeat center;
     background-size: cover;
 }
 
@@ -752,7 +854,7 @@ body.menu-open {
 
 .load::before {
     position: absolute;
-    content: '';
+    content: "";
     width: 100%;
     height: 100%;
     background-color: #6365f1d7;
@@ -875,4 +977,20 @@ body.menu-open {
         grid-column: 1 / 2;
         grid-row: 1 / 3;
     }
+}
+
+.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root {
+    color: var(--Texto-Color);
+}
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
+    color: var(--Texto-Color);
+}
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    border-color: var(--Texto-Color);
+}
+.css-15jws13-MuiFormLabel-root-MuiInputLabel-root {
+    color: var(--Texto-Color);
+}
+.css-rw1vm2-MuiInputBase-root-MuiOutlinedInput-root {
+    color: var(--Texto-Color);
 }

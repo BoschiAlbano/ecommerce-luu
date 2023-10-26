@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import React from 'react';
+import Link from "next/link";
+import React from "react";
 
 const Footer = ({ categorias = [] }) => {
     return (
@@ -17,13 +17,13 @@ const Footer = ({ categorias = [] }) => {
                     {/* Informacion - Redes */}
                     <div>
                         <p>
-                            <span className="text-xs uppercase tracking-wide text-gray-500">
+                            <span className="text-xs uppercase tracking-wide text-[--Texto-Color]">
                                 Telefono
                             </span>
 
                             <a
                                 href="#"
-                                className="block text-2xl font-medium text-gray-900 hover:opacity-75 sm:text-3xl"
+                                className="block text-2xl font-medium text-[--Texto-Color] hover:opacity-75 sm:text-3xl"
                             >
                                 0123456789
                             </a>
@@ -64,7 +64,7 @@ const Footer = ({ categorias = [] }) => {
                                     href="/"
                                     rel="noreferrer"
                                     target="_blank"
-                                    className="text-gray-700 transition hover:opacity-75"
+                                    className="text-[--Texto-Color] transition hover:opacity-75"
                                 >
                                     <span className="sr-only">Instagram</span>
 
@@ -88,7 +88,7 @@ const Footer = ({ categorias = [] }) => {
                                     href="/"
                                     rel="noreferrer"
                                     target="_blank"
-                                    className="text-gray-700 transition hover:opacity-75"
+                                    className="text-[--Texto-Color] transition hover:opacity-75"
                                 >
                                     <span className="sr-only">Twitter</span>
 
@@ -108,7 +108,7 @@ const Footer = ({ categorias = [] }) => {
                                     href="/"
                                     rel="noreferrer"
                                     target="_blank"
-                                    className="text-gray-700 transition hover:opacity-75"
+                                    className="text-[--Texto-Color] transition hover:opacity-75"
                                 >
                                     <span className="sr-only">GitHub</span>
 
@@ -132,7 +132,7 @@ const Footer = ({ categorias = [] }) => {
                                     href="/"
                                     rel="noreferrer"
                                     target="_blank"
-                                    className="text-gray-700 transition hover:opacity-75"
+                                    className="text-[--Texto-Color] transition hover:opacity-75"
                                 >
                                     <span className="sr-only">Dribbble</span>
 
@@ -156,7 +156,7 @@ const Footer = ({ categorias = [] }) => {
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         {/* Categorias*/}
                         <div>
-                            <p className="font-medium text-gray-900">
+                            <p className="font-medium text-[--Texto-Color]">
                                 Categorias
                             </p>
 
@@ -166,7 +166,7 @@ const Footer = ({ categorias = [] }) => {
                                         <li key={index}>
                                             <Link
                                                 href="#"
-                                                className="text-gray-700 transition hover:opacity-75"
+                                                className="text-[--Texto-Color] transition hover:opacity-75"
                                             >
                                                 {item.descripcion}
                                             </Link>
@@ -177,13 +177,15 @@ const Footer = ({ categorias = [] }) => {
                         </div>
                         {/* Compania*/}
                         <div>
-                            <p className="font-medium text-gray-900">Company</p>
+                            <p className="font-medium text-[--Texto-Color]">
+                                Company
+                            </p>
 
                             <ul className="mt-6 space-y-4 text-sm">
                                 <li>
                                     <a
                                         href="#"
-                                        className="text-gray-700 transition hover:opacity-75"
+                                        className="text-[--Texto-Color] transition hover:opacity-75"
                                     >
                                         About
                                     </a>
@@ -192,7 +194,7 @@ const Footer = ({ categorias = [] }) => {
                                 <li>
                                     <a
                                         href="#"
-                                        className="text-gray-700 transition hover:opacity-75"
+                                        className="text-[--Texto-Color] transition hover:opacity-75"
                                     >
                                         Meet the Team
                                     </a>
@@ -201,7 +203,7 @@ const Footer = ({ categorias = [] }) => {
                                 <li>
                                     <a
                                         href="#"
-                                        className="text-gray-700 transition hover:opacity-75"
+                                        className="text-[--Texto-Color] transition hover:opacity-75"
                                     >
                                         Accounts Review
                                     </a>
@@ -217,7 +219,7 @@ const Footer = ({ categorias = [] }) => {
                             <li>
                                 <a
                                     href="#"
-                                    className="text-gray-500 transition hover:opacity-75"
+                                    className="text-[--Texto-Color] transition hover:opacity-75"
                                 >
                                     Terms & Conditions
                                 </a>
@@ -226,7 +228,7 @@ const Footer = ({ categorias = [] }) => {
                             <li>
                                 <a
                                     href="#"
-                                    className="text-gray-500 transition hover:opacity-75"
+                                    className="text-[--Texto-Color] transition hover:opacity-75"
                                 >
                                     Privacy Policy
                                 </a>
@@ -235,14 +237,14 @@ const Footer = ({ categorias = [] }) => {
                             <li>
                                 <a
                                     href="#"
-                                    className="text-gray-500 transition hover:opacity-75"
+                                    className="text-[--Texto-Color] transition hover:opacity-75"
                                 >
                                     Cookies
                                 </a>
                             </li>
                         </ul>
 
-                        <p className="mt-8 text-xs text-gray-500 sm:mt-0">
+                        <p className="mt-8 text-xs text-[--Texto-Color] sm:mt-0">
                             &copy; 2022. Company Name. All rights reserved.
                         </p>
                     </div>

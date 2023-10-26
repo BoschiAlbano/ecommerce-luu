@@ -48,9 +48,9 @@ const Carrito = () => {
                 <div className="Borde_Degradado absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 sm:h-[80%] h-[90%] rounded-sm w-[95%] sm:w-[80%] md:w-[70%] lg:w-[70%] xl:w-[60%] 2xl:w-[50%]">
                     <Box
                         id={"ScrollProducto"}
-                        className=" bg-white w-full h-full flex flex-col  items-center  relative overflow-auto "
+                        className=" bg-[--Carrito-Color] w-full h-full flex flex-col  items-center  relative overflow-auto "
                     >
-                        <h1 className="text-2xl font-extrabold mt-4">
+                        <h1 className="text-2xl font-extrabold mt-4 text-[--Texto-Color]">
                             Carrito de Compras
                         </h1>
 
@@ -70,10 +70,10 @@ const Carrito = () => {
                             </div>
                         )}
 
-                        {/* Icono Menu */}
+                        {/* Icono X */}
                         <div className="absolute flex right-0 top-0  m-2">
                             <button
-                                className="text-[#000000b4]"
+                                className="text-[--Texto-Color]"
                                 onClick={handleClose}
                             >
                                 <MenuIcon sx={{ fontSize: 35 }} />

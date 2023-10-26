@@ -11,7 +11,7 @@ import FavoritosContext from "@/context/FavoritosContext";
 export default function Home() {
     const { productos, banners, categorias, ActualizarProductos } =
         useContext(ApiContext);
-    const { setCarrito } = useContext(FavoritosContext);
+    const { setCarrito, modo } = useContext(FavoritosContext);
 
     const router = useRouter();
 
@@ -32,7 +32,11 @@ export default function Home() {
                     <div className="sm:h-[500px] sm:mx-[15px] mx-[0px]  contenedor-Carrusel items-center">
                         {/* Logo */}
                         <img
-                            src="/assets/Logo.png"
+                            src={
+                                modo
+                                    ? "/assets/LogoBlanco.png"
+                                    : "/assets/Logo.png"
+                            }
                             className=" text-center lg:flex hidden"
                             alt="Del Interior Logo"
                         />

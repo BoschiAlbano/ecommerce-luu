@@ -6,6 +6,7 @@ import Alert from "@/components/alert/alert";
 const UseFavoritos = ({ children }) => {
     const [store, setValue] = useLocalStorage("Favoritos", []);
     const [carrito, setCarrito] = useLocalStorage("Carrito", []);
+    const [modo, setModo] = useLocalStorage("Modo", false);
 
     const [alert, setAlert] = useState({
         open: false,
@@ -15,7 +16,7 @@ const UseFavoritos = ({ children }) => {
         severity: "",
     });
 
-    const handleLocalstorage = ({ id, descripcion }) => {
+    const handleLocalstorage = ({ id, titulo }) => {
         // buscar id en el localStorage
         let item = [].concat(store);
 
@@ -24,12 +25,12 @@ const UseFavoritos = ({ children }) => {
 
         if (Id === -1) {
             // Agrego
-            item.push({ id, descripcion });
+            item.push({ id, titulo });
             setValue(item);
 
             setAlert({
                 ...alert,
-                msj: `El Producto - ${descripcion} - fue Agregado a favoritos`,
+                msj: `El Producto - ${titulo} - fue Agregado a favoritos`,
                 severity: "success",
                 open: true,
             });
@@ -40,7 +41,7 @@ const UseFavoritos = ({ children }) => {
 
             setAlert({
                 ...alert,
-                msj: `El Producto - ${descripcion} - fue Eliminado de favoritos`,
+                msj: `El Producto - ${titulo} - fue Eliminado de favoritos`,
                 severity: "warning",
                 open: true,
             });
@@ -154,6 +155,8 @@ const UseFavoritos = ({ children }) => {
                 alert,
                 MostrarAlerta,
                 setCarrito,
+                setModo,
+                modo,
             }}
         >
             {children}

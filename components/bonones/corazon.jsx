@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import FavoritosContext from '@/context/FavoritosContext';
+import React, { useState, useEffect, useContext } from "react";
+import FavoritosContext from "@/context/FavoritosContext";
 
 const Corazon = ({ articulo = {} }) => {
     const { id, titulo } = articulo;
@@ -23,7 +23,6 @@ const Corazon = ({ articulo = {} }) => {
         handleLocalstorage({ id, titulo });
         SetChecked(!checked);
     };
-
     return (
         <div title="Like" className="heart-container">
             <input
