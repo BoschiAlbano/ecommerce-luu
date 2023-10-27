@@ -39,6 +39,14 @@ const MercadoPago = ({ productos = [] }) => {
         GenerarUrl();
     };
 
+    const calcular = () => {
+        const total = productos.reduce((prev, acumulador) => {
+            return prev.precio + acumulador.precio;
+        });
+
+        return total;
+    };
+
     if (url == null) {
         return (
             <button
@@ -78,7 +86,7 @@ const MercadoPago = ({ productos = [] }) => {
                 />
 
                 <h1 className="font-semibold text-white sm:text-xl text-sm text-center pl-6">
-                    Pagar
+                    {`Pagar $ ${calcular()}`}
                 </h1>
             </Link>
         );

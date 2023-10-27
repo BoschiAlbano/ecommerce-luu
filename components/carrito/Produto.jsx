@@ -43,9 +43,11 @@ const Producto = ({ P_Carrito = {}, P_Original = {}, CloseModal }) => {
                 className=" w-[100%] item1 "
             />
             {/* Titulo del Producto */}
-            <h1 className="font-semibold text-sm sm:text-xl w-[100%] item2 text-[--Texto-Color]">
-                {P_Original.titulo}
-            </h1>
+            <div className="font-semibold text-sm sm:text-xl w-[100%] h-full item2 text-[--Texto-Color] flex items-center gap-6">
+                <h1>{P_Original.titulo}</h1>
+                <h1 className=" font-bold">{`$ ${P_Original.precio}`}</h1>
+            </div>
+
             {/* Cantidad */}
             <div className="flex flex-row items-center h-[3rem] gap-1 w-[100%] item3 ">
                 <TextField

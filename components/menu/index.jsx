@@ -15,6 +15,7 @@ import Carrito from "../bonones/carrito";
 import ApiContext from "@/context/ApiContext";
 import Head from "next/head";
 import SwitchMaterial from "../switch";
+import AlertDialogSlide from "../alert/dialog";
 
 const Menu = ({ title = "Del Interior", children }) => {
     const navigation = useRouter();
@@ -32,6 +33,8 @@ const Menu = ({ title = "Del Interior", children }) => {
 
     const [texto, setTexto] = useState("");
 
+    const [cerrarSesion, setCerrarSesion] = useState(false);
+
     useEffect(() => {
         SetSpinner(true);
 
@@ -43,11 +46,6 @@ const Menu = ({ title = "Del Interior", children }) => {
             }
         });
     }, []);
-
-    async function sigOutUser() {
-        const { error } = await supabase.auth.signOut();
-        //navigation.push("/login")
-    }
 
     // // bloquear el body para que el menu no se mueva
     // useEffect(() => {
@@ -115,6 +113,10 @@ const Menu = ({ title = "Del Interior", children }) => {
         });
     }, []);
 
+    const CerrarSesion = () => {
+        setCerrarSesion(!cerrarSesion);
+    };
+
     return (
         <>
             <Head>
@@ -161,7 +163,7 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
 
                                     <button
                                         className="button px-3 text-xl font-[inherit] font-extrabold text-[#000000b4] mb-6"
-                                        onClick={() => sigOutUser()}
+                                        onClick={() => CerrarSesion()}
                                     >
                                         Cerrar Sesion
                                     </button>
@@ -269,7 +271,7 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
                                     <Carrito />
                                 </div>
 
-                                {/* Home y cerrar sesion */}
+                                {/* Categorias , Home y cerrar sesion */}
                                 <div className="lg:flex hidden absolute right-0">
                                     <div className="relative ">
                                         <div
@@ -301,11 +303,7 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
                                             }
                                         >
                                             <div
-                                                className={`bg-[--Secciones-Color] mt-5 pt-3 shadow-xls w-full h-full rounded-md text-center ${
-                                                    categoriaOpen
-                                                        ? "overflow-visible"
-                                                        : "hidden"
-                                                }`}
+                                                className={`relative EfectoCategoria h-[250px] bg-[--Secciones-Color] mt-5 pt-3 shadow-xls w-full  rounded-md text-center overflow-hidden`}
                                             >
                                                 <div className="w-full flex flex-col items-center">
                                                     {categorias.map((item) => {
@@ -335,10 +333,15 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
 
                                     <button
                                         className="button px-3 text-xl font-[inherit] font-extrabold text-[#000000b4]"
-                                        onClick={() => sigOutUser()}
+                                        onClick={() => CerrarSesion()}
                                     >
                                         Cerrar Sesion
                                     </button>
+
+                                    <AlertDialogSlide
+                                        setOpen={setCerrarSesion}
+                                        open={cerrarSesion}
+                                    />
                                 </div>
                             </div>
 

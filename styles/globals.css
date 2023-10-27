@@ -45,7 +45,7 @@
     --Scrollbar-thumb-Color: #6b97decc; */
 }
 /* Sistema claro */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
     :root {
         --color1: #d16698;
         --color2: #f5d287;
@@ -83,7 +83,7 @@
         --Scrollbar-Color: #f4d186;
         --Scrollbar-thumb-Color: #d266999d;
     }
-}
+} */
 
 /* Cambio con el switch */
 .dark {
@@ -107,7 +107,7 @@
     --Icono-Carrito: #075563b4;
     --Icono-Carrito-Hover: #219626;
 
-    --Planta-Color: #ffffffc7;
+    --Planta-Color: #ffffffee;
 
     --Separador-Color: #ffffffb4;
     --Separador-Color-Hover: #075563b4;
@@ -159,6 +159,7 @@
 
     --Scrollbar-Color: #f4d186;
     --Scrollbar-thumb-Color: #d266999d;
+    --Carrito-Color: #ffffff;
 }
 
 body {
@@ -993,4 +994,18 @@ body.menu-open {
 }
 .css-rw1vm2-MuiInputBase-root-MuiOutlinedInput-root {
     color: var(--Texto-Color);
+}
+
+.EfectoCategoria {
+    animation: bajar 0.5s;
+}
+
+@keyframes bajar {
+    0% {
+        height: 0px;
+    }
+
+    100% {
+        height: 250px;
+    }
 }
