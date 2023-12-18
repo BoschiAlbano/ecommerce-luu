@@ -158,7 +158,7 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
                                     <ClearIcon sx={{ fontSize: 35 }} />
                                 </button>
 
-                                <div className="flex flex-col w-full items-center overflow-y-scroll overflow-x-hidden justify-between h-[100svh]">
+                                <div className="flex flex-col w-full items-center overflow-y-scroll overflow-x-hidden justify-between h-[100dvh]">
                                     <ListarCategorias datos={categorias} />
 
                                     <button
