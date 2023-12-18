@@ -48,28 +48,28 @@ const Menu = ({ title = "Del Interior", children }) => {
     }, []);
 
     // // bloquear el body para que el menu no se mueva
-    // useEffect(() => {
-    //     // Cuando el componente se monta
-    //     const bloquearScroll = () => {
-    //         document.body.classList.add('menu-open');
-    //     };
+    useEffect(() => {
+        // Cuando el componente se monta
+        const bloquearScroll = () => {
+            document.body.classList.add("menu-open");
+        };
 
-    //     // Cuando el componente se desmonta
-    //     const habilitarScroll = () => {
-    //         document.body.classList.remove('menu-open');
-    //     };
+        // Cuando el componente se desmonta
+        const habilitarScroll = () => {
+            document.body.classList.remove("menu-open");
+        };
 
-    //     if (openMenu) {
-    //         bloquearScroll();
-    //     } else {
-    //         habilitarScroll();
-    //     }
+        if (openMenu) {
+            bloquearScroll();
+        } else {
+            habilitarScroll();
+        }
 
-    //     // Asegurarse de eliminar la clase cuando el componente se desmonta
-    //     return () => {
-    //         habilitarScroll();
-    //     };
-    // }, [openMenu]); // Ejecuta este efecto cuando openMenu cambie
+        // Asegurarse de eliminar la clase cuando el componente se desmonta
+        return () => {
+            habilitarScroll();
+        };
+    }, [openMenu]); // Ejecuta este efecto cuando openMenu cambie
 
     // hacer transparente el menu al bajar
     useEffect(() => {
@@ -158,7 +158,7 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
                                     <ClearIcon sx={{ fontSize: 35 }} />
                                 </button>
 
-                                <div className="flex flex-col w-full items-center overflow-y-scroll overflow-x-hidden justify-between h-screen">
+                                <div className="flex flex-col w-full items-center overflow-y-scroll overflow-x-hidden justify-between h-[100svh]">
                                     <ListarCategorias datos={categorias} />
 
                                     <button
