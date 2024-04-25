@@ -133,7 +133,7 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
                 />
                 <link rel="icon" href="/assets/Icono.ico" />
             </Head>
-            <div className="relative flex flex-col justify-center items-center">
+            <div className="mostrar relative flex flex-col justify-center items-center">
                 <div className="flex flex-col justify-start items-center sm:w-[95%] w-full gap-2">
                     {/* Header */}
                     <header
@@ -379,10 +379,12 @@ En "Del Interior", no solo nos enfocamos en la estética, sino también en la ca
             ) : (
                 <div
                     ref={MenuRef}
-                    className=" h-full w-full flex flex-col items-center relative"
+                    className="mostrar h-full w-full flex flex-col items-center relative  overflow-y-hidden"
                 >
                     {/* Contenido */}
-                    {children}
+                    <div className="h-full w-full flex flex-col items-center min-h-screen">
+                        {children}
+                    </div>
 
                     {/* Footer */}
                     <div className="mt-4 sm:w-[85%] w-[100%]">

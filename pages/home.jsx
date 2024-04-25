@@ -1,3 +1,4 @@
+"use client";
 import React, { useContext, useEffect } from "react";
 import Menu from "@/components/menu";
 import Masonry from "@/components/tarjetas/Masonry";
@@ -8,11 +9,13 @@ import ApiContext from "@/context/ApiContext";
 import { useRouter } from "next/router";
 import FavoritosContext from "@/context/FavoritosContext";
 
+import useNerScreen from "@/hook/useNerScreen";
+
 export default function Home() {
     const { productos, banners, categorias, ActualizarProductos } =
         useContext(ApiContext);
-    const { setCarrito, modo } = useContext(FavoritosContext);
-
+    const { setCarrito } = useContext(FavoritosContext);
+    const modo = false;
     const router = useRouter();
 
     useEffect(() => {
@@ -48,7 +51,7 @@ export default function Home() {
 
                     <div className="w-full flex flex-col justify-center items-center mt-5 gap-4">
                         {/* Swiper de Tarjetas Destacadas */}
-                        <div className="w-full">
+                        <div className="w-full ">
                             <Link
                                 href={`destacados`}
                                 className="separador before:sm:mx-8 after:sm:mx-8 before:mx-2 after:mx-2 my-10 w-full"
@@ -68,37 +71,46 @@ export default function Home() {
 
                         {/* Masonry de Tarjetas categoria */}
                         {categorias.map((item) => {
-                            return (
-                                <div
-                                    key={item.id}
-                                    className="w-full" //bg-[--Secciones-Color]
-                                >
-                                    <Link
-                                        href={`categoria/${item.id}`}
-                                        className="separador before:sm:mx-8 after:sm:mx-8 before:mx-2 after:mx-2 my-10 w-full"
-                                    >
-                                        <div className="flex flex-col justify-normal items-center">
-                                            <h1 className="text-2xl">
-                                                {item.descripcion}
-                                            </h1>
-                                            <p className="text-sm">(ver mas)</p>
-                                        </div>
-                                    </Link>
-
-                                    <div className="sm:mx-[15px] mx-[5px]">
-                                        <Masonry
-                                            Productos={productos.filter(
-                                                (prod) =>
-                                                    prod.categoriaId == item.id
-                                            )}
-                                        />
-                                    </div>
-                                </div>
-                            );
+                            return <Tarjeta key={item.id} item={item} />;
                         })}
                     </div>
                 </div>
             </Menu>
         </>
+    );
+}
+
+function Tarjeta({ item }) {
+    const { productos } = useContext(ApiContext);
+    const { isNearScreen, elementRef } = useNerScreen({ distance: "-100px" });
+
+    return (
+        <div
+            ref={elementRef}
+            className={`w-full `} //bg-[--Secciones-Color]
+        >
+            <Link
+                href={`categoria/${item.id}`}
+                className={`separador before:sm:mx-8 after:sm:mx-8 before:mx-2 after:mx-2 my-10 w-full  ${
+                    isNearScreen ? "mostrarIzquierda" : "opacity-0"
+                }`}
+            >
+                <div className="flex flex-col justify-normal items-center">
+                    <h1 className="text-2xl">{item.descripcion}</h1>
+                    <p className="text-sm">(ver mas)</p>
+                </div>
+            </Link>
+            <div
+                className={`sm:mx-[15px] mx-[5px] ${
+                    isNearScreen ? "mostrar" : "opacity-0"
+                }`}
+            >
+                <Masonry
+                    Productos={productos.filter(
+                        (prod) => prod.categoriaId == item.id
+                    )}
+                />
+            </div>
+        </div>
     );
 }

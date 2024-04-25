@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { supabase } from '@/supabase/cliente';
-import { useRouter } from 'next/router';
-import Componente_Login from '@/components/login';
+import React, { useEffect } from "react";
+import { supabase } from "@/supabase/cliente";
+import { useRouter } from "next/router";
+import Componente_Login from "@/components/login";
 
 const Login = () => {
     const navigation = useRouter();
@@ -9,7 +9,7 @@ const Login = () => {
     useEffect(() => {
         supabase.auth.onAuthStateChange(async (event, session) => {
             if (session) {
-                navigation.push('/home');
+                navigation.push("/home");
             }
         });
     }, []);

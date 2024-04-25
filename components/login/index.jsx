@@ -28,8 +28,8 @@ const Login = () => {
     const { MostrarAlerta } = useContext(FavoritosContext);
     //Datos Formilario Login
     const [datos, setDatos] = useState({
-        email: "",
-        password: "",
+        email: "boschi.albano.jose@gmail.com",
+        password: "portafolio",
         password2: "",
     });
 
@@ -51,7 +51,11 @@ const Login = () => {
     };
 
     useEffect(() => {
-        setDatos({ email: "", password: "", password2: "" });
+        setDatos({
+            email: "boschi.albano.jose@gmail.com",
+            password: "portafolio",
+            password2: "",
+        });
     }, [register]);
 
     const Onchange = (e) => {
@@ -59,7 +63,6 @@ const Login = () => {
     };
     const OnSubmitLogin = async (e) => {
         e.preventDefault();
-
         // verificar campos Vacios
         if (VerificarCampos()) {
             return;
@@ -72,8 +75,13 @@ const Login = () => {
             });
 
             if (error) {
+                // MostrarAlerta({
+                //     msj: "Error, Usuario o Contraseña son incorrectos",
+                //     severity: "error",
+                // });
+
                 MostrarAlerta({
-                    msj: "Error, Usuario o Contraseña son incorrectos",
+                    msj: "Error, La base de datos de Supabase esta en pausa...",
                     severity: "error",
                 });
 
@@ -379,7 +387,7 @@ const Login = () => {
                             variant="contained"
                             type="submit"
                         >
-                            Ingresar
+                            Registrarse
                         </Button>
 
                         <p

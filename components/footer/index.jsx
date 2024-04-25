@@ -1,9 +1,17 @@
 import Link from "next/link";
 import React from "react";
+import useNerScreen from "@/hook/useNerScreen";
 
 const Footer = ({ categorias = [] }) => {
+    const { isNearScreen, elementRef } = useNerScreen({ distance: "0px" });
+
     return (
-        <footer className="bg-[--Secciones-Color] lg:grid lg:grid-cols-5 mb-4">
+        <footer
+            ref={elementRef}
+            className={`bg-[--Secciones-Color] lg:grid lg:grid-cols-5 mb-4 ${
+                isNearScreen ? "mostrar" : "opacity-0"
+            }`}
+        >
             <div className="relative block h-32 lg:col-span-2 lg:h-full footer">
                 {/* <img
                     src={`${process.env.NEXT_PUBLIC_HOST}/assets/fondo4.png`}

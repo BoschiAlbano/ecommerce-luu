@@ -80,12 +80,12 @@ const UseFavoritos = ({ children }) => {
                 // Viene de Productos que de deja seleccionar la cantidad - entoces remplazo si existe el producto
                 item[Id].cantidad = Cant;
                 setCarrito(item);
-                setAlert({
-                    ...alert,
-                    msj: `El Producto - ${Produto.titulo} - fue Modficiado en el carrito de Compras - Cantidad ${item[Id].cantidad}`,
-                    severity: "success",
-                    open: true,
-                });
+                // setAlert({
+                //     ...alert,
+                //     msj: `El Producto - ${Produto.titulo} - fue Modficiado en el carrito de Compras - Cantidad ${item[Id].cantidad}`,
+                //     severity: "success",
+                //     open: true,
+                // });
                 return;
             }
             if (Produto.cantidad >= item[Id].cantidad + Cant) {

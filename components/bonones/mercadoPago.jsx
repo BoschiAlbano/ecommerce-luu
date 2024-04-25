@@ -40,9 +40,9 @@ const MercadoPago = ({ productos = [] }) => {
     };
 
     const calcular = () => {
-        const total = productos.reduce((prev, acumulador) => {
-            return prev.precio + acumulador.precio;
-        });
+        const total = productos.reduce((prev, value, index, arr) => {
+            return prev + value?.precio;
+        }, 0);
 
         return total;
     };

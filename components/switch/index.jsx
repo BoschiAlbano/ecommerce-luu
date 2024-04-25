@@ -22,7 +22,7 @@ const SwitchMaterial = () => {
     // Cambiar el modo
     useEffect(() => {
         function toggleTheme() {
-            console.log(modo);
+            // console.log(modo);
             const body = document.body;
             const currentTheme = body.classList.contains("light")
                 ? "light"

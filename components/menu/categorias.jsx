@@ -1,11 +1,11 @@
 "use client";
 import React, { useContext } from "react";
 import Link from "next/link";
-import FavoritosContext from "@/context/FavoritosContext";
+// import FavoritosContext from "@/context/FavoritosContext";
 
 const Categorias = ({ datos = [] }) => {
-    const { modo } = useContext(FavoritosContext);
-
+    // const { modo } = useContext(FavoritosContext);
+    const modo = false;
     return (
         <div className="flex flex-col w-full justify-center items-center">
             <Link
